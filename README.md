@@ -1,1 +1,1 @@
-# Blog-Website
+This is a blog posting website.
