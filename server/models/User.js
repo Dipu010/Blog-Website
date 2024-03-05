@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 const UserSchema=mongoose.Schema({
-    firstName: {
+      firstName: {
         type: String,
         required: true,
       },
@@ -25,13 +25,9 @@ const UserSchema=mongoose.Schema({
       token:{
         type:String
       },
-      images: {
-        type: String,
-        required: true
-    },
-    Blogs:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Blogs",
+      profilePicture: {
+        type: String
     }
+   
 })
 module.exports = mongoose.model("User", UserSchema);
