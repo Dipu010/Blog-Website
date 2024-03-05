@@ -22,16 +22,12 @@ const UserSchema=mongoose.Schema({
         enum:["user","admin"],
         lowercase:true
       },
-      token:{
+      refreshToken:{
         type:String
       },
-      images: {
+      profilePicture: {
         type: String,
         required: true
     },
-    Blogs:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Blogs",
-    }
 })
 module.exports = mongoose.model("User", UserSchema);

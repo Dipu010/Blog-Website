@@ -14,7 +14,7 @@ const auth =  async(req,res,next)=>{
 
     try{
         console.log("inside-try")
-        const key=process.env.SECRET_KEY;
+        const key=process.env.JWT_SECRET_CODE;
         console.log(key);
         const decode = jwt.verify(token,key);
         console.log(decode);
