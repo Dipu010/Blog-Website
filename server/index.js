@@ -15,8 +15,10 @@ app.use(cors({
     methods:["GET","POST"],
     credentials:true
 }))
-import routes from "./routes/BlogRoutes.js";
+import routes from "./routes/UserRoutes.js";
+import blogRoute from "./routes/BlogRoutes.js";
 app.use('/api/v1',routes);
+app.use('/api/v1',blogRoute)
 
 app.listen(port,()=>console.log(`server started at port ${port}`))
 app.get("/",(req,res)=>{
