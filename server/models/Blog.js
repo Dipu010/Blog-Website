@@ -19,12 +19,12 @@ const blogSchema = mongoose.Schema({
     },
     createdAt:{
         type: Date,
-        default:new Date.now()
+        default: Date.now()
     },
     updatedAt:{
         type:Date,
-        default:new Date.now()
+        default: Date.now()
     }
 })
 
-module.exports = mongoose.model("Blog", blogSchema);
+export const  Blog = mongoose.model("Blog", blogSchema);

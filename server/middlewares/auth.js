@@ -4,12 +4,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const auth =  async(req,res,next)=>{
-    const token = req.body.token || req.cookies.token
+    const token =  req.cookies.accessToken || req.cookies.refreshToken
     console.log(token);
     if(!token){
         return  res.status(401).json({
         success:false,
-        message:"user not loged in"
+        message:"user not logged in"
        });
       
     };
@@ -32,4 +32,4 @@ const auth =  async(req,res,next)=>{
 
 }
 
-export default auth
+export default auth;
