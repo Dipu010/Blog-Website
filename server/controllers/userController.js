@@ -1,11 +1,12 @@
 //SignUp,Login,Logout,ForgetPassword,ResetPassword
-import {User} from "../models/User";
+import {User} from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
-exports.Register = async (req, res) => {
+export const Register = async (req, res) => {
   try {
     var { firstName,lastName, email, password ,accountType} = req.body;
     const check = await User.findOne({email});
@@ -36,7 +37,7 @@ exports.Register = async (req, res) => {
   }
 };
 
-exports.Login = async (req, res) => {
+export const Login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -81,7 +82,7 @@ exports.Login = async (req, res) => {
     console.error("An error occurred:", error.message);
   }
 };
-exports.forgetPassword=async(req,res)=>{
+export const forgetPassword=async(req,res)=>{
   // Sending the mail.
   const target = req.body.email;
   const data = await User.findOne({email:target});
@@ -133,7 +134,7 @@ exports.forgetPassword=async(req,res)=>{
     })
   }
 }
-exports.ChangePassword=async(req,res)=>{
+export const ChangePassword=async(req,res)=>{
     try {
         const {Password,ConfirmPassword}=req.body;
         console.log({Password,ConfirmPassword})

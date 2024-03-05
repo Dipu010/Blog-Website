@@ -1,5 +1,7 @@
-import { jwt } from "jsonwebtoken";
-require("dotenv").config();
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const auth =  async(req,res,next)=>{
     const token = req.body.token || req.cookies.token
@@ -13,7 +15,6 @@ const auth =  async(req,res,next)=>{
     };
 
     try{
-        console.log("inside-try")
         const key=process.env.JWT_SECRET_CODE;
         console.log(key);
         const decode = jwt.verify(token,key);
@@ -31,4 +32,4 @@ const auth =  async(req,res,next)=>{
 
 }
 
-export default auth;
+export default auth
