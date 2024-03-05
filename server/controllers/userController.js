@@ -65,7 +65,7 @@ exports.Login = async (req, res) => {
       name: user.name,
       user:user.user
     }
-    const secretKey = process.env.SECRET_KEY;
+    const secretKey = process.env.JWT_SECRET_CODE;
     const refreshToken = jwt.sign(refreshPayload, secretKey, {expiresIn: "30d"});
     const accessToken = jwt.sign(accessPayload, secretKey , {expiresIn: "2h"});
     const data = await User.findByIdAndUpdate(user._id,{token:refreshToken},{new:true});
@@ -106,7 +106,7 @@ exports.forgetPassword=async(req,res)=>{
     
     email:target
   }
-  const secretKey = process.env.SECRET_KEY;
+  const secretKey = process.env.JWT_SECRET_CODE;
   // send mail with defined transport object
   try {
     const info = await transporter.sendMail({

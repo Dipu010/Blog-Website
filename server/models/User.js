@@ -22,7 +22,7 @@ const UserSchema=mongoose.Schema({
         enum:["user","admin"],
         lowercase:true
       },
-      token:{
+      refreshToken:{
         type:String
       },
       profilePicture: {
