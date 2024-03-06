@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const blogSchema = mongoose.Schema({
+const commentSchema = mongoose.Schema({
     description:{
         type:String,
         required:true
@@ -17,4 +17,4 @@ const blogSchema = mongoose.Schema({
     }
 })
 
-export const Comment = mongoose.model("Blog",blogSchema);
+export const Comment = mongoose.model("Comment",commentSchema);
