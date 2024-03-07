@@ -10,6 +10,13 @@ const blogSchema = mongoose.Schema({
         type: String,
         required:true
     },
+    summery:{
+        type:String,
+        required:true
+    },
+    tags:{
+        type:String
+    },
     description:{
         type: String,
         required:true

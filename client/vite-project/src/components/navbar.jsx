@@ -10,7 +10,7 @@ function Navbar() {
    {/* <!-- component -->
 <!-- follow me on twitter @asad_codes --> */}
 
-<div class="flex flex-wrap h-screen">
+<div class="flex flex-wrap ">
   <section class="relative mx-auto">
       {/* <!-- navbar --> */}
     <nav class="flex justify-between bg-gray-900 text-white w-screen">
