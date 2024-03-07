@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import StepComplition from "./StepComplition";
+import {useNavigate} from "react-router-dom";
 
 const getLocalData = () => {
   const retrivedData = localStorage.getItem("blogDescription");
@@ -8,8 +9,11 @@ const getLocalData = () => {
   else return [];
 };
 export default function BlogDescription() {
+  const navigate = useNavigate();
   var retrivedData = getLocalData();
-  if (retrivedData == []) {
+  
+  if (retrivedData.length==0) {
+    console.log("hello");
     retrivedData = [
       {
         title: "",
@@ -41,6 +45,7 @@ export default function BlogDescription() {
     {
         alert("please complete all the input Field")
     }
+    navigate("/image");
   }
   return (
     <div>
