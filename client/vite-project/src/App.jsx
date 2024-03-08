@@ -4,6 +4,7 @@ import { BrowserRouter,Route,Routes } from 'react-router-dom'
 import Login from './components/Login'
 import BlogDescription from './blogComponents.jsx/BlogDescription'
 import BlogUploadImage from './blogComponents.jsx/BlogUploadImage'
+import BlogPost from './blogComponents.jsx/BlogPost'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -14,6 +15,7 @@ function App() {
        <Route path='/' element={<Navbar/>}/>
        <Route path="/blog" element={<BlogDescription/>}/>
        <Route path="/image" element={<BlogUploadImage/>}/>
+       <Route path='/post' element={<BlogPost/>}/>
     </Routes>
 
     </>
