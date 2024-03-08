@@ -4,16 +4,16 @@ import { Comment } from "../models/Comment.js";
 
 export const CreateBlog = async (req, res) => {
   try {
-    const { title, description, picture } = req.body;
+    const { title, description, picture ,summary ,tags } = req.body;
     const user = req.data.id;
-    if (!description || !title) {
+    if (!description || !title || !summary) {
       return res.status(404).json({
         status: false,
         data: "",
         message: "please fill all input fields",
       });
     }
-    const data = await Blog.create({ title, description, picture, user });
+    const data = await Blog.create({ title, description, picture, user ,summary ,tags});
     if (!data) throw new Error("Error has occured please try again");
     return res.status(200).json({
       status: true,
