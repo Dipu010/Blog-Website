@@ -8,7 +8,7 @@ dotenv.config();
 
 export const Register = async (req, res) => {
   try {
-    var { firstName,lastName, email, password ,accountType} = req.body;
+    var { fullName, email, password ,accountType} = req.body;
     const check = await User.findOne({email});
     if (check) {
       throw new Error( "User already exist" );
@@ -16,12 +16,13 @@ export const Register = async (req, res) => {
      
       const hashValue = await bcrypt.hash(password, 10);
       const data = await User.create({
-        firstName,
-        lastName,
+      fullName,
         email,
         password: hashValue,
-        accountType
+        accountType,
+        profilePicture:`https://api.dicebear.com/5.x/initials/svg?seed=${fullName.charAt(0)}${fullName.split(" ")[1]}`
       });
+      console.log(data);
       res.status(200).json({
         success: true,
         data: data,
