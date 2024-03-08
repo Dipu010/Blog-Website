@@ -45,7 +45,7 @@ export default function BlogDescription() {
     {
         alert("please complete all the input Field")
     }
-    navigate("/image");
+    else navigate("/image");
   }
   return (
     <div>

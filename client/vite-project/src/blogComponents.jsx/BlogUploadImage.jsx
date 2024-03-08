@@ -1,29 +1,46 @@
 import React, { useEffect, useState } from "react";
 import StepComplition from "./StepComplition";
 import Navbar from "../components/navbar";
-export default function BlogUploadImage() {
-  const [selectedFile, setSelectedFile] = useState();
-  const [preview, setPreview] = useState();
+import {useNavigate} from "react-router-dom";
 
-  useEffect(() => {
-    if (!selectedFile) {
-      setPreview(undefined);
-      return;
-    }
-    const imgURL = URL.createObjectURL(selectedFile);
-    setPreview(imgURL);
-
-    return () => URL.revokeObjectURL(imgURL);
-  }, [selectedFile]);
-
-  const onSelectFile = (e) => {
-    if (!e.target.files || e.target.files.length === 0) {
-      setSelectedFile(undefined);
-      return;
-    }
-    console.log(e.target.files[0]);
-    setSelectedFile(e.target.files[0]);
+const getLocalData = () => {
+    const retrivedData = localStorage.getItem("blogImage");
+    if (retrivedData) return JSON.parse(retrivedData);
+    else return [];
   };
+
+
+export default function BlogUploadImage() {
+  const navigate = useNavigate();
+  var retrivedData = getLocalData();
+  if(retrivedData.length==0){
+    retrivedData=[undefined]
+  }
+  const [selectedFile, setSelectedFile] = useState(retrivedData[0]);
+ 
+  const setLocal=()=>{
+    const data = JSON.stringify([selectedFile]);
+    localStorage.setItem("blogImage",data);
+  }
+  useEffect(()=>{
+    setLocal();
+  },[selectedFile])
+
+ 
+  const onSelectFile = (e) => {
+    const image = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = ()=>{
+      const imgURL = reader.result;
+      setSelectedFile(imgURL)
+    }
+    reader.readAsDataURL(image);
+  };
+  
+  const handleClick = ()=>{
+    if(selectedFile==undefined) alert("Upload an image");
+    else navigate("/post")
+  }
   return (
     <div>
       <Navbar></Navbar>
@@ -43,7 +60,7 @@ export default function BlogUploadImage() {
             <div class="flex flex-col items-center justify-center pt-5 pb-6 bg-slate-700">
               {selectedFile ? (
                 <img
-                  src={preview}
+                  src={selectedFile}
                   className=" object-contain h-[400px] w-[500px]"
                 />
               ) : (
@@ -77,7 +94,8 @@ export default function BlogUploadImage() {
               class="hidden"
               onChange={(e) => onSelectFile(e)}
             />
-            <button className=" bg-purple-700 text-white box-border px-[20px] py-[3px] mt-[20px] rounded-md hover:bg-white hover:text-purple-700">
+            <button className=" bg-purple-700 text-white box-border px-[20px] py-[3px] mt-[20px] rounded-md hover:bg-white hover:text-purple-700"
+            onClick={()=>{handleClick()}}>
               Upload
             </button>
           </label>
