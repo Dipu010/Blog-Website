@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import "./Login.css"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
+import axios from 'axios';
 function Login() {
     const navigate=useNavigate();
     const [input,setInput]=useState({
@@ -10,8 +11,9 @@ function Login() {
     const handleInput = (event) => {
         setInput({ ...input, [event.target.name]: event.target.value });
       };
-      const handleSubmit = async()=>{
-        const res= await axios.post("/api/v1/login",{...input},{ withCredentials: true });
+      const handleSubmit = async(e)=>{
+        e.preventDefault();
+        const res= await axios.post(`http://localhost:4000/api/v1/login`,{...input},{ withCredentials: true });
         console.log(res);
         navigate("/loginSuccess")
         // props.loginSuccess();
@@ -20,7 +22,7 @@ function Login() {
        <div className=' flex h-screen w-screen items-center justify-center'>
         <div class="form-container">
       <p class="title">Welcome back</p>
-      <form class="form" onSubmit={handleSubmit}>
+      <form class="form" onSubmit={(e)=>handleSubmit(e)}>
         <input type="email" class="input" placeholder="Email" name='email' value={input.email}
             onChange={(event) => handleInput(event)}/>
         <input type="password" class="input" placeholder="Password" name='password'  value={input.password}
@@ -31,7 +33,7 @@ function Login() {
         <button class="form-btn">Log in</button>
       </form>
       <p class="sign-up-label">
-        Don't have an account?<span class="sign-up-link">Sign up</span>
+        Don't have an account?<Link to='/register'><span class="sign-up-link">Sign up</span></Link>
       </p>
       <div class="buttons-container">
         <div class="apple-login-button">
