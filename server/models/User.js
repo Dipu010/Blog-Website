@@ -3,11 +3,7 @@ import bcrypt, { hash } from "bcrypt"
 import jwt from "jsonwebtoken"
 
 const UserSchema=mongoose.Schema({
-      firstName: {
-        type: String,
-        required: true,
-      },
-      lastName: {
+      fullName: {
         type: String,
         required: true,
       },
@@ -30,6 +26,7 @@ const UserSchema=mongoose.Schema({
       accountType:{
         type:String,
         enum:["user","admin"],
+        default:"user",
         lowercase:true
       },
       refreshToken:{
