@@ -6,7 +6,7 @@ export const CreateBlog = async (req, res) => {
   try {
     const { title, description, picture ,summary ,tags } = req.body;
     const user = req.data.id;
-    if (!description || !title) {
+    if (!description || !title || !summary) {
       return res.status(404).json({
         status: false,
         data: "",
