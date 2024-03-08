@@ -10,7 +10,7 @@ const blogSchema = mongoose.Schema({
         type: String,
         required:true
     },
-    summery:{
+    summary:{
         type:String,
         required:true
     },
@@ -23,15 +23,8 @@ const blogSchema = mongoose.Schema({
     },
     picture:{
         type: String,
-    },
-    createdAt:{
-        type: Date,
-        default: Date.now()
-    },
-    updatedAt:{
-        type:Date,
-        default: Date.now()
     }
-})
+},
+{timestamps:true})
 
 export const  Blog = mongoose.model("Blog", blogSchema);

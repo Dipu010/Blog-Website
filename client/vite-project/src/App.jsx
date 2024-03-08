@@ -9,6 +9,7 @@ import Dashboard from './components/Dashboard'
 import Dash from './components/Dash'
 import Navigation from './components/Navigation'
 import MyProfile from './components/MyProfile'
+import BlogPost from './blogComponents.jsx/BlogPost'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -22,6 +23,7 @@ function App() {
        <Route path='/navigation' element={<Navigation/>}/>
        <Route path="/blog" element={<BlogDescription/>}/>
        <Route path="/image" element={<BlogUploadImage/>}/>
+       <Route path='/post' element={<BlogPost/>}/>
     </Routes>
 
     </>

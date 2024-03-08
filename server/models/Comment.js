@@ -15,6 +15,6 @@ const commentSchema = mongoose.Schema({
         ref: "Blog",
         required:true
     }
-})
+},{timestamps:true})
 
 export const Comment = mongoose.model("Comment",commentSchema);
