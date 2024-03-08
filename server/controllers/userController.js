@@ -4,14 +4,16 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+import { apiError } from "../utils/apiError.js";
+import { apiResponse } from "../utils/apiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 dotenv.config();
 
-export const Register = async (req, res) => {
-  try {
-    var { firstName,lastName, email, password ,accountType} = req.body;
+ const registerUser = asyncHandler(async (req, res) => {
+    var { firstName,lastName, email,userName, password ,accountType} = req.body;
     const check = await User.findOne({email});
     if (check) {
-      throw new Error( "User already exist" );
+      throw new apiError(401,"User Already Exists with the given email")
       };
      
       const hashValue = await bcrypt.hash(password, 10);
@@ -19,25 +21,14 @@ export const Register = async (req, res) => {
         firstName,
         lastName,
         email,
+        userName,
         password: hashValue,
         accountType
       });
-      res.status(200).json({
-        success: true,
-        data: data,
-        message: "Data Send success",
-      });
-    
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      data: "can not find",
-      message: error.message,
-    });
-  }
-};
+      res.status(200).json(new apiResponse(200,{data},"User Registered Successfully"));
+  });
 
-export const Login = async (req, res) => {
+const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -161,3 +152,5 @@ export const ChangePassword=async(req,res)=>{
          })
     }
 }
+
+export {registerUser,loginUser}

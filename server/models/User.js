@@ -8,6 +8,13 @@ const UserSchema=mongoose.Schema({
         type: String,
         required: true,
       },
+      userName:{
+        type:String,
+        required:true,
+        index:true,
+        unique:true,
+        lowercase:true
+      },
       email: {
         type: String,
         required: true,
@@ -29,5 +36,5 @@ const UserSchema=mongoose.Schema({
         type: String
     }
    
-})
+},{timestamps:true})
 export const User=mongoose.model("User",UserSchema);

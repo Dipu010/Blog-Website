@@ -23,15 +23,8 @@ const blogSchema = mongoose.Schema({
     },
     picture:{
         type: String,
-    },
-    createdAt:{
-        type: Date,
-        default: Date.now()
-    },
-    updatedAt:{
-        type:Date,
-        default: Date.now()
     }
-})
+},
+{timestamps:true})
 
 export const  Blog = mongoose.model("Blog", blogSchema);
