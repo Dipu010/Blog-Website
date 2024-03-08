@@ -9,6 +9,28 @@ import { apiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 dotenv.config();
 
+
+const generateAccessandRefreshTokens=async(userId)=>{
+  try{
+      
+      const user=await User.findById(userId)
+      
+      const accessToken= user.generateAccessToken()
+      
+      const refreshToken=user.generateRefreshToken()
+
+      user.refreshToken=refreshToken
+      await user.save({validateBeforeSave:false})
+
+      return {accessToken,refreshToken}
+
+      
+  }
+  catch(error){
+      throw new apiError(500,"Something went wrong while creating tokens")
+  }
+}
+
  const registerUser = asyncHandler(async (req, res) => {
     var { firstName,lastName, email,userName, password ,accountType} = req.body;
     const check = await User.findOne({email});
@@ -25,54 +47,46 @@ dotenv.config();
         password: hashValue,
         accountType
       });
-      res.status(200).json(new apiResponse(200,{data},"User Registered Successfully"));
+      return res.status(200).json(new apiResponse(200,{data},"User Registered Successfully"));
   });
 
-const loginUser = async (req, res) => {
-  try {
+const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      throw new Error("Enter all field");
+      throw new apiError(404,"All fields are Required");
     }
 
-    const user = await User.findOne({ email });
-    console.log(user);
-    if (!user) {
-      throw new Error("User Not Found");
+    const existedUser= await User.findOne({ email });
+    console.log(existedUser);
+    if (!existedUser) {
+      throw new apiError(404,"User Not Registered");
     }
 
-    if (!(await bcrypt.compare(password, user.password))) {
-      throw new Error("Password Invalid");
+    const isPasswordCorrect1=await existedUser.isPasswordCorrect(password)
+    if(!isPasswordCorrect1){
+        throw new apiError(401,"Wrong Password")
     }
 
-    const refreshPayload = {
-      id: user._id,
-      name: user.name,
-      user:user.user
-    };
-    const accessPayload = {
-      id: user._id,
-      email:user.email,
-      name: user.name,
-      user:user.user
-    }
-    const secretKey = process.env.JWT_SECRET_CODE;
-    const refreshToken = jwt.sign(refreshPayload, secretKey, {expiresIn: "30d"});
-    const accessToken = jwt.sign(accessPayload, secretKey , {expiresIn: "2h"});
-    const data = await User.findByIdAndUpdate(user._id,{token:refreshToken},{new:true});
-    res
-      .cookie("refreshToken", refreshToken , { httpOnly: true, maxAge: 10000000000000 })
-      .cookie("accessToken",accessToken,{ httpOnly: true, maxAge: 100000000 })
-      .status(200)
-      .json({
-        success: true,
-        data:data
-      });
-  } catch (error) {
-    console.error("An error occurred:", error.message);
+
+   
+    const {accessToken,refreshToken}=await generateAccessandRefreshTokens(existedUser._id)
+
+    const data = await User.findByIdAndUpdate(existedUser._id,{token:refreshToken},{new:true});
+
+    const options={
+      httpOnly: true,
+      secure: true
   }
-};
+
+
+    return res.cookie("refreshToken", refreshToken ,options)
+      .cookie("accessToken",accessToken,options)
+      .status(200)
+      .json(new apiResponse(200,{data},`${data.userName} logged in successfully`));
+});
+
+
 export const forgetPassword=async(req,res)=>{
   // Sending the mail.
   const target = req.body.email;
