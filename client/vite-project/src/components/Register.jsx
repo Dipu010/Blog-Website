@@ -39,7 +39,7 @@ export function SignUp() {
     <section className="m-8 flex">
       <div className="w-2/5 h-full hidden lg:block">
         <img
-          src="https://demos.creative-tim.com/material-tailwind-dashboard-react/img/pattern.png"
+          src="/assets/pattern.png"
           className="h-full w-full object-cover rounded-3xl"
         />
       </div>
@@ -195,7 +195,6 @@ export function SignUp() {
         </form>
 
       </div>
-      {/* <Link to={"/dash"}><Dash input={input}></Dash></Link> */}
     </section>
   );
 }

@@ -30,7 +30,6 @@ const UserSchema=mongoose.Schema({
       accountType:{
         type:String,
         enum:["user","admin"],
-        default:"user",
         lowercase:true
       },
       refreshToken:{
