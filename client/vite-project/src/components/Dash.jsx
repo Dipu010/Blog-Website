@@ -8,7 +8,6 @@ const Dash = (props) => {
 //    document.getElementById('ram').style.cssText='--tw-text-opacity: 1; color: rgb(255 255 255 / var(--tw-text-opacity)); --tw-border-opacity: 1; border-color: rgb(255 255 255 / var(--tw-border-opacity))'
 //    document.getElementById('sham').style.cssText='--tw-text-opacity: 1; color: rgb(255 255 255 / var(--tw-text-opacity)); --tw-border-opacity: 1; border-color: rgb(255 255 255 / var(--tw-border-opacity))'
 //    document.getElementById('radhe').style.cssText='--tw-text-opacity: 1; color: rgb(255 255 255 / var(--tw-text-opacity)); --tw-border-opacity: 1; border-color: rgb(255 255 255 / var(--tw-border-opacity))'
-
 //     } 
   const {data}=useContext(AuthContext);
   console.log(data);
@@ -140,7 +139,7 @@ const Dash = (props) => {
             <div class="flex w-full items-center">
               <div class="flex items-center text-3xl text-gray-900 dark:text-white">
                 <img src={data.profilePicture} class="w-12 mr-4 rounded-full" alt="profile" />
-               {data.fullName}
+               {`${data.firstName} ${data.lastName}`}
               </div>
               <div class="ml-auto sm:flex hidden items-center justify-end">
                 <div class="text-right">
