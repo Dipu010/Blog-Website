@@ -38,15 +38,15 @@ const generateAccessandRefreshTokens=async(userId)=>{
       throw new apiError(401,"User Already Exists with the given email")
       };
      
-      const hashValue = await bcrypt.hash(password, 10);
+      
       const data = await User.create({
         firstName,
         lastName,
         email,
         userName,
-        password: hashValue,
+        password,
         accountType,
-        profilePicture:`https://api.dicebear.com/5.x/initials/svg?seed=${fullName.charAt(0)}${fullName.split(" ")[1]}`
+        // profilePicture:`https://api.dicebear.com/5.x/initials/svg?seed=${fullName.charAt(0)}${fullName.split(" ")[1]}`
       });
       return res.status(200).json(new apiResponse(200,{data},"User Registered Successfully"));
   });
