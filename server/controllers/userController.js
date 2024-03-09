@@ -86,7 +86,7 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 
-const forgetPassword = async (req, res) => {
+export const forgetPassword = async (req, res) => {
   // Sending the mail.
   const target = req.body.email;
   const data = await User.findOne({ email: target });
@@ -136,7 +136,7 @@ const forgetPassword = async (req, res) => {
     })
   }
 }
-const ChangePassword = async (req, res) => {
+export const ChangePassword = async (req, res) => {
   try {
     const { Password, ConfirmPassword } = req.body;
     console.log({ Password, ConfirmPassword })
