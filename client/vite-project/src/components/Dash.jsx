@@ -139,8 +139,8 @@ const Dash = (props) => {
           <div class="sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-200 bg-white dark:bg-gray-900 dark:text-white dark:border-gray-800 sticky top-0">
             <div class="flex w-full items-center">
               <div class="flex items-center text-3xl text-gray-900 dark:text-white">
-                <img src='' class="w-12 mr-4 rounded-full" alt="profile" />
-               {/* {data.fullName} */}
+                <img src={data.profilePicture} class="w-12 mr-4 rounded-full" alt="profile" />
+               {data.fullName}
               </div>
               <div class="ml-auto sm:flex hidden items-center justify-end">
                 <div class="text-right">
