@@ -1,11 +1,39 @@
 import { Blog } from "../models/Blog.js";
 import { Like } from "../models/Like.js";
 import { Comment } from "../models/Comment.js";
+import { cloudinary } from "../utils/cloudinary.js";
 
 export const CreateBlog = async (req, res) => {
   try {
-    const { title, description, picture ,summary ,tags } = req.body;
+    const { title, description, image, summary, tags } = req.body;
+    var picture;
+    if (image) {
+      const uploadedImage = await cloudinary.uploader.upload(
+        image,
+        {
+          upload_preset: "unsigned_preset",
+          allowed_formats: [
+            "png",
+            "jpg",
+            "jpeg",
+            "avif",
+            "svg",
+            "ico",
+            "jfif",
+            "webp",
+          ],
+        },
+        function (error, response) {
+          if (error) {
+            throw new Error("some thing wrong with the image link");
+          }
+        }
+      );
+      picture=uploadedImage.secure_url;
+    }
+    else picture=""
     const user = req.data.id;
+
     if (!description || !title || !summary) {
       return res.status(404).json({
         status: false,
@@ -13,7 +41,14 @@ export const CreateBlog = async (req, res) => {
         message: "please fill all input fields",
       });
     }
-    const data = await Blog.create({ title, description, picture, user ,summary ,tags});
+    const data = await Blog.create({
+      title,
+      description,
+      picture,
+      user,
+      summary,
+      tags,
+    });
     if (!data) throw new Error("Error has occured please try again");
     return res.status(200).json({
       status: true,

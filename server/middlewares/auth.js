@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const auth =  async(req,res,next)=>{
-    const token =  req.cookies.accessToken || req.cookies.refreshToken
+    
+    const token =  req.cookies.accessToken 
     console.log(token);
     if(!token){
         return  res.status(401).json({
@@ -15,7 +16,7 @@ const auth =  async(req,res,next)=>{
     };
 
     try{
-        const key=process.env.JWT_SECRET_CODE;
+        const key=process.env.ACCESS_TOKEN_SECRET;
         console.log(key);
         const decode = jwt.verify(token,key);
         console.log(decode);
