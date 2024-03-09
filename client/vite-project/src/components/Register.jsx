@@ -6,38 +6,32 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import axios from "axios"
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/Authcontex";
+import { useState } from "react";
+import { Link,useNavigate } from "react-router-dom";
+
 
 export function SignUp() {
-  const navigate = useNavigate();
-  const { setData, data } = useContext(AuthContext);
-  const [input, setInput] = useState({
-    firstName: "",
-    lastName: "",
-    userName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+  const navigate=useNavigate();
+  const [input,setInput]=useState({
+    firstName:"",
+    lastName:"",
+      email:"",
+      password:"",
+      confirmPassword:"",
   });
-  // const [pic,setPic]=useState('');
-  // setPic(`https://api.dicebear.com/5.x/initials/svg?seed=${firstName}${lastName}`)
   const handleInput = (event) => {
-    setInput({ ...input, [event.target.name]: event.target.value });
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const res = await axios.post(`http://localhost:4000/api/v1/register`, { ...input });
-    console.log(res);
-    // setData({ input, pic });
-    console.log(data);
-    navigate("/navigation")
-    // props.loginSuccess();
-  }
+      setInput({ ...input, [event.target.name]: event.target.value });
+    };
+    const handleSubmit = async(e)=>{
+      e.preventDefault();
+      const res= await axios.post(`http://localhost:4000/api/v1/register`,{...input});
+      console.log(res);
+      navigate("/login")
+      // props.loginSuccess();
+    }
   return (
     <section className="m-8 flex">
-      <div className="w-2/5 h-full hidden lg:block">
+            <div className="w-2/5 h-full hidden lg:block">
         <img
           src="/assets/pattern.png"
           className="h-full w-full object-cover rounded-3xl"
@@ -48,17 +42,15 @@ export function SignUp() {
           <Typography variant="h2" className="font-bold mb-4">Join Us Today</Typography>
           <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Enter your email and password to register.</Typography>
         </div>
-        <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2" onSubmit={(e) => { handleSubmit(e) }}>
+        <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2" onSubmit={(e)=>{handleSubmit(e)}}>
           <div className="mb-1 flex flex-col gap-6">
-           <div className=" flex gap-8">
-          <div className=" flex flex-col gap-4">
           <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
               FirstName
             </Typography>
             <Input
               size="lg"
               placeholder="FirstName"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900  px-4 py-2"
+              className=" border-t-blue-gray-200 focus:!border-t-gray-900  px-4 py-2"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
@@ -66,10 +58,7 @@ export function SignUp() {
               name="firstName"
               value={input.firstName}
             />
-          </div>
-            
-          <div className=" flex flex-col gap-4">
-          <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
+            <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
               LastName
             </Typography>
             <Input
@@ -83,8 +72,6 @@ export function SignUp() {
               name="lastName"
               value={input.lastName}
             />
-          </div>
-           </div>
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
               Your email
             </Typography>
@@ -97,20 +84,6 @@ export function SignUp() {
               }}
               name="email"
               value={input.email}
-              onChange={(event) => handleInput(event)}
-            />
-            <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
-              Your UserName
-            </Typography>
-            <Input
-              size="lg"
-              placeholder="UserName"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900  px-4 py-2"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-              name="userName"
-              value={input.userName}
               onChange={(event) => handleInput(event)}
             />
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
@@ -129,7 +102,7 @@ export function SignUp() {
               onChange={(event) => handleInput(event)}
             />
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
-              ConfirmPassword
+             ConfirmPassword
             </Typography>
             <Input
               size="lg"
@@ -162,7 +135,7 @@ export function SignUp() {
             }
             containerProps={{ className: "-ml-2.5" }}
           />
-          <Button type='submit' className="mt-6 px-4 py-2 text-xl" fullWidth>
+          <Button  type='submit' className="mt-6 px-4 py-2 text-xl" fullWidth>
             Register Now
           </Button>
 
