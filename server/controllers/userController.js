@@ -8,7 +8,7 @@ dotenv.config();
 
 export const Register = async (req, res) => {
   try {
-    var { fullName, email, password ,accountType} = req.body;
+   const { firstName,lastName,userName, email, password ,accountType} = req.body;
     const check = await User.findOne({email});
     if (check) {
       throw new Error( "User already exist" );
@@ -16,11 +16,13 @@ export const Register = async (req, res) => {
      
       const hashValue = await bcrypt.hash(password, 10);
       const data = await User.create({
-      fullName,
+        firstName,
+        lastName,
+        userName,
         email,
         password: hashValue,
         accountType,
-        profilePicture:`https://api.dicebear.com/5.x/initials/svg?seed=${fullName.charAt(0)}${fullName.split(" ")[1]}`
+        profilePicture:`https://api.dicebear.com/5.x/initials/svg?seed=${firstName}${lastName}`
       });
       console.log(data);
       res.status(200).json({
@@ -79,6 +81,11 @@ export const Login = async (req, res) => {
         success: true,
         data:data
       });
+      res.status(201).json({
+        success:true,
+        data:user,
+        message:"SuccessFull"
+      })
   } catch (error) {
     console.error("An error occurred:", error.message);
   }

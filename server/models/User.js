@@ -3,7 +3,11 @@ import bcrypt, { hash } from "bcrypt"
 import jwt from "jsonwebtoken"
 
 const UserSchema=mongoose.Schema({
-      fullName: {
+      firstName: {
+        type: String,
+        required: true,
+      },
+     lastName: {
         type: String,
         required: true,
       },
