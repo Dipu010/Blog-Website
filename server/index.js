@@ -5,10 +5,12 @@ import dotenv from "dotenv";
 dotenv.config();
 import cookieParser from "cookie-parser";
 import dbConnector from "./config/dbconnection.js";
+import { cloudinary } from "./utils/cloudinary.js";
 
 const port=process.env.PORT || 5000;
 
 app.use(express.json());
+
 app.use(cookieParser());
 app.use(cors({
     origin:process.env.CORS_ORIGIN,
