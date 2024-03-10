@@ -19,6 +19,7 @@ export function SignUp() {
     email: "",
     password: "",
     confirmPassword: "",
+    // profilePicture:""
   });
   // const [pic,setPic]=useState('');
   // setPic(`https://api.dicebear.com/5.x/initials/svg?seed=${firstName}${lastName}`)
@@ -30,8 +31,11 @@ export function SignUp() {
     const res = await axios.post(`http://localhost:4000/api/v1/register`, { ...input });
     console.log(res);
     // setData({ input, pic });
-    navigate("/navigation")
+    navigate("/login")
     // props.loginSuccess();
+  }
+  const loginwithgoogle=()=>{
+   window.open("http://localhost:4000/api/v1/auth/google/callback","_self");
   }
   return (
     <section className="m-8 flex">
@@ -165,7 +169,7 @@ export function SignUp() {
           </Button>
 
           <div className="space-y-4 mt-8">
-            <Button size="lg" color="white" className="flex items-center gap-2 justify-center shadow-md" fullWidth>
+            <Button size="lg" color="white" className="flex items-center gap-2 justify-center shadow-md" fullWidth onClick={loginwithgoogle}>
               <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_1156_824)">
                   <path d="M16.3442 8.18429C16.3442 7.64047 16.3001 7.09371 16.206 6.55872H8.66016V9.63937H12.9813C12.802 10.6329 12.2258 11.5119 11.3822 12.0704V14.0693H13.9602C15.4741 12.6759 16.3442 10.6182 16.3442 8.18429Z" fill="#4285F4" />
@@ -188,7 +192,7 @@ export function SignUp() {
           </div>
           <Typography variant="paragraph" className="text-center text-blue-gray-500 font-medium mt-4">
             Already have an account?
-            <Link to="/navigation" className="text-gray-900 ml-1">Sign in</Link>
+            <Link to="/login" className="text-gray-900 ml-1">Sign in</Link>
           </Typography>
         </form>
 

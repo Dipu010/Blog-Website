@@ -1,15 +1,51 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/Authcontex";
-import { useContext } from "react";
+import axios from "axios";
+import { useContext, useEffect, useState} from "react";
 const Header = (props) => {
   const {data}=useContext(AuthContext);
+  console.log(data);
+  const [userData,setUserData]=useState({});
+  const [loginData,setLoginData]=useState({});
+  // For google Login
+  console.log(userData);
+   const getUser=async()=>{
+    try {
+      const response=await axios.get('http://localhost:4000/api/v1/login/success',{withCredentials:true});
+      console.log(response);
+      setUserData(response.data.user);
+    } catch (error) {
+      console.log("error", error);
+    }
+   }
+   const logout = ()=>{
+    window.open("http://localhost:4000/api/v1/logout","_self")
+}
+useEffect(()=>
+{getUser()}
+,[]);
+// For User data login
+// console.log(loginData);
+// const getUserLogin=async()=>{
+//   try {
+//     const response=await axios.post('http://localhost:4000/api/v1/login',{data:data},{withCredentials:true});
+//     console.log(response);
+//    setLoginData(response.data.message.data);
+//   } catch (error) {
+//     console.log("error", error);
+//   }
+//  }
+//  useEffect(()=>
+//  {getUserLogin()}
+//  ,[]);
+  
   return (
    <div>
      <Container>
       <Content>
         <Logo>
-          <Link to="/home">
+          <Link to={`/home`}>
             <img src="/assets/home-logo.svg" alt="" />
           </Link>
         </Logo>
@@ -24,7 +60,7 @@ const Header = (props) => {
         <Nav>
           <NavListWrap>
             <NavList className="active">
-              <Link to='/home'>
+              <Link to={`/home`}>
                 <img src="https://raw.githubusercontent.com/CleverProgrammers/cp-linkedin-clone/f014d361d787029f15ea0f0f78c053d8c214f138/public/images/nav-home.svg" alt="" />
                 <span>Home</span>
               </Link>
@@ -60,13 +96,13 @@ const Header = (props) => {
 
             <User>
               <a>
-                <img src={data.profilePicture} alt="" />
-                <span>{data.firstName}</span>
+                <img src={data?.profilePicture || userData?.profilePicture} alt="" />
+                <span>{data?.firstName || userData?.displayName}</span>
                 <img src="https://raw.githubusercontent.com/CleverProgrammers/cp-linkedin-clone/f014d361d787029f15ea0f0f78c053d8c214f138/public/images/down-icon.svg" alt="" />
               </a>
 
               <SignOut>
-                <a>Sign Out</a>
+               <button onClick={logout} type="button">Sign-Out</button>
               </SignOut>
             </User>
 
@@ -83,6 +119,7 @@ const Header = (props) => {
         </Nav>
       </Content>
     </Container>
+    
    </div>
   );
 };

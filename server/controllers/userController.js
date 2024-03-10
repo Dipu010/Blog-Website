@@ -46,7 +46,7 @@ const generateAccessandRefreshTokens=async(userId)=>{
         userName,
         password,
         accountType,
-        // profilePicture:`https://api.dicebear.com/5.x/initials/svg?seed=${fullName.charAt(0)}${fullName.split(" ")[1]}`
+         profilePicture:`https://api.dicebear.com/5.x/initials/svg?seed=${firstName}${lastName}`
       });
       return res.status(200).json(new apiResponse(200,{data},"User Registered Successfully"));
   });
@@ -84,7 +84,7 @@ const loginUser = asyncHandler(async (req, res) => {
     return res.cookie("refreshToken", refreshToken ,options)
       .cookie("accessToken",accessToken,options)
       .status(200)
-      .json(new apiResponse(200,{data},`${data.userName} logged in successfully`));
+      .json(new apiResponse(200,{data:data},`${data.userName} logged in successfully`));
 });
 
 

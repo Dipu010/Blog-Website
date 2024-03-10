@@ -5,15 +5,21 @@ import jwt from "jsonwebtoken"
 const UserSchema=mongoose.Schema({
       firstName: {
         type: String,
-        required: true,
+       
+      },
+      googleId:{
+        type:String
       },
       lastName: {
         type: String,
-        required: true,
+        // required: true,
+      },
+      displayName:{
+        type:String
       },
       userName:{
         type:String,
-        required:true,
+        // required:true,
         index:true,
         unique:true,
         lowercase:true
@@ -25,7 +31,6 @@ const UserSchema=mongoose.Schema({
       },
       password: {
         type: String,
-        required: true,
       },
       accountType:{
         type:String,
