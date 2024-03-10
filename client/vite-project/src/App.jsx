@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Navbar from './components/navbar'
 import { BrowserRouter,Route,Routes } from 'react-router-dom'
 import Login from './components/Login'
@@ -11,9 +11,10 @@ import Dash from './components/Dash'
 import Nav from './components/nav'
 import Header from './components/Header'
 import Home from './components/Home'
+import { AuthContext } from './context/Authcontex'
 function App() {
   const [count, setCount] = useState(0)
-
+  const {data}=useContext(AuthContext);
   return (
     <>
     <Routes>
@@ -21,7 +22,6 @@ function App() {
        <Route path='/register' element={<Register></Register>}/>
        <Route path='/' element={<Navbar/>}/>
        <Route path='/dash' element={<Dash/>}/>
-       <Route path='/navigation' element={<Navigation/>}/>
        <Route path="/blog" element={<BlogDescription/>}/>
        <Route path="/image" element={<BlogUploadImage/>}/>
        <Route path='/post' element={<BlogPost/>}/>

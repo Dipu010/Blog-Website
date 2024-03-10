@@ -6,6 +6,7 @@ import { AuthContext } from '../context/Authcontex';
 function Login() {
     const navigate=useNavigate();
     const {setData}=useContext(AuthContext);
+    const {storeDataInLS,getDataInLS}=useContext(AuthContext);
     const [input,setInput]=useState({
         email:"",
         password:""
@@ -13,14 +14,18 @@ function Login() {
     const handleInput = (event) => {
         setInput({ ...input, [event.target.name]: event.target.value });
       };
-      const ctx=useContext(AuthContext);
+      // const ctx=useContext(AuthContext);
       const handleSubmit = async(e)=>{
         e.preventDefault();
-        const res= await axios.post(`http://localhost:4000/api/v1/login`,{...input},{ withCredentials: true });
+        const res= await axios.post(`http://localhost:4000/api/v1/login`,{...input},{ withCredentials: true })
         console.log(res);
-        setData(res.data.message.data);
-        ctx.setLoggedIn(true);
+        const response=res.data.message.data;
+         storeDataInLS(response);
+         getDataInLS();
+         setData(response);
+        navigate('/home');
       }
+
   return (
        <AuthContext.Consumer>
         {(ctx)=>{

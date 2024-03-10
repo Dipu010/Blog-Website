@@ -1,29 +1,32 @@
 import styled from "styled-components";
 import { AuthContext } from "../context/Authcontex";
-import { useContext } from "react";
+import { useContext, useEffect,useState } from "react";
+import axios from "axios";
 const Leftside = (props) => {
   const {data}=useContext(AuthContext);
+  const [userData,setUserData]=useState({});
+  console.log(userData);
+   const getUser=async()=>{
+    try {
+      const response=await axios.get('http://localhost:4000/api/v1/login/success',{withCredentials:true});
+      setUserData(response.data.user);
+    } catch (error) {
+      console.log("error", error);
+    }
+   }
+   useEffect(()=>{
+    getUser()
+   },[]);
+//    const logout = ()=>{
+//     window.open("http://localhost:4000/api/v1/logout","_self")
+// }
   return (
     <Container>
       <ArtCard>
         <UserInfo>
           <CardBackground />
           <a>
-       <img src={data.profilePicture} alt="" className=" w-[72px] h-[72px] box-border bg-clip-content shadow-none bg-white bg-center bg-no-repeat border-white border-2 border-solid rounded-full mt-[-38px] mr-auto ml-auto mb-3" />
-  {/* box-shadow: none;
-  background-image: url(${data.profilePicture});
-  width: 72px;
-  height: 72px;
-  box-sizing: border-box;
-  background-clip: content-box;
-  background-color: white;
-  background-position: center;
-  background-size: 60%;
-  background-repeat: no-repeat;
-  border: 2px solid white;
-  margin: -38px auto 12px;
-  border-radius: 50%;
-`; */}
+       <img src={data.profilePicture || userData?.profilePicture} alt="" className=" w-[72px] h-[72px] box-border bg-clip-content shadow-none bg-white bg-center bg-no-repeat border-white border-2 border-solid rounded-full mt-[-38px] mr-auto ml-auto mb-3" />
             <Link>Welcome, there!</Link>
           </a>
           <a>
