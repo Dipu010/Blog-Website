@@ -12,7 +12,6 @@ import { AuthContext } from "../context/Authcontex";
 
 export function SignUp() {
   const navigate = useNavigate();
-  const { setData, data } = useContext(AuthContext);
   const [input, setInput] = useState({
     firstName: "",
     lastName: "",
@@ -31,7 +30,6 @@ export function SignUp() {
     const res = await axios.post(`http://localhost:4000/api/v1/register`, { ...input });
     console.log(res);
     // setData({ input, pic });
-    console.log(data);
     navigate("/navigation")
     // props.loginSuccess();
   }
@@ -190,7 +188,7 @@ export function SignUp() {
           </div>
           <Typography variant="paragraph" className="text-center text-blue-gray-500 font-medium mt-4">
             Already have an account?
-            <Link to="/login" className="text-gray-900 ml-1">Sign in</Link>
+            <Link to="/navigation" className="text-gray-900 ml-1">Sign in</Link>
           </Typography>
         </form>
 
