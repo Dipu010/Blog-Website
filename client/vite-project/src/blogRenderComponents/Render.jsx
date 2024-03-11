@@ -37,6 +37,7 @@ export default function Render() {
                 userNmae={val.owner.userNmae}
                 date={val.createdAt}
                 image={val.picture}
+                id={val._id}
               ></BlogStructure>
             );
           })}
