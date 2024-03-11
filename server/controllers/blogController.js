@@ -33,7 +33,7 @@ export const CreateBlog = asyncHandler(async (req, res) => {
     );
     picture = uploadedImage.secure_url;
   } else picture = "";
-  const user = req.data.id;
+  const user = req.data._id;
 
   if (!description || !title || !summary) {
     throw new apiError(404, "All fields are Required");
@@ -42,7 +42,7 @@ export const CreateBlog = asyncHandler(async (req, res) => {
     title,
     description,
     picture,
-    user,
+    owner:user,
     summary,
     tags,
   });
@@ -132,3 +132,8 @@ export const CommentBlog = async (req, res) => {
     });
   }
 };
+
+export const GetBlog = asyncHandler(async(req,res)=>{
+  const data =await  Blog.find().populate("owner").exec();
+  return res.status(200).json(new apiResponse(200, { data }, "all the blogs fetched"));
+})

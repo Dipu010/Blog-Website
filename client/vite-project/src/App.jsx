@@ -11,6 +11,8 @@ import Dash from './components/Dash'
 import Nav from './components/nav'
 import Header from './components/Header'
 import Home from './components/Home'
+import Render from './blogRenderComponents/Render'
+
 import { AuthContext } from './context/Authcontex'
 function App() {
   const [count, setCount] = useState(0)
@@ -26,6 +28,7 @@ function App() {
        <Route path="/image" element={<BlogUploadImage/>}/>
        <Route path='/post' element={<BlogPost/>}/>
        <Route path='/home' element={<Home/>}/>
+       <Route path='/blogrender' element={<Render/>}/>
     </Routes>
 
     </>
