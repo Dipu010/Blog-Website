@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import BlogOwner from "./BlogOwner";
+import BlogFunctionality from "./BlogFunctionality";
 export default function BlogStructure(props) {
-  const [seemore, setSeemore] = useState(0);
+const [seemore, setSeemore] = useState(0);
 
   return (
     <div className="">
-      <div className=" box-border w-[800px] p-[20px] bg-slate-800 flex flex-row rounded-t-md">
+      <div className=" box-border w-[750px] p-[20px] bg-slate-800 flex flex-row rounded-t-md">
         <BlogOwner
           firstName={props.firstName}
           lastName={props.lastName}
@@ -13,11 +14,11 @@ export default function BlogStructure(props) {
           date={props.date}
         ></BlogOwner>
       </div>
-      <div className=" box-border w-[800px] p-[20px] bg-slate-700 flex flex-col rounded-b-md">
+      <div className="relative box-border w-[750px] p-[20px] bg-slate-700 flex flex-col rounded-b-md">
         <div className=" text-white text-[24px] font-semibold">
           {props.title}
         </div>
-        <div className=" text-white mt-[20px] font-semibold">
+        <div className=" text-white mt-[20px] font-semibold text-[18px]">
           {props.summary}
           <br />
           {!seemore ? (
@@ -51,6 +52,8 @@ export default function BlogStructure(props) {
             src={props.image}
           />
         </div>
+        <BlogFunctionality id={props.id}></BlogFunctionality>
+        
       </div>
     </div>
   );
