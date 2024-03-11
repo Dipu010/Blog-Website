@@ -11,6 +11,7 @@ const getLocalData = () => {
 
 
 export default function BlogUploadImage() {
+
   const navigate = useNavigate();
   var retrivedData = getLocalData();
   if(retrivedData.length==0){
