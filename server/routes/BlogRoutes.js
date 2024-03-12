@@ -1,6 +1,6 @@
 import express from "express";
 const blogRoute = express.Router();
-import { CreateBlog ,UpdateBlog, LikeBlog,CommentBlog,GetBlog } from "../controllers/blogController.js";
+import { CreateBlog ,UpdateBlog, LikeBlog,CommentBlog,GetBlog} from "../controllers/blogController.js";
 import { FollowPerson } from "../controllers/followController.js";
 import auth from "../middlewares/auth.js"
 

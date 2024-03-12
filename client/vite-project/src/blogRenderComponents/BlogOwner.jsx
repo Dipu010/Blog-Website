@@ -8,8 +8,8 @@ export default function BlogOwner(props) {
         <IoMdPerson className=" rounded-full text-[40px] text-white" />
       </div>
       <div className=" flex flex-col ml-[15px] ">
-        <div className=" font-semibold cursor-pointer text-[20px] text-white">satwik BIswas</div>
-        <div className=" text-slate-200  cursor-pointer">Posted On 25th Jan 2024</div>
+        <div className=" font-semibold cursor-pointer text-[20px] text-white">{props.firstName} {props.lastName}</div>
+        <div className=" text-slate-200  cursor-pointer">Posted On {props.date.substring(0,10)}</div>
       </div>
       
     </div>
