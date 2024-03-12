@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import StepComplition from "./StepComplition";
 import {useNavigate} from "react-router-dom";
+import Nav from "../components/nav";
 
 const getLocalData = () => {
   const retrivedData = localStorage.getItem("blogDescription");
@@ -49,7 +50,7 @@ export default function BlogDescription() {
   }
   return (
     <div>
-      <Navbar></Navbar>
+     <Nav></Nav>
       <div className=" w-screen bg-slate-700 flex flex-col items-center">
         <div className=" text-white text-[30px]  w-screen font-black flex justify-center items-center mt-[20px]">
           Create New Blog
