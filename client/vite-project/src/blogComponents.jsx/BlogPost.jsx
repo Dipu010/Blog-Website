@@ -3,6 +3,7 @@ import Navbar from "../components/navbar";
 import StepComplition from "./StepComplition";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Nav from "../components/nav";
 
 const getLocalData = () => {
   const retriveDescription = JSON.parse(
@@ -56,7 +57,7 @@ export default function BlogPost() {
         ""
       )}
       <div className={loading ?  " h-screen w-screen filter blur-lg overflow-y-hidden" : "" }>
-        <Navbar></Navbar>
+        <Nav/>
         <div className="w-screen bg-slate-700 flex flex-col items-center pb-[70px]">
           <div className=" text-white text-[30px]  w-screen font-black flex justify-center items-center mt-[20px]">
             Create New Blog

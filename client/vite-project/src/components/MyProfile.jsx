@@ -8,6 +8,7 @@ import { AuthContext } from '../context/Authcontex'
 import IconBtn from '../assets/Iconbutton'
 export default function MyProfile() {
     const {data}=useContext(AuthContext);
+    const navigate=useNavigate();
   return (
     <div>
           <h1 className="mb-14 text-3xl font-medium text-richblack-5">

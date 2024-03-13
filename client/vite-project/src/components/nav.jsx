@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState,useEffect } from "react";
 import {
   Box,
   IconButton,
@@ -20,7 +20,7 @@ import {
   Menu,
   Close,
 } from "@mui/icons-material";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { setMode, setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
@@ -28,22 +28,41 @@ import { AuthContext } from "../context/Authcontex";
 const Nav = () => {
     const {data}=useContext(AuthContext);
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
-//   const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
 //   const user = useSelector((state) => state.user);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
-  const theme = useTheme();
-  const neutralLight = theme.palette.neutral.light;
-  const dark = theme.palette.neutral.dark;
-  const background = theme.palette.background.default;
-  const primaryLight = theme.palette.primary.light;
-  const alt = theme.palette.background.alt;
+  // const theme = useTheme();
+  // const neutralLight = theme.palette.neutral.light;
+  // const dark = theme.palette.neutral.dark;
+  // const background = theme.palette.background.default;
+  // const primaryLight = theme.palette.primary.light;
+  // const alt = theme.palette.background.alt;
 
   const fullName = `${data.firstName} ${data.lastName}`;
-
+  console.log(data);
+  const [userData,setUserData]=useState({});
+  const [loginData,setLoginData]=useState({});
+  // For google Login
+  console.log(userData);
+   const getUser=async()=>{
+    try {
+      const response=await axios.get('http://localhost:4000/api/v1/login/success',{withCredentials:true});
+      console.log(response);
+      setUserData(response.data.user);
+    } catch (error) {
+      console.log("error", error);
+    }
+   }
+   const logout = ()=>{
+    window.open("http://localhost:4000/api/v1/logout","_self")
+}
+useEffect(()=>
+{getUser()}
+,[]);
   return (
-    <FlexBetween padding="1rem 6%" backgroundColor={alt}>
+    <FlexBetween padding="1rem 6%" >
       <FlexBetween gap="1.75rem">
         <Typography
           fontWeight="bold"
@@ -52,21 +71,20 @@ const Nav = () => {
           onClick={() => navigate("/home")}
           sx={{
             "&:hover": {
-              color: primaryLight,
+              // color: primaryLight,
               cursor: "pointer",
             },
           }}
         >
-          Sociopedia
+         BlogoPedia
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
-            backgroundColor={neutralLight}
             borderRadius="9px"
             gap="3rem"
             padding="0.1rem 1.5rem"
           >
-            <InputBase placeholder="Search..." />
+            <InputBase placeholder="Search..."  />
             <IconButton>
               <Search />
             </IconButton>
@@ -78,20 +96,15 @@ const Nav = () => {
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
           <IconButton >
-            {theme.palette.mode === "dark" ? (
-              <DarkMode sx={{ fontSize: "25px" }} />
-            ) : (
-              <LightMode sx={{ color: dark, fontSize: "25px" }} />
-            )}
+              <LightMode sx={{ fontSize: "25px" }} />
           </IconButton>
           <Message sx={{ fontSize: "25px" }} />
           <Notifications sx={{ fontSize: "25px" }} />
           <Help sx={{ fontSize: "25px" }} />
-          <FormControl variant="standard" value={fullName}>
+          <FormControl variant="standard" value={fullName || userData?.displayName}>
             <Select
-              value={fullName}
+              value={fullName || userData?.displayName}
               sx={{
-                backgroundColor: neutralLight,
                 width: "150px",
                 borderRadius: "0.25rem",
                 p: "0.25rem 1rem",
@@ -100,15 +113,14 @@ const Nav = () => {
                   width: "3rem",
                 },
                 "& .MuiSelect-select:focus": {
-                  backgroundColor: neutralLight,
                 },
               }}
               input={<InputBase />}
             >
-              <MenuItem value={fullName}>
-                <Typography>{fullName}</Typography>
+              <MenuItem value={fullName || userData?.displayName}>
+                <Typography>{fullName || userData?.displayName}</Typography>
               </MenuItem>
-              <MenuItem >Log Out</MenuItem>
+              <MenuItem onClick={logout} >Log Out</MenuItem>
             </Select>
           </FormControl>
         </FlexBetween>
@@ -121,7 +133,7 @@ const Nav = () => {
       )}
 
       {/* MOBILE NAV */}
-      {!isNonMobileScreens && isMobileMenuToggled && (
+      {/* {!isNonMobileScreens && isMobileMenuToggled && (
         <Box
           position="fixed"
           right="0"
@@ -130,19 +142,18 @@ const Nav = () => {
           zIndex="10"
           maxWidth="500px"
           minWidth="300px"
-          backgroundColor={background}
-        >
+        > */}
           {/* CLOSE ICON */}
-          <Box display="flex" justifyContent="flex-end" p="1rem">
+          {/* <Box display="flex" justifyContent="flex-end" p="1rem">
             <IconButton
               onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
             >
               <Close />
             </IconButton>
-          </Box>
+          </Box> */}
 
           {/* MENU ITEMS */}
-          <FlexBetween
+          {/* <FlexBetween
             display="flex"
             flexDirection="column"
             justifyContent="center"
@@ -152,11 +163,8 @@ const Nav = () => {
             <IconButton
               sx={{ fontSize: "25px" }}
             >
-              {theme.palette.mode === "dark" ? (
-                <DarkMode sx={{ fontSize: "25px" }} />
-              ) : (
                 <LightMode sx={{ color: dark, fontSize: "25px" }} />
-              )}
+           
             </IconButton>
             <Message sx={{ fontSize: "25px" }} />
             <Notifications sx={{ fontSize: "25px" }} />
@@ -165,7 +173,7 @@ const Nav = () => {
               <Select
                 value={fullName}
                 sx={{
-                  backgroundColor: neutralLight,
+                  
                   width: "150px",
                   borderRadius: "0.25rem",
                   p: "0.25rem 1rem",
@@ -174,7 +182,6 @@ const Nav = () => {
                     width: "3rem",
                   },
                   "& .MuiSelect-select:focus": {
-                    backgroundColor: neutralLight,
                   },
                 }}
                 input={<InputBase />}
@@ -189,7 +196,7 @@ const Nav = () => {
             </FormControl>
           </FlexBetween>
         </Box>
-      )}
+      )} */}
     </FlexBetween>
   );
 };

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import Navbar from './components/navbar'
 import { BrowserRouter,Route,Routes } from 'react-router-dom'
 import Login from './components/Login'
@@ -18,19 +18,20 @@ import { ProfileSection } from './components/ProfileSection'
 function App() {
   const [count, setCount] = useState(0)
   const {data}=useContext(AuthContext);
-  return (
+  // const mode=useSelector((state)=>state.mode);
+  // const theme=useMemo(()=>createTheme(themeSettings(mode)),[mode]);
+   return (
     <>
-    <Routes>
+    {/* <CssBaseline/> */}
+   <Routes>
        <Route path='/login' element={<Login></Login>}/>
        <Route path='/register' element={<Register></Register>}/>
        <Route path='/' element={<Navbar/>}/>
-       <Route path='/dash' element={<Dash/>}/>
        <Route path="/blog" element={<BlogDescription/>}/>
        <Route path="/image" element={<BlogUploadImage/>}/>
        <Route path='/post' element={<BlogPost/>}/>
        <Route path='/home' element={<Home/>}/>
        <Route path='/blogrender' element={<Render/>}/>
-       <Route path='/profile' element={<ProfileSection/>}/>
     </Routes>
 
     </>

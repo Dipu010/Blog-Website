@@ -1,89 +1,167 @@
-import React from 'react'
-import {useNavigate,Link} from "react-router-dom";
-function Navbar() {
-  const navigate=useNavigate();
-  const handleClick=()=>{
-    navigate("/login");
-  }
+import { useContext, useState } from "react";
+import {
+  Box,
+  IconButton,
+  InputBase,
+  Typography,
+  Select,
+  MenuItem,
+  FormControl,
+  useTheme,
+  useMediaQuery,
+  Button
+} from "@mui/material";
+import {
+  Search,
+  Message,
+  DarkMode,
+  LightMode,
+  Notifications,
+  Help,
+  Menu,
+  Close,
+} from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+// import { setMode, setLogout } from "state";
+import { useNavigate } from "react-router-dom";
+import FlexBetween from "./FlexBetween";
+import { AuthContext } from "../context/Authcontex";
+const Navbar = () => {
+    const {data}=useContext(AuthContext);
+  const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
+  // const dispatch = useDispatch();
+  const navigate = useNavigate();
+//   const user = useSelector((state) => state.user);
+  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+
+  // const theme = useTheme();
+  // const neutralLight = theme.palette.neutral.light;
+  // const dark = theme.palette.neutral.dark;
+  // const background = theme.palette.background.default;
+  // const primaryLight = theme.palette.primary.light;
+  // const alt = theme.palette.background.alt;
+
+  const fullName = `${data.firstName} ${data.lastName}`;
+
   return (
-    <div>
-   {/* <!-- component -->
-<!-- follow me on twitter @asad_codes --> */}
+    <FlexBetween padding="1rem 6%" >
+      <FlexBetween gap="1.75rem">
+        <Typography
+          fontWeight="bold"
+          fontSize="clamp(1rem, 2rem, 2.25rem)"
+          color="primary"
+          onClick={() => navigate("/home")}
+          sx={{
+            "&:hover": {
+              // color: primaryLight,
+              cursor: "pointer",
+            },
+          }}
+        >
+         BlogoPedia
+        </Typography>
+        {isNonMobileScreens && (
+          <FlexBetween
+            borderRadius="9px"
+            gap="3rem"
+            padding="0.1rem 1.5rem"
+          >
+            <InputBase placeholder="Search..."  />
+            <IconButton>
+              <Search />
+            </IconButton>
+          </FlexBetween>
+        )}
+      </FlexBetween>
 
-<div className="flex flex-wrap ">
-  <section className="relative mx-auto">
-      {/* <!-- navbar --> */}
-    <nav className="flex justify-between bg-gray-900 text-white w-screen">
-      <div className="px-5 xl:px-12 py-6 flex w-full items-center">
-        <a className="text-3xl font-bold font-heading" href="#">
-           <img className="h-9" src="logo.png" alt=""/> 
-          Logo Here.
-        </a>
-        {/* <!-- Nav Links --> */}
-        <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
-          <li><a className="hover:text-gray-200" href="#">Home</a></li>
-          <li><a className="hover:text-gray-200" href="#">Catagory</a></li>
-          <li><a className="hover:text-gray-200" href="#">Collections</a></li>
-          <li><a className="hover:text-gray-200" href="#">Contact Us</a></li>
-        </ul>
-        {/* <!-- Header Icons --> */}
-        <div className="hidden xl:flex space-x-5 items-center">
-          {/* <a class="hover:text-gray-200" href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
-          </a> */}
-          <Link to='/register'> <button className="h-8 px-3 rounded-md shadow text-white bg-blue-500">Sign-UP</button></Link>
-          {/* <a class="flex items-center hover:text-gray-200" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-            <span class="flex absolute -mt-5 ml-4">
-              <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
-                </span>
-              </span>
-          </a> */}
-          {/* <!-- Sign In / Register      --> */}
-          {/* <a class="flex items-center hover:text-gray-200" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-          </a> */}
-          
-        </div>
-      </div>
-      {/* <!-- Responsive navbar --> */}
-      {/* <a class="xl:hidden flex mr-6 items-center" href="#">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-        <span class="flex absolute -mt-5 ml-4">
-          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
-          </span>
-        </span>
-      </a> */}
-      {/* <a class="navbar-burger self-center mr-12 xl:hidden" href="#">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-      </a> */}
-    </nav>
-    
-  </section>
-</div>
-{/* <!-- Does this resource worth a follow? --> */}
-{/* <div class="absolute bottom-0 right-0 mb-4 mr-4 z-10">
-    <div>
-        <a title="Follow me on twitter" href="https://www.twitter.com/asad_codes" target="_blank" class="block w-16 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12">
-            <img class="object-cover object-center w-full h-full rounded-full" src="https://www.imore.com/sites/imore.com/files/styles/large/public/field/image/2019/12/twitter-logo.jpg"/>
-        </a>
-    </div>
-</div> */}
+      {/* DESKTOP NAV */}
+      {isNonMobileScreens ? (
+        <FlexBetween gap="2rem">
+          <IconButton >
+              <LightMode sx={{ fontSize: "25px" }} />
+          </IconButton>
+          <Message sx={{ fontSize: "25px" }} />
+          <Notifications sx={{ fontSize: "25px" }} />
+          <Help sx={{ fontSize: "25px" }} />
+          <FormControl variant="standard" value={fullName}>
+           <Button onClick={()=>navigate("/register")} className=" bg-slate-400 rounded-sm"> Sign-Up</Button>
+          </FormControl>
+        </FlexBetween>
+      ) : (
+        <IconButton
+          onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
+        >
+          <Menu />
+        </IconButton>
+      )}
 
-    </div>
+      {/* MOBILE NAV */}
+      {/* {!isNonMobileScreens && isMobileMenuToggled && (
+        <Box
+          position="fixed"
+          right="0"
+          bottom="0"
+          height="100%"
+          zIndex="10"
+          maxWidth="500px"
+          minWidth="300px"
+        > */}
+          {/* CLOSE ICON */}
+          {/* <Box display="flex" justifyContent="flex-end" p="1rem">
+            <IconButton
+              onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
+            >
+              <Close />
+            </IconButton>
+          </Box> */}
+
+          {/* MENU ITEMS */}
+          {/* <FlexBetween
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            gap="3rem"
+          >
+            <IconButton
+              sx={{ fontSize: "25px" }}
+            >
+                <LightMode sx={{ color: dark, fontSize: "25px" }} />
+           
+            </IconButton>
+            <Message sx={{ fontSize: "25px" }} />
+            <Notifications sx={{ fontSize: "25px" }} />
+            <Help sx={{ fontSize: "25px" }} />
+            <FormControl variant="standard" value={fullName}>
+              <Select
+                value={fullName}
+                sx={{
+                  
+                  width: "150px",
+                  borderRadius: "0.25rem",
+                  p: "0.25rem 1rem",
+                  "& .MuiSvgIcon-root": {
+                    pr: "0.25rem",
+                    width: "3rem",
+                  },
+                  "& .MuiSelect-select:focus": {
+                  },
+                }}
+                input={<InputBase />}
+              >
+                <MenuItem value={fullName}>
+                  <Typography>{fullName}</Typography>
+                </MenuItem>
+                <MenuItem >
+                  Log Out
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </FlexBetween>
+        </Box>
+      )} */}
+    </FlexBetween>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

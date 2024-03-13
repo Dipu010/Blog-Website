@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import Leftside from "./LeftSide";
-import Main from "./Main";
+import Middle from "./Middle";
 import Rightside from "./RightSide";
-import Header from "./Header";
+import Nav from "./nav";
 
 const Home = (props) => {
   return (
     <div>
-     <Header></Header>
+ <Nav></Nav>
     <Container>
-      <Section>
+      {/* <Section>
         <h5>
           <a>Hiring in a hurry? - </a>
         </h5>
@@ -17,10 +17,10 @@ const Home = (props) => {
           Find talented pros in record time with Upwork and keep business
           moving.
         </p>
-      </Section>
+      </Section> */}
       <Layout>
         <Leftside />
-        <Main />
+        <Middle />
         <Rightside />
       </Layout>
     </Container>
