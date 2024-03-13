@@ -52,7 +52,7 @@ const [seemore, setSeemore] = useState(0);
             src={props.image}
           />
         </div>
-        <BlogFunctionality id={props.id}></BlogFunctionality>
+        <BlogFunctionality id={props.id} reaction={props.reaction}></BlogFunctionality>
         
       </div>
     </div>

@@ -5,8 +5,18 @@ import { FaRegCommentDots } from "react-icons/fa6";
 import axios from "axios";
 
 export default function BlogFunctionality(props) {
-  const [like, setLike] = useState(0);
-  const [dislike, setDislike] = useState(0);
+  var reactionL;
+  var reactionUL;
+  if(props.reaction==1){
+     reactionL=1;
+     reactionUL=0;
+  }
+  else if(props.reaction==-1){
+    reactionUL=1;
+    reactionL=0;
+  }
+  const [like, setLike] = useState(reactionL);
+  const [dislike, setDislike] = useState(reactionUL);
   const handleLike = async () => {
     if (like) setLike(0);
     else {

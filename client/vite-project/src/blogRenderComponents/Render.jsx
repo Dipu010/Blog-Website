@@ -9,8 +9,9 @@ export default function Render() {
     const parsedData = await axios.get(`http://localhost:4000/api/v1/getblog`, {
       withCredentials: true,
     });
+    console.log(parsedData);
     setLoading(0);
-    setDataArray([...parsedData.data.message.data]);
+    setDataArray([...parsedData.data.message.response]);
   };
   useEffect(() => {
     getData();
@@ -29,15 +30,16 @@ export default function Render() {
           {dataArray.map((val) => {
             return (
               <BlogStructure
-                title={val.title}
-                description={val.description}
-                summary={val.summary}
-                firstName={val.owner.firstName}
-                lastName={val.owner.lastName}
-                userNmae={val.owner.userNmae}
-                date={val.createdAt}
-                image={val.picture}
-                id={val._id}
+                title={val._doc.title}
+                description={val._doc.description}
+                summary={val._doc.summary}
+                firstName={val._doc.owner.firstName}
+                lastName={val._doc.owner.lastName}
+                userNmae={val._doc.owner.userNmae}
+                date={val._doc.createdAt}
+                image={val._doc.picture}
+                id={val._doc._id}
+                reaction={val.reaction.val}
               ></BlogStructure>
             );
           })}
