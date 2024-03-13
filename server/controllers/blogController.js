@@ -110,6 +110,8 @@ export const LikeBlog = asyncHandler(async (req, res) => {
   return res.status(200).json(new apiResponse(200, { data }, "Blog is Liked/disliked"));
 });
 
+
+
 export const CommentBlog = async (req, res) => {
   try {
     const { description, id } = req.body; //Here Id id blogId
@@ -135,5 +137,21 @@ export const CommentBlog = async (req, res) => {
 
 export const GetBlog = asyncHandler(async(req,res)=>{
   const data =await  Blog.find().populate("owner").exec();
-  return res.status(200).json(new apiResponse(200, { data }, "all the blogs fetched"));
+  const response=[];
+  for(let i=0;i<data.length;i++){
+    
+    const blog = data[i]._id;
+
+    const user = req.data._id;
+    const exist = await Like.findOne({user,blog});
+    var obj;
+    if(exist){
+      obj = {...data[i],reaction:exist};
+    }
+    else {
+      obj = {...data[i],reaction:{val:0}};
+    }
+    response.push(obj);
+  }
+  return res.status(200).json(new apiResponse(200, { response }, "all the blogs fetched"));
 })
