@@ -6,10 +6,10 @@ import Register from './components/Register'
 import BlogDescription from './blogComponents.jsx/BlogDescription'
 import BlogUploadImage from './blogComponents.jsx/BlogUploadImage'
 import BlogPost from './blogComponents.jsx/BlogPost'
-import Navigation from './components/Navigation'
+
 import Dash from './components/Dash'
 import Nav from './components/nav'
-import Header from './components/Header'
+
 import Home from './components/Home'
 import Render from './blogRenderComponents/Render'
 

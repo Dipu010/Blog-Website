@@ -1,4 +1,5 @@
 import { useContext, useState,useEffect } from "react";
+import axios from "axios";
 import {
   Box,
   IconButton,
@@ -25,8 +26,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 import { AuthContext } from "../context/Authcontex";
-const Nav = () => {
-    const {data}=useContext(AuthContext);
+const Nav = ({data}) => {
+    console.log(data)
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   // const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,7 +42,8 @@ const Nav = () => {
   // const alt = theme.palette.background.alt;
 
   const fullName = `${data.firstName} ${data.lastName}`;
-  console.log(data);
+  console.log(fullName)
+
   const [userData,setUserData]=useState({});
   const [loginData,setLoginData]=useState({});
   // For google Login

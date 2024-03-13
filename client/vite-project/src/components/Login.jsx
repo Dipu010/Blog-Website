@@ -5,8 +5,7 @@ import axios from 'axios';
 import { AuthContext } from '../context/Authcontex';
 function Login() {
     const navigate=useNavigate();
-    const {setData}=useContext(AuthContext);
-    const {storeDataInLS,getDataInLS}=useContext(AuthContext);
+    const {storeDataInLS,getDataInLS,setData}=useContext(AuthContext);
     const [input,setInput]=useState({
         email:"",
         password:""
@@ -21,7 +20,7 @@ function Login() {
         console.log(res);
         const response=res.data.message.data;
          storeDataInLS(response);
-         getDataInLS();
+         console.log(response)
          setData(response);
         navigate('/home');
       }
