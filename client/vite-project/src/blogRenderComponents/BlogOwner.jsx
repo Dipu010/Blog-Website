@@ -9,7 +9,7 @@ export default function BlogOwner(props) {
       </div>
       <div className=" flex flex-col ml-[15px] ">
         <div className=" font-semibold cursor-pointer text-[20px] text-white">{props.firstName} {props.lastName}</div>
-        <div className=" text-slate-200  cursor-pointer">Posted On {props.date.substring(0,10)}</div>
+        <div className=" text-slate-200  cursor-pointer">Posted On {props.date.substring(0,10).toLocaleString()}</div>
       </div>
       
     </div>

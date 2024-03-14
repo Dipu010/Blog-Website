@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import StepComplition from "./StepComplition";
-import Navbar from "../components/navbar";
+import Nav from "../components/nav";
 import {useNavigate} from "react-router-dom";
 
 const getLocalData = () => {
@@ -42,9 +42,10 @@ export default function BlogUploadImage() {
     if(selectedFile==undefined) alert("Upload an image");
     else navigate("/post")
   }
+  const data=JSON.parse(localStorage.getItem("ResPonse"));
   return (
     <div>
-      <Navbar></Navbar>
+      <Nav data={data}></Nav>
       <div className=" w-screen bg-slate-700 flex flex-col items-center">
         <div className=" text-white text-[30px]  w-screen font-black flex justify-center items-center mt-[20px]">
           Create New Blog

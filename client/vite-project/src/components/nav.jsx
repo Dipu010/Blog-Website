@@ -21,25 +21,15 @@ import {
   Menu,
   Close,
 } from "@mui/icons-material";
-import { useDispatch, useSelector } from "react-redux";
-// import { setMode, setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
-import { AuthContext } from "../context/Authcontex";
 const Nav = ({data}) => {
     console.log(data)
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
-  // const dispatch = useDispatch();
+ 
   const navigate = useNavigate();
-//   const user = useSelector((state) => state.user);
-  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
-  // const theme = useTheme();
-  // const neutralLight = theme.palette.neutral.light;
-  // const dark = theme.palette.neutral.dark;
-  // const background = theme.palette.background.default;
-  // const primaryLight = theme.palette.primary.light;
-  // const alt = theme.palette.background.alt;
+  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
   const fullName = `${data.firstName} ${data.lastName}`;
   console.log(fullName)
@@ -64,7 +54,8 @@ useEffect(()=>
 {getUser()}
 ,[]);
   return (
-    <FlexBetween padding="1rem 6%" >
+   <div >
+        <FlexBetween padding="1rem 6%"  className=" bg-fixed">
       <FlexBetween gap="1.75rem">
         <Typography
           fontWeight="bold"
@@ -200,6 +191,7 @@ useEffect(()=>
         </Box>
       )} */}
     </FlexBetween>
+   </div>
   );
 };
 

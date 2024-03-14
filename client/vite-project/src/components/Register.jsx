@@ -164,9 +164,7 @@ export function SignUp() {
             }
             containerProps={{ className: "-ml-2.5" }}
           />
-          <Button type='submit' className="mt-6 px-4 py-2 text-xl" fullWidth>
-            Register Now
-          </Button>
+        <Button className="mt-6 px-4 py-2 text-xl bg-black" fullWidth> Register Now</Button>
 
           <div className="space-y-4 mt-8">
             <Button size="lg" color="white" className="flex items-center gap-2 justify-center shadow-md" fullWidth onClick={loginwithgoogle}>
