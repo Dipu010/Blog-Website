@@ -5,6 +5,7 @@ import { cloudinary } from "../utils/cloudinary.js";
 import { apiError } from "../utils/apiError.js";
 import { apiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import mongoose from "mongoose";
 
 export const CreateBlog = asyncHandler(async (req, res) => {
   const { title, description, image, summary, tags } = req.body;
@@ -154,4 +155,26 @@ export const GetBlog = asyncHandler(async(req,res)=>{
     response.push(obj);
   }
   return res.status(200).json(new apiResponse(200, { response }, "all the blogs fetched"));
+})
+
+export const GetMyBlog=asyncHandler(async(req,res)=>{
+
+  const user=req.data
+  console.log(user)
+  if(!user)
+    throw new apiError(401,"Unauthorized Request")
+  
+    const posts= await Blog.aggregate(
+      [
+        {
+          '$match': {owner: new mongoose.Types.ObjectId(user._id)}
+        }
+      ]
+    )
+    
+    // const post= await Blog.find({owner:user._id})
+    
+
+    res.status(200).json(new apiResponse(200,{posts},"Done"))
+
 })
