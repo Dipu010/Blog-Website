@@ -40,6 +40,7 @@ export default function Render() {
                 image={val._doc.picture}
                 id={val._doc._id}
                 reaction={val.reaction.val}
+                key={val._doc._id}
               ></BlogStructure>
             );
           })}
