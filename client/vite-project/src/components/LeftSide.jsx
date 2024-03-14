@@ -38,50 +38,50 @@ function Leftside({data}) {
   const fullName=`${data.firstName} ${data.lastName}`;
 
   return (
-    <div className="bg-white rounded-lg p-6 shadow-md w-full max-w-sm">
+    <div className=" bg-slate-700 rounded-lg p-6 shadow-lg h-[470px] max-w-sm mt-[100px] ">
       <div className="flex items-center space-x-4">
         <img src={data.profilePicture} alt="Profile" className="rounded-full w-14 h-14" />
         <div>
-          <h1 className="text-xl font-semibold">{fullName}</h1>
-          <p className="text-gray-500">{profileData.friends} friends</p>
+          <h1 className="text-xl font-semibold text-yellow-100">{fullName}</h1>
+          <p className=" text-gray-300">{profileData.friends} friends</p>
         </div>
       </div>
       <br />
       <div className="mt-4">
       <div className='flex justify-between'>
-      <CiLocationOn className=' cursor-pointer text-xl'></CiLocationOn>
-        <p className="text-gray-600">{profileData.location}</p>
+      <CiLocationOn className=' cursor-pointer text-xl text-yellow-50'></CiLocationOn>
+        <p className="text-gray-200">{profileData.location}</p>
       </div>
        <div className='flex justify-between'>
-       < FaShoppingBag className=' cursor-pointer text-xl'/>
-       <p className="text-gray-600">{profileData.occupation}</p>
+       < FaShoppingBag className=' cursor-pointer text-xl text-yellow-50'/>
+       <p className="text-gray-200">{profileData.occupation}</p>
        </div>
       </div>
       <br />
       <div className="mt-4">
        <div className=' flex justify-between'>
-       <p className="text-gray-800 font-medium text-sm">Who's viewed your profile </p>
-        <p className="font-bold">{profileData.profileViews}</p>
+       <p className="text-gray-300 font-medium text-sm">Who's viewed your profile </p>
+        <p className="font-bold text-cyan-300">{profileData.profileViews}</p>
        </div>
       <div className='flex justify-between'>
-      <p className="text-gray-800 font-medium text-sm">Impressions of your post </p>
-        <p className="font-bold">{profileData.postImpressions}</p>
+      <p className="text-gray-300 font-medium text-sm">Impressions of your post </p>
+        <p className="font-bold text-cyan-300">{profileData.postImpressions}</p>
       </div>
       </div>
       <br />
       <div className="mt-4">
-        <p className="text-gray-800 font-medium">Social Profiles</p>
+        <p className="text-gray-300  text-xl font-bold">Social Profiles</p>
         <div className="mt-2 space-y-2">
           {profileData.socialProfiles.map((profile, index) => (
             <div key={index} className="flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <div className='flex items-center'>
-                <img src={profile.icon} alt={`${profile.name} icon`} className="w-5 h-5" />
-                <span className="ml-2 text-gray-800">{profile.name}</span>
+                <img src={profile.icon} className="w-5 h-5" />
+                <span className="ml-2 text-blue-400">{profile.name}</span>
                 </div>
-                  <CiEdit className=' cursor-pointer text-xl'></CiEdit>
+                  <CiEdit className=' cursor-pointer text-xl text-gray-100'></CiEdit>
               </div>
-              <p className="text-gray-500 text-sm">{profile.type}</p>
+              <p className="text-gray-200 text-sm">{profile.type}</p>
             </div>
           ))}
         </div>
