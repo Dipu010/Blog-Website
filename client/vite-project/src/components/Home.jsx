@@ -10,8 +10,8 @@ const Home = (props) => {
   
   return (
     <div>
- <Nav data={data}></Nav>
-    <Container>
+ <Nav data={data} ></Nav>
+    <Container className=" bg-slate-500">
       <Layout>
         <Leftside data={data} />
         <Middle data={data} />

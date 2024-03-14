@@ -26,7 +26,7 @@ export default function Middle({data}) {
    },[]);
   return (
     <div>
-      <div className="flex  flex-col gap-3 p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm">
+      <div className="flex  flex-col gap-3 p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm mt-[40px]">
       <div className="flex  p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm">
       <img
         className="w-10 h-10 rounded-full mr-4"

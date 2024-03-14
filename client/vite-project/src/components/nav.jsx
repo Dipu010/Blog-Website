@@ -54,8 +54,8 @@ useEffect(()=>
 {getUser()}
 ,[]);
   return (
-   <div >
-        <FlexBetween padding="1rem 6%"  className=" bg-fixed">
+   <div className="w-screen  z-30 fixed ">
+        <FlexBetween padding="1rem 6%"  className=" bg-fixed bg-slate-800">
       <FlexBetween gap="1.75rem">
         <Typography
           fontWeight="bold"
@@ -77,9 +77,9 @@ useEffect(()=>
             gap="3rem"
             padding="0.1rem 1.5rem"
           >
-            <InputBase placeholder="Search..."  />
+            <input type="text" placeholder="Search..." className="  border-white px-10 py-3 rounded-full ml-5"  />
             <IconButton>
-              <Search />
+              <Search className=" text-yellow-50"/>
             </IconButton>
           </FlexBetween>
         )}
@@ -89,11 +89,11 @@ useEffect(()=>
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
           <IconButton >
-              <LightMode sx={{ fontSize: "25px" }} />
+              <LightMode sx={{ fontSize: "25px" }} className=" text-yellow-50"/>
           </IconButton>
-          <Message sx={{ fontSize: "25px" }} />
-          <Notifications sx={{ fontSize: "25px" }} />
-          <Help sx={{ fontSize: "25px" }} />
+          <Message sx={{ fontSize: "25px" }} className=" text-yellow-50" />
+          <Notifications sx={{ fontSize: "25px" }} className=" text-yellow-50"/>
+          <Help sx={{ fontSize: "25px" }} className=" text-yellow-50"/>
           <FormControl variant="standard" value={fullName || userData?.displayName}>
             <Select
               value={fullName || userData?.displayName}
@@ -108,10 +108,10 @@ useEffect(()=>
                 "& .MuiSelect-select:focus": {
                 },
               }}
-              input={<InputBase />}
+              input={<InputBase className=" text-yellow-50"/>}
             >
-              <MenuItem value={fullName || userData?.displayName}>
-                <Typography>{fullName || userData?.displayName}</Typography>
+              <MenuItem value={fullName || userData?.displayName} className="text-yellow-50 px-4 rounded-full">
+                <Typography className="text-yellow-50 [&>*:nth-child(2)]:bg-black">{fullName || userData?.displayName} </Typography>
               </MenuItem>
               <MenuItem onClick={logout} >Log Out</MenuItem>
             </Select>
