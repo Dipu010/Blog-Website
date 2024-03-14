@@ -113,28 +113,18 @@ export const LikeBlog = asyncHandler(async (req, res) => {
 
 
 
-export const CommentBlog = async (req, res) => {
-  try {
-    const { description, id } = req.body; //Here Id id blogId
-    const user = req.data.id;
-    const data = await Comment.create({
-      description: description,
-      user: user,
-      blog: id,
-    });
-    return res.status(200).json({
-      success: true,
-      data: data,
-      message: "comment successfull",
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      data: "",
-      message: error.message,
-    });
-  }
-};
+export const CommentBlog = asyncHandler(async (req, res) => {
+ 
+  const { description, id } = req.body; //Here Id id blogId
+  const user = req.data._id;
+  const data = await Comment.create({
+    description: description,
+    user: user,
+    blog: id,
+  });
+  if(data) return res.status(200).json(new apiResponse(200, { data }, "you have a comment in this post"));
+  
+})
 
 export const GetBlog = asyncHandler(async(req,res)=>{
   const data =await  Blog.find().populate("owner").exec();
