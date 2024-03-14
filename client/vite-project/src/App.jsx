@@ -31,7 +31,7 @@ function App() {
        <Route path="/image" element={<BlogUploadImage/>}/>
        <Route path='/post' element={<BlogPost/>}/>
        <Route path='/home' element={<Home/>}/>
-       <Route path='/blogrender' element={<Render/>}/>
+       {/* <Route path='/blogrender' element={<Render/>}/> */}
     </Routes>
 
     </>

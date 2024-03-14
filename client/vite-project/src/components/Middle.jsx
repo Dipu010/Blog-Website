@@ -5,13 +5,14 @@ import { IoIosCreate } from 'react-icons/io'
 import { LiaBlogSolid } from "react-icons/lia";
 import { FaEarthAsia } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/Authcontex';
 import axios from 'axios';
-export default function Middle() {
+import Render from '../blogRenderComponents/Render';
+
+export default function Middle({data}) {
   const navigate=useNavigate();
-  const {data}=useContext(AuthContext);
   const [userData,setUserData]=useState({});
   console.log(userData);
+  // For Google Login
    const getUser=async()=>{
     try {
       const response=await axios.get('http://localhost:4000/api/v1/login/success',{withCredentials:true});
@@ -39,7 +40,7 @@ export default function Middle() {
       </div>
           <div className="flex items-center justify-between gap-10">
           <div className="flex items-center">
-          <p onClick={()=>navigate('/blog')}>Create Blogs</p>
+          <p onClick={()=>navigate('/blog')} className='cursor-pointer'>Create Blogs</p>
         <IoIosCreate className="h-6 w-6 text-gray-500 mx-2 cursor-pointer" />
           </div>
        <div className="flex items-center">
@@ -57,6 +58,7 @@ export default function Middle() {
        
       </div>
       </div>
+      <Render className=' mt-3'></Render>
 
     </div>
   )

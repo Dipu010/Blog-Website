@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../components/navbar";
 import StepComplition from "./StepComplition";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -31,7 +30,7 @@ export default function BlogPost() {
     image: retrivedData[1][0],
   };
   const [loading, setLoading] = useState(0);
-
+  const data=JSON.parse(localStorage.getItem("ResPonse"));
   const handlePost = async () => {
     window.scrollTo(0,0);
     setLoading(1);
@@ -43,6 +42,7 @@ export default function BlogPost() {
     removeLocalData();
     navigate("/");
   };
+  
 
   const [show, setShow] = useState(0);
   return (
@@ -57,7 +57,7 @@ export default function BlogPost() {
         ""
       )}
       <div className={loading ?  " h-screen w-screen filter blur-lg overflow-y-hidden" : "" }>
-        <Nav/>
+        <Nav data={data}/>
         <div className="w-screen bg-slate-700 flex flex-col items-center pb-[70px]">
           <div className=" text-white text-[30px]  w-screen font-black flex justify-center items-center mt-[20px]">
             Create New Blog

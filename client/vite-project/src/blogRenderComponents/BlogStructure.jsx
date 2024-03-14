@@ -6,7 +6,7 @@ const [seemore, setSeemore] = useState(0);
 
   return (
     <div className="">
-      <div className=" box-border w-[750px] p-[20px] bg-slate-800 flex flex-row rounded-t-md">
+      <div className=" box-border w-[690px] p-[20px] bg-slate-800 flex flex-row rounded-t-md">
         <BlogOwner
           firstName={props.firstName}
           lastName={props.lastName}
@@ -14,11 +14,11 @@ const [seemore, setSeemore] = useState(0);
           date={props.date}
         ></BlogOwner>
       </div>
-      <div className="relative box-border w-[750px] p-[20px] bg-slate-700 flex flex-col rounded-b-md">
+      <div className="relative box-border w-[690px] p-[20px] bg-slate-700 flex flex-col rounded-b-md">
         <div className=" text-white text-[24px] font-semibold">
           {props.title}
         </div>
-        <div className=" text-white mt-[20px] font-semibold text-[18px]">
+        <div className=" text-white mt-[20px] font-semibold text-[16px]">
           {props.summary}
           <br />
           {!seemore ? (
@@ -48,7 +48,7 @@ const [seemore, setSeemore] = useState(0);
         )}
         <div className=" mt-[20px]">
           <img
-            className=" object-fill h-[450px] w-[780px]"
+            className=" object-fill h-[350px] w-full"
             src={props.image}
           />
         </div>
