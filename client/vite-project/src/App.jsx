@@ -15,6 +15,7 @@ import Render from './blogRenderComponents/Render'
 
 import { AuthContext } from './context/Authcontex'
 import { ProfileSection } from './components/ProfileSection'
+import BlogUpdate from './blogUpdateComponents/blogUpdateDescription'
 function App() {
   const [count, setCount] = useState(0)
   const {data}=useContext(AuthContext);
@@ -33,6 +34,7 @@ function App() {
        <Route path='/home' element={<Home/>}/>
        {/* <Route path='/blogrender' element={<Render/>}/> */}
        <Route path='/profile' element={<ProfileSection/>}/>
+       <Route path='/updateblog' element={<BlogUpdate/>}/>
     </Routes>
 
     </>
