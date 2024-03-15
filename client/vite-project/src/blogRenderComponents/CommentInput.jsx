@@ -24,6 +24,7 @@ export default function CommentInput(props) {
     );
     console.log(response);
     props.setComment(0);
+    window.location.reload();
   };
 
   return (

@@ -127,7 +127,9 @@ export const CommentBlog = asyncHandler(async (req, res) => {
 })
 
 export const GetBlog = asyncHandler(async(req,res)=>{
-  const data =await  Blog.find().populate("owner").exec();
+  const data =await  Blog.find().sort({
+    createdAt:-1
+    }).populate("owner").exec();
   const response=[];
   for(let i=0;i<data.length;i++){
     
@@ -135,6 +137,7 @@ export const GetBlog = asyncHandler(async(req,res)=>{
 
     const user = req.data._id;
     const exist = await Like.findOne({user,blog});
+    const commentCount = await Comment.find({blog}).count();
     var obj;
     if(exist){
       obj = {...data[i],reaction:exist};
@@ -142,6 +145,7 @@ export const GetBlog = asyncHandler(async(req,res)=>{
     else {
       obj = {...data[i],reaction:{val:0}};
     }
+    obj = {...obj,comments:commentCount};
     response.push(obj);
   }
   return res.status(200).json(new apiResponse(200, { response }, "all the blogs fetched"));
@@ -167,4 +171,11 @@ export const GetMyBlog=asyncHandler(async(req,res)=>{
 
     res.status(200).json(new apiResponse(200,{posts},"Done"))
 
+})
+
+export const GetComment = asyncHandler(async(req,res)=>{
+  const{id,no} = req.body;
+  const skipAmount = no*5;
+  const result = await Comment.find({blog:id}).skip(skipAmount).limit(5);
+  res.status(200).json(new apiResponse(200,{result},"Comment fetched"));
 })

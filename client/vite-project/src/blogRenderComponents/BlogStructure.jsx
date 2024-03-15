@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import BlogOwner from "./BlogOwner";
 import BlogFunctionality from "./BlogFunctionality";
+import ShowComments from "./ShowComments";
 export default function BlogStructure(props) {
-const [seemore, setSeemore] = useState(0);
+  const [seemore, setSeemore] = useState(0);
+  const [showComments, setShowComments] = useState(0);
 
   return (
     <div className="">
@@ -47,13 +49,29 @@ const [seemore, setSeemore] = useState(0);
           ""
         )}
         <div className=" mt-[20px]">
-          <img
-            className=" object-fill h-[350px] w-full"
-            src={props.image}
-          />
+          <img className=" object-fill h-[350px] w-full" src={props.image} />
         </div>
-        <BlogFunctionality id={props.id} reaction={props.reaction}></BlogFunctionality>
-        
+        <div className=" mt-[20px]">
+          {props.comments != 0 ? (
+            <div
+              className=" text-white cursor-pointer hover:underline ml-[550px]"
+              onClick={() => {
+                showComments ? setShowComments(0) : setShowComments(1);
+              }}
+            >
+              {props.comments} comments
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+        <BlogFunctionality
+          id={props.id}
+          reaction={props.reaction}
+        ></BlogFunctionality>
+        {
+          showComments ? <ShowComments id={props.id}></ShowComments> : ""
+        }
       </div>
     </div>
   );

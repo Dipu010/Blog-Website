@@ -40,7 +40,7 @@ export default function BlogPost() {
       { withCredentials: true }
     );
     removeLocalData();
-    navigate("/");
+    navigate("/home");
   };
   
 
