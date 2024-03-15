@@ -14,6 +14,7 @@ export default function BlogStructure(props) {
           lastName={props.lastName}
           userName={props.userName}
           date={props.date}
+          profilePicture ={props.profilePicture}
         ></BlogOwner>
       </div>
       <div className="relative box-border w-[690px] p-[20px] bg-slate-700 flex flex-col rounded-b-md">
@@ -65,6 +66,7 @@ export default function BlogStructure(props) {
             ""
           )}
         </div>
+        <div className=" box-border w-[650px] h-[2px] bg-slate-200 mt-[10px]"></div>
         <BlogFunctionality
           id={props.id}
           reaction={props.reaction}

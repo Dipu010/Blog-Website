@@ -50,7 +50,7 @@ export default function BlogFunctionality(props) {
     console.log(dislikeResult);
   };
   return (
-    <div className=" flex flex-col justify-center items-center gap-2 -mt-[10px]">
+    <div className=" flex flex-col justify-center items-center gap-2 -mt-[5px]">
       <div className=" flex w-[100%]  h-[30px] mt-[20px] justify-evenly items-center">
         <BiLike
           className={

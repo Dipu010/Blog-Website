@@ -42,6 +42,7 @@ export default function Render() {
                 reaction={val.reaction.val}
                 key={val._doc._id}
                 comments = {val.comments}
+                profilePicture = {val._doc.owner.profilePicture}
               ></BlogStructure>
             );
           })}

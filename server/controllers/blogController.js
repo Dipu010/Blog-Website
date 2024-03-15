@@ -176,6 +176,6 @@ export const GetMyBlog=asyncHandler(async(req,res)=>{
 export const GetComment = asyncHandler(async(req,res)=>{
   const{id,no} = req.body;
   const skipAmount = no*5;
-  const result = await Comment.find({blog:id}).skip(skipAmount).limit(5);
+  const result = await Comment.find({blog:id}).skip(skipAmount).limit(5).populate("user").exec();
   res.status(200).json(new apiResponse(200,{result},"Comment fetched"));
 })
