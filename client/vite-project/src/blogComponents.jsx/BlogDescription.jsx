@@ -21,8 +21,9 @@ export default function BlogDescription() {
         summery: "",
         description: "",
         tags: "",
-      },
+      }
     ];
+    console.log(retrivedData)
   }
   const [description, setDescription] = useState({
     title: retrivedData[0].title,
@@ -30,7 +31,7 @@ export default function BlogDescription() {
     description: retrivedData[0].description,
     tags:retrivedData[0].tags,
   });
-
+  console.log(description)
   const setLocally = () => {
     const data = [description];
     localStorage.setItem("blogDescription", JSON.stringify(data));

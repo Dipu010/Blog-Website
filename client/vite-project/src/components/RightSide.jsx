@@ -8,7 +8,6 @@ const Rightside = (props) => {
           <h2>Add to your feed</h2>
           <img src="https://raw.githubusercontent.com/CleverProgrammers/cp-linkedin-clone/f014d361d787029f15ea0f0f78c053d8c214f138/public/images/feed-icon.svg" alt="" />
         </Title>
-
         <FeedList>
           <li>
             <a>
