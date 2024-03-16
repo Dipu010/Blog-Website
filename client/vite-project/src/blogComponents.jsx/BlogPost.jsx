@@ -29,6 +29,7 @@ export default function BlogPost() {
     tags: retrivedData[0][0].tags,
     image: retrivedData[1][0],
   };
+  console.log(finalData);
   const [loading, setLoading] = useState(0);
   const data=JSON.parse(localStorage.getItem("ResPonse"));
   const handlePost = async () => {
@@ -39,6 +40,7 @@ export default function BlogPost() {
       { ...finalData },
       { withCredentials: true }
     );
+    console.log(data);
     removeLocalData();
     navigate("/home");
   };

@@ -33,6 +33,7 @@ const generateAccessandRefreshTokens=async(userId)=>{
 
  const registerUser = asyncHandler(async (req, res) => {
     var { firstName,lastName, email,userName, password ,accountType} = req.body;
+    console.log({ firstName,lastName, email,userName, password ,accountType})
     const check = await User.findOne({email});
     if (check) {
       throw new apiError(401,"User Already Exists with the given email")
