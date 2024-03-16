@@ -138,6 +138,7 @@ export const GetBlog = asyncHandler(async(req,res)=>{
     const user = req.data._id;
     const exist = await Like.findOne({user,blog});
     const commentCount = await Comment.find({blog}).count();
+    const likeCount = await Like.find({blog,val:1}).count();
     var obj;
     if(exist){
       obj = {...data[i],reaction:exist};
@@ -145,7 +146,7 @@ export const GetBlog = asyncHandler(async(req,res)=>{
     else {
       obj = {...data[i],reaction:{val:0}};
     }
-    obj = {...obj,comments:commentCount};
+    obj = {...obj,comments:commentCount,likes:likeCount};
     response.push(obj);
   }
   return res.status(200).json(new apiResponse(200, { response }, "all the blogs fetched"));

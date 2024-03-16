@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import BlogStructure from "./BlogStructure";
+import { BlogContext } from "../context/BlogContext";
 export default function Render() {
+  const blogContext = useContext(BlogContext);
   const [loading, setLoading] = useState(1);
-  const [dataArray, setDataArray] = useState([]);
-  console.log(dataArray);
+  console.log(blogContext.dataArray)
   const getData = async () => {
     const parsedData = await axios.get(`http://localhost:4000/api/v1/getblog`, {
       withCredentials: true,
     });
     console.log(parsedData);
     setLoading(0);
-    setDataArray([...parsedData.data.message.response]);
+    blogContext.setDataArray([...parsedData.data.message.response]);
   };
   useEffect(() => {
     getData();
@@ -27,22 +28,11 @@ export default function Render() {
         </div>
       ) : (
         <>
-          {dataArray.map((val) => {
+          {blogContext.dataArray.map((val,index) => {
             return (
               <BlogStructure
-                title={val._doc.title}
-                description={val._doc.description}
-                summary={val._doc.summary}
-                firstName={val._doc.owner.firstName}
-                lastName={val._doc.owner.lastName}
-                userNmae={val._doc.owner.userNmae}
-                date={val._doc.createdAt}
-                image={val._doc.picture}
-                id={val._doc._id}
-                reaction={val.reaction.val}
-                key={val._doc._id}
-                comments = {val.comments}
-                profilePicture = {val._doc.owner.profilePicture}
+                i={index}
+                key={blogContext.dataArray[index]._doc._id}
               ></BlogStructure>
             );
           })}
