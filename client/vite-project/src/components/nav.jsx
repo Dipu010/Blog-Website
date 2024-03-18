@@ -54,7 +54,7 @@ useEffect(()=>
 {getUser()}
 ,[]);
   return (
-   <div className="w-screen  z-30 fixed ">
+   <div className="w-screen  z-30 fixed mb-8">
         <FlexBetween padding="1rem 6%"  className=" bg-fixed bg-slate-800">
       <FlexBetween gap="1.75rem">
         <Typography

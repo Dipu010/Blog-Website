@@ -7,11 +7,16 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { AuthContext } from '../context/Authcontex';
 import axios from 'axios';
+import { useNavigate ,Link} from 'react-router-dom';
 function Leftside({data}) {
   // Dummy data for the user profile
   
   const [userData,setUserData]=useState({});
+  const navigate=useNavigate()
+
   console.log(userData);
+
+
    const getUser=async()=>{
     try {
       const response=await axios.get('http://localhost:4000/api/v1/login/success',{withCredentials:true});
@@ -39,10 +44,10 @@ function Leftside({data}) {
 
   return (
     <div className=" bg-slate-700 rounded-lg p-6 shadow-lg h-[470px] max-w-sm mt-[100px] ">
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-4" >
         <img src={data.profilePicture} alt="Profile" className="rounded-full w-14 h-14" />
         <div>
-          <h1 className="text-xl font-semibold text-yellow-100">{fullName}</h1>
+          <h1 className="text-xl font-semibold text-yellow-100" onClick={()=>{navigate('..profile')}}>{fullName}</h1>
           <p className=" text-gray-300">{profileData.friends} friends</p>
         </div>
       </div>

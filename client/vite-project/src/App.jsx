@@ -16,6 +16,10 @@ import Render from './blogRenderComponents/Render'
 import { AuthContext } from './context/Authcontex'
 import { ProfileSection } from './components/ProfileSection'
 import BlogUpdate from './blogUpdateComponents/blogUpdateDescription'
+import {Layout} from "../src/components/Layout/Layout"
+import {HomeLayout} from "../src/components/Layout/HomeLayout"
+import { HomePage } from './components/Layout/HomePage'
+import { CreateBlogLayout } from './components/Layout/CreateBlogLayout'
 function App() {
   const [count, setCount] = useState(0)
   const {data}=useContext(AuthContext);
@@ -23,18 +27,45 @@ function App() {
   // const theme=useMemo(()=>createTheme(themeSettings(mode)),[mode]);
    return (
     <>
-    {/* <CssBaseline/> */}
+   
    <Routes>
        <Route path='/login' element={<Login></Login>}/>
        <Route path='/register' element={<Register></Register>}/>
-       <Route path='/' element={<Navbar/>}/>
-       <Route path="/blog" element={<BlogDescription/>}/>
+       
+      
+
+       <Route path='/' element={<Layout/>}>
+            <Route path='login' element={<Login/>}/>
+            <Route path=':id/' element={<HomePage/>}>
+                <Route path='' element={<ProfileSection/>}/>
+                <Route path='home' element={<HomeLayout/>} />
+                <Route path='profile' element={<ProfileSection/>}/>
+
+                <Route path='createBlog/' element={<CreateBlogLayout/>}>
+                    <Route path='' element={<BlogDescription/>}/>
+                    <Route path="image" element={<BlogUploadImage/>}/>
+                    <Route path='post' element={<BlogPost/>}/>
+
+                </Route>
+                
+            </Route>
+            
+            {/* <Route path=':id' element={<ProfileSection/>}/>
+            <Route path=':id/profile' element={<ProfileSection/>}/> */}
+                  
+           
+            
+       </Route>
+
+
+
+       {/* <Route path="/blog" element={<BlogDescription/>}/>
        <Route path="/image" element={<BlogUploadImage/>}/>
        <Route path='/post' element={<BlogPost/>}/>
-       <Route path='/home' element={<Home/>}/>
+       <Route path='/home' element={<Home/>}/> */}
        {/* <Route path='/blogrender' element={<Render/>}/> */}
-       <Route path='/profile' element={<ProfileSection/>}/>
-       <Route path='/updateblog' element={<BlogUpdate/>}/>
+       {/* <Route path='/profile' element={<ProfileSection/>}/>
+       <Route path='/updateblog' element={<BlogUpdate/>}/> */}
     </Routes>
 
     </>

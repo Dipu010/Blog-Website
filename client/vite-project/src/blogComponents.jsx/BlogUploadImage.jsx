@@ -45,7 +45,7 @@ export default function BlogUploadImage() {
   const data=JSON.parse(localStorage.getItem("ResPonse"));
   return (
     <div>
-      <Nav data={data}></Nav>
+      
       <div className=" w-screen bg-slate-700 flex flex-col items-center">
         <div className=" text-white text-[30px]  w-screen font-black flex justify-center items-center mt-[20px]">
           Create New Blog

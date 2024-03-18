@@ -22,7 +22,7 @@ function Login() {
          storeDataInLS(response);
          console.log(response)
          setData(response);
-        navigate('/home');
+        navigate('home/{response.firstName}');
       }
       const loginwithgoogle=()=>{
         window.open("http://localhost:4000/api/v1/auth/google/callback","_self");
