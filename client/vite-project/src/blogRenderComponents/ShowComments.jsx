@@ -1,24 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import CommentStructure from "./CommentStructure";
 export default function ShowComments(props) {
+  const [LoadMore,setLoadMore]= useState(0);
   const [loading, setLoading] = useState(1);
   const [commentArray, setCommentArray] = useState([]);
+  const val = useRef(0);
   console.log(commentArray);
+
+
   const getComment = async () => {
     const parsedComment = await axios.post(
       `http://localhost:4000/api/v1/getcomment`,
-      { id: props.id, no: 0 },
+      { id: props.id, no: val.current },
       {
         withCredentials: true,
       }
     );
     setLoading(0);
-    setCommentArray([...parsedComment.data.message.result]);
+    setCommentArray([...commentArray,...parsedComment.data.message.result]);
   };
+
+
   useEffect(() => {
     getComment();
-  }, []);
+  }, [LoadMore]);
+
+  const loadMore = ()=>{
+    val.current=val.current+1;
+    setLoading(1);
+    setLoadMore(LoadMore+1);
+  }
+
 
   return (
     <>
@@ -47,7 +60,9 @@ export default function ShowComments(props) {
               />
             );
           })}
-          <button className=" box-border bg-inherit px-2 w-[180px] rounded-md py-1 hover:bg-slate-500 cursor-pointer text-white font-semibold">
+          <button className=" box-border bg-inherit px-2 w-[180px] rounded-md py-1 hover:bg-slate-500 cursor-pointer text-white font-semibold"
+          onClick={()=>{loadMore()}}
+          >
             Load More Comments
           </button>
         </div>
