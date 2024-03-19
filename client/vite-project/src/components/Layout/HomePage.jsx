@@ -1,8 +1,13 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useParams } from 'react-router-dom'
 import Nav from '../nav'
 
 export const HomePage = () => {
+
+  const {id}=useParams()
+  console.log(id)
+  
+
 
     const data =JSON.parse(localStorage.getItem('ResPonse'))
 

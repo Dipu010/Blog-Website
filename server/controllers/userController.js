@@ -1,5 +1,6 @@
 //SignUp,Login,Logout,ForgetPassword,ResetPassword
 import {User} from "../models/User.js";
+import {Blog} from "../models/Blog.js"
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
@@ -169,4 +170,21 @@ export const ChangePassword=async(req,res)=>{
     }
 }
 
-export {registerUser,loginUser}
+const showProfile=asyncHandler(async(req,res)=>{
+
+    const{userName}=req.body
+    const userData=await User.findOne({userName:userName})
+    console.log(userData)
+    if(!userData)
+      throw new apiError(404,"User not found")
+
+    const userPosts=await Blog.find({owner:userData._id}).sort({createdAt:-1})
+    console.log(userPosts)
+
+    res.status(201).json(new apiResponse(200,{userData,userPosts},"Everything fetched"))
+
+
+
+})
+
+export {registerUser,loginUser,showProfile}

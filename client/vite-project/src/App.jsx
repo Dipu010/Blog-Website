@@ -48,13 +48,8 @@ function App() {
 
                 </Route>
                 
-            </Route>
-            
-            {/* <Route path=':id' element={<ProfileSection/>}/>
-            <Route path=':id/profile' element={<ProfileSection/>}/> */}
-                  
+            </Route>                            
            
-            
        </Route>
 
 
