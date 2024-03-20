@@ -1,8 +1,8 @@
 import React,{useState,useEffect,useContext} from 'react'
-import BlogDescription from '../BlogComponents.jsx/BlogDescription'
-import BlogPost from '../BlogComponents.jsx/BlogPost'
-import StepComplition from '../BlogComponents.jsx/StepComplition'
-import BlogUploadImage from '../BlogComponents.jsx/BlogUploadImage'
+import BlogDescription from '../blogComponents.jsx/BlogDescription'
+import BlogPost from '../blogComponents.jsx/BlogPost'
+import StepComplition from '../blogComponents.jsx/StepComplition'
+import BlogUploadImage from '../blogComponents.jsx/BlogUploadImage'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 const getLocalData = () => {

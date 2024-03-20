@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import BlogStructure from "./BlogStructure";
-import { BlogContext } from "../Context/BlogContext";
+import { BlogContext } from "../context/BlogContext";
 export default function Render() {
   const blogContext = useContext(BlogContext);
   const [loading, setLoading] = useState(1);

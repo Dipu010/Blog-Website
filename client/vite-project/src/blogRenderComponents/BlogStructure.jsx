@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import BlogOwner from "./BlogOwner";
 import BlogFunctionality from "./BlogFunctionality";
 import ShowComments from "./ShowComments";
-import { BlogContext } from "../Context/BlogContext";
+import { BlogContext } from "../context/BlogContext";
 export default function BlogStructure(props) {
   const {dataArray} = useContext(BlogContext);
   const [seemore, setSeemore] = useState(0);

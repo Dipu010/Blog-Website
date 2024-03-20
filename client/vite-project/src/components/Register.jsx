@@ -8,7 +8,7 @@ import {
 import axios from "axios"
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../Context/Authcontex";
+import { AuthContext } from "../context/Authcontex";
 
 export function SignUp() {
   const navigate = useNavigate();

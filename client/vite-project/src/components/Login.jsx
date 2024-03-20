@@ -2,7 +2,7 @@ import React,{useContext, useState} from 'react'
 import "./Login.css"
 import { useNavigate,Link } from 'react-router-dom';
 import axios from 'axios';
-import { AuthContext } from '../Context/Authcontex';
+import { AuthContext } from '../context/Authcontex';
 function Login() {
     const navigate=useNavigate();
     const {storeDataInLS,getDataInLS,setData}=useContext(AuthContext);
