@@ -34,7 +34,7 @@ const generateAccessandRefreshTokens=async(userId)=>{
 
  const registerUser = asyncHandler(async (req, res) => {
     var { firstName,lastName, email,userName, password ,accountType} = req.body;
-    console.log({ firstName,lastName, email,userName, password ,accountType})
+    // console.log({ firstName,lastName, email,userName, password ,accountType})
     const check = await User.findOne({email});
     if (check) {
       throw new apiError(401,"User Already Exists with the given email")
@@ -61,7 +61,7 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 
     const existedUser= await User.findOne({ email });
-    console.log(existedUser);
+    // console.log(existedUser);
     if (!existedUser) {
       throw new apiError(404,"User Not Registered");
     }
@@ -94,7 +94,7 @@ export const forgetPassword=async(req,res)=>{
   // Sending the mail.
   const target = req.body.email;
   const data = await User.findOne({email:target});
-  console.log(data);
+  // console.log(data);
   if(!data) 
   {
     res.status(404).json({
@@ -145,7 +145,7 @@ export const forgetPassword=async(req,res)=>{
 export const ChangePassword=async(req,res)=>{
     try {
         const {Password,ConfirmPassword}=req.body;
-        console.log({Password,ConfirmPassword})
+        // console.log({Password,ConfirmPassword})
     if(Password!==ConfirmPassword){
         return res.status(401).json({
             success:false,
@@ -156,13 +156,13 @@ export const ChangePassword=async(req,res)=>{
   // hash the password and save in the db,
    const hashPassword= await bcrypt.hash(Password,10);
    const data=await User.findOneAndUpdate({email:req.data.email},{password:hashPassword},{new:true});
-   console.log(data);
+  //  console.log(data);
    return res.status(200).json({
     success:true,
     message:"Password Saved Successfully"
    })
      } catch (error) {
-         console.log(error);
+        //  console.log(error);
          return res.status(500).json({
             success:false,
             message:"Password dont save"
@@ -172,14 +172,15 @@ export const ChangePassword=async(req,res)=>{
 
 const showProfile=asyncHandler(async(req,res)=>{
 
+    console.log("Params:-",req.params.id)
     const{userName}=req.body
     const userData=await User.findOne({userName:userName})
-    console.log(userData)
+    // console.log(userData)
     if(!userData)
       throw new apiError(404,"User not found")
 
     const userPosts=await Blog.find({owner:userData._id}).sort({createdAt:-1})
-    console.log(userPosts)
+    // console.log(userPosts)
 
     res.status(201).json(new apiResponse(200,{userData,userPosts},"Everything fetched"))
 

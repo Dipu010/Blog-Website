@@ -2,7 +2,7 @@ import React,{useContext, useState} from 'react'
 import "./Login.css"
 import { useNavigate,Link } from 'react-router-dom';
 import axios from 'axios';
-import { AuthContext } from '../../context/Authcontex';
+import {AuthContext} from '../../context/Authcontex';
 function Login() {
     const navigate=useNavigate();
     const {storeDataInLS,getDataInLS,setData}=useContext(AuthContext);
@@ -22,7 +22,7 @@ function Login() {
          storeDataInLS(response);
          console.log(response)
          setData(response);
-        navigate('home/{response.firstName}');
+        navigate(`/${response.userName}/home`);
       }
       const loginwithgoogle=()=>{
         window.open("http://localhost:4000/api/v1/auth/google/callback","_self");

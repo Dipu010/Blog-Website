@@ -14,7 +14,7 @@ blogRoute.get("/getblog",auth,GetBlog);
 blogRoute.post("/getcomment",GetComment);
 //following route
 blogRoute.post("/follow",auth,FollowPerson);
-blogRoute.get("/myblog",auth,GetMyBlog);
+blogRoute.get("/myblog/:id",auth,GetMyBlog);
 
 //searching route
 blogRoute.post('/searchname',SearchName);

@@ -29,7 +29,7 @@ export default function BlogOwner(props) {
         <div
           className=" font-semibold cursor-pointer text-[20px] text-white"
           onClick={() => {
-            navigate("/profile");
+            navigate(`/${props.userName}/profile`);
           }}
         >
           {props.firstName} {props.lastName}

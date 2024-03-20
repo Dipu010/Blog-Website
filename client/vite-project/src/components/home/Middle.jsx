@@ -6,12 +6,17 @@ import { LiaBlogSolid } from "react-icons/lia";
 import { FaEarthAsia } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Render from '../../blogRenderComponents/Render';
+import Render from '../../blogRenderComponents/Render'
+import {MyBlogContext} from '../../context/myBlogContex'
+
+// import { MyBlogContext } from '../context/myBlogContex';
+import MyBlogRender from '../myblog/MyBlogRender';
 
 export default function Middle({data}) {
   const navigate=useNavigate();
   const [userData,setUserData]=useState({});
   console.log(userData);
+  const {click,setClick}=useContext(MyBlogContext);
   // For Google Login
    const getUser=async()=>{
     try {
@@ -44,13 +49,13 @@ export default function Middle({data}) {
         <IoIosCreate className="h-6 w-6 text-gray-500 mx-2 cursor-pointer" />
           </div>
        <div className="flex items-center">
-       <p className='cursor-pointer text-black hover:bg-neutral-700 hover:text-white px-3 py-1 rounded-md'>
+       <p className='cursor-pointer text-black hover:bg-neutral-700 hover:text-white px-3 py-1 rounded-md' onClick={()=>setClick(1)}>
           All Blogs
         </p>
         <FaEarthAsia className="h-6 w-6 text-gray-500 mx-2 cursor-pointer" />
        </div>
     <div className="flex items-center">
-    <p className='cursor-pointer text-black hover:bg-neutral-700 hover:text-white px-3 py-1 rounded-md'> 
+    <p className='cursor-pointer text-black hover:bg-neutral-700 hover:text-white px-3 py-1 rounded-md' onClick={()=>setClick(2)}> 
          My Blogs
         </p>
         <LiaBlogSolid className="h-6 w-6 text-gray-500 mx-2 cursor-pointer" />
@@ -58,7 +63,8 @@ export default function Middle({data}) {
        
       </div>
       </div>
-      <Render className=' mt-3'></Render>
+      { click==1? <Render className=' mt-3'></Render>: <MyBlogRender className=' mt-3'/>}
+     { click==2? <MyBlogRender className=' mt-3'></MyBlogRender>: <Render className=' mt-3'/>}
 
     </div>
   )

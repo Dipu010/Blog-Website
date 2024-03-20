@@ -7,6 +7,6 @@ routes.post("/register",registerUser);
 routes.post("/login",loginUser);
 routes.post("/forgetPassword",forgetPassword);
 routes.post("/register",auth,ChangePassword);
-routes.post("/profile",showProfile)
+routes.post("/profile/:id",showProfile)
 
 export default routes
