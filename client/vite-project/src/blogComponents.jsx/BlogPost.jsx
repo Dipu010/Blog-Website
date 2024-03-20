@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import StepComplition from "./StepComplition";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Nav from "../Components/Navbar/nav";
+import Nav from "../Components/nav";
 
 const getLocalData = () => {
   const retriveDescription = JSON.parse(

@@ -6,8 +6,7 @@ import { LiaBlogSolid } from "react-icons/lia";
 import { FaEarthAsia } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Render from '../../BlogRenderComponents/Render';
-
+import Render from '../BlogRenderComponents/Render.jsx';
 
 export default function Middle({data}) {
   const navigate=useNavigate();
@@ -60,7 +59,6 @@ export default function Middle({data}) {
       </div>
       </div>
       <Render className=' mt-3'></Render>
-      
       
 
     </div>

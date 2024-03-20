@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet, useParams } from 'react-router-dom'
-import Nav from '../Components/Navbar/nav'
+import Nav from '../Components/nav'
 
 export const HomePage = () => {
 
