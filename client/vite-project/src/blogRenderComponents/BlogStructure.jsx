@@ -10,13 +10,14 @@ export default function BlogStructure(props) {
 
   return (
     <div className="">
-      <div className=" box-border w-[690px] p-[20px] bg-slate-800 flex flex-row rounded-t-md">
+      <div className=" box-border w-[690px] p-[20px] bg-slate-800 flex  rounded-t-md">
         <BlogOwner
           firstName={dataArray[props.i]._doc.owner.firstName}
           lastName={dataArray[props.i]._doc.owner.lastName}
           userName={dataArray[props.i]._doc.owner.userName}
           date={dataArray[props.i]._doc.createdAt}
           profilePicture ={dataArray[props.i]._doc.owner.profilePicture}
+          owner_id={dataArray[props.i]._doc.owner._id}
         ></BlogOwner>
       </div>
       <div className="relative box-border w-[690px] p-[20px] bg-slate-700 flex flex-col rounded-b-md">

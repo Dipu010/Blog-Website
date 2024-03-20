@@ -17,19 +17,23 @@ export const SearchName = asyncHandler(async (req, res) => {
   if (flag) {
     parts = nameToSearch.split(" ");
   }
-  var data1;
+  var data;
   if (!flag) {
-    data1 = await User.aggregate([
+    data = await User.aggregate([
       {
-        $match: {
-          firstName: {
-            $regex: new RegExp("^" + nameToSearch, "i"),
-          },
-        },
-      },
+        '$match': {
+          '$or': [
+            {
+              'userName': new RegExp('^'+nameToSearch, 'i')
+            }, {
+              'firstName': new RegExp('^'+nameToSearch, 'i')
+            }
+          ]
+        }
+      }
     ]);
   } else {
-    data1 = await User.aggregate([
+    data = await User.aggregate([
       {
         $match: {
           firstName: {
@@ -47,34 +51,13 @@ export const SearchName = asyncHandler(async (req, res) => {
     ]);
   }
 
-  const data2 = await User.aggregate([
-    {
-      $match: {
-        userName: {
-          $regex: new RegExp("^" + nameToSearch, "i"),
-        },
-      },
-    },
-  ]);
 
-  let map = new Map();
-  for (let x of data1) {
-    if (!map.has(x._id)) {
-      map[x._id] = x;
-    }
-  }
-  for (let x of data2) {
-    if (!map.has(x._id)) {
-      map[x._id] = x;
-    }
-  }
+  
+  
 
-  var response = [];
-  for (let i in map) {
-    response.push(map[i]);
-  }
-
+  
+ 
   return res
     .status(200)
-    .json(new apiResponse(200, { response }, "users found"));
+    .json(new apiResponse(200, { data }, "users found"));
 })

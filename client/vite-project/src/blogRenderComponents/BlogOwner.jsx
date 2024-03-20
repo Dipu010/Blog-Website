@@ -1,12 +1,21 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { IoMdPerson } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
 export default function BlogOwner(props) {
   const navigate = useNavigate();
+  const owner_id=props.owner_id
+  const[follow,setFollow]=useState(false);
 
-  const handleClick = ()=>{
-    console.log("Ho gaya malik")
+  const handleClick =async ()=>{
+    const response=await axios.post("http://localhost:4000/api/v1/follow",{followingID:owner_id},{withCredentials:true});
+    console.log(response);
+    if(response.data.message.data.val)
+      setFollow(true)
+    else
+      setFollow(false)
+      
   }
   return (
     <div className=" flex justify-center items-center">
@@ -30,7 +39,7 @@ export default function BlogOwner(props) {
         </div>
       </div>
       <button className=" box-border h-[30px] w-[100px] ml-[300px]  rounded-md bg-blue-600 text-white "
-        onClick={()=>{handleClick()}}>Follow</button>
+        onClick={()=>{handleClick()}}>{follow?"following":"follow"}</button>
     </div>
   );
 }

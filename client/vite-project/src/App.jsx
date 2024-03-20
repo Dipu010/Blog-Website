@@ -7,19 +7,15 @@ import BlogDescription from './blogComponents.jsx/BlogDescription'
 import BlogUploadImage from './blogComponents.jsx/BlogUploadImage'
 import BlogPost from './blogComponents.jsx/BlogPost'
 
-import Dash from './components/Dash'
-import Nav from './components/nav'
 
-import Home from './components/Home'
-import Render from './blogRenderComponents/Render'
 
 import { AuthContext } from './context/Authcontex'
 import { ProfileSection } from './components/ProfileSection'
 import BlogUpdate from './blogUpdateComponents/blogUpdateDescription'
-import {Layout} from "../src/components/Layout/Layout"
-import {HomeLayout} from "../src/components/Layout/HomeLayout"
-import { HomePage } from './components/Layout/HomePage'
-import { CreateBlogLayout } from './components/Layout/CreateBlogLayout'
+import {Layout} from "../src/Layout/Layout"
+import {HomeLayout} from "../src/Layout/HomeLayout"
+import { HomePage } from './Layout/HomePage'
+import { CreateBlogLayout } from './Layout/CreateBlogLayout'
 function App() {
   const [count, setCount] = useState(0)
   const {data}=useContext(AuthContext);

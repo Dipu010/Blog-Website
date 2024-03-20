@@ -24,7 +24,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 const Nav = ({data}) => {
-    console.log(data)
+    // console.log(data)
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
  
   const navigate = useNavigate();
@@ -32,12 +32,12 @@ const Nav = ({data}) => {
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
   const fullName = `${data.firstName} ${data.lastName}`;
-  console.log(fullName)
+  // console.log(fullName)
 
   const [userData,setUserData]=useState({});
   const [loginData,setLoginData]=useState({});
   // For google Login
-  console.log(userData);
+  // console.log(userData);
    const getUser=async()=>{
     try {
       const response=await axios.get('http://localhost:4000/api/v1/login/success',{withCredentials:true});
