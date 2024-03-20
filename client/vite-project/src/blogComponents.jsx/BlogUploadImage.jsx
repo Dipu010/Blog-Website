@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import StepComplition from "./StepComplition";
-import Nav from "../Components/nav";
 import {useNavigate} from "react-router-dom";
 
 const getLocalData = () => {

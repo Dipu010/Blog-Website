@@ -5,7 +5,6 @@ import { CiLocationOn } from "react-icons/ci";
 import { FaShoppingBag } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
-import { AuthContext } from '../Context/Authcontex';
 import axios from 'axios';
 import { useNavigate ,Link} from 'react-router-dom';
 function Leftside({data}) {
