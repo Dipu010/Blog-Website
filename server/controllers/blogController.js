@@ -6,6 +6,7 @@ import { apiError } from "../utils/apiError.js";
 import { apiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import mongoose from "mongoose";
+import { User } from "../models/User.js";
 
 export const CreateBlog = asyncHandler(async (req, res) => {
   const { title, description, image, summary, tags } = req.body;
@@ -43,7 +44,7 @@ export const CreateBlog = asyncHandler(async (req, res) => {
     title,
     description,
     picture,
-    owner:user,
+    owner: user,
     summary,
     tags,
   });
@@ -84,26 +85,25 @@ export const UpdateBlog = async (req, res) => {
 };
 
 export const LikeBlog = asyncHandler(async (req, res) => {
-  
+
   const { val, id } = req.body; //Here Id id blogID
   const user = req.data._id;
-  const exist = await Like.findOne({user:user,blog:id})
-  if(exist){
-    if(val==1 && exist.val==1){
-      const data = await Like.findOneAndDelete({_id:exist._id});
+  const exist = await Like.findOne({ user: user, blog: id })
+  if (exist) {
+    if (val == 1 && exist.val == 1) {
+      const data = await Like.findOneAndDelete({ _id: exist._id });
       return res.status(200).json(new apiResponse(200, { data }, "Your like is removed"));
     }
-    else if(val==1 && exist.val==-1){
-      const data= await Like.findByIdAndUpdate({_id:exist._id},{val:1})
+    else if (val == 1 && exist.val == -1) {
+      const data = await Like.findByIdAndUpdate({ _id: exist._id }, { val: 1 })
       return res.status(200).json(new apiResponse(200, { data }, "Blog is Liked"));
     }
-    else if(val==-1 && exist.val==1)
-    {
-      const data= await Like.findByIdAndUpdate({_id:exist._id},{val:-1})
+    else if (val == -1 && exist.val == 1) {
+      const data = await Like.findByIdAndUpdate({ _id: exist._id }, { val: -1 })
       return res.status(200).json(new apiResponse(200, { data }, "Blog is disliked"));
     }
-    else if(val==-1 && exist.val==-1){
-      const data = await Like.findOneAndDelete({_id:exist._id});
+    else if (val == -1 && exist.val == -1) {
+      const data = await Like.findOneAndDelete({ _id: exist._id });
       return res.status(200).json(new apiResponse(200, { data }, "Your dislike is removed"));
     }
   }
@@ -114,7 +114,7 @@ export const LikeBlog = asyncHandler(async (req, res) => {
 
 
 export const CommentBlog = asyncHandler(async (req, res) => {
- 
+
   const { description, id } = req.body; //Here Id id blogId
   const user = req.data._id;
   const data = await Comment.create({
@@ -122,61 +122,77 @@ export const CommentBlog = asyncHandler(async (req, res) => {
     user: user,
     blog: id,
   });
-  if(data) return res.status(200).json(new apiResponse(200, { data }, "you have a comment in this post"));
-  
+  if (data) return res.status(200).json(new apiResponse(200, { data }, "you have a comment in this post"));
+
 })
 
-export const GetBlog = asyncHandler(async(req,res)=>{
-  const data =await  Blog.find().sort({
-    createdAt:-1
-    }).populate("owner").exec();
-  const response=[];
-  for(let i=0;i<data.length;i++){
-    
+export const GetBlog = asyncHandler(async (req, res) => {
+  const data = await Blog.find().sort({
+    createdAt: -1
+  }).populate("owner").exec();
+  var response = [];
+  for (let i = 0; i < data.length; i++) {
+
     const blog = data[i]._id;
 
     const user = req.data._id;
-    const exist = await Like.findOne({user,blog});
-    const commentCount = await Comment.find({blog}).count();
-    const likeCount = await Like.find({blog,val:1}).count();
+    const exist = await Like.findOne({ user, blog });
+    const commentCount = await Comment.find({ blog }).count();
+    const likeCount = await Like.find({ blog, val: 1 }).count();
     var obj;
-    if(exist){
-      obj = {...data[i],reaction:exist};
+    if (exist) {
+      obj = { ...data[i], reaction: exist };
     }
     else {
-      obj = {...data[i],reaction:{val:0}};
+      obj = { ...data[i], reaction: { val: 0 } };
     }
-    obj = {...obj,comments:commentCount,likes:likeCount};
+    obj = { ...obj, comments: commentCount, likes: likeCount };
     response.push(obj);
   }
   return res.status(200).json(new apiResponse(200, { response }, "all the blogs fetched"));
 })
 
-export const GetMyBlog=asyncHandler(async(req,res)=>{
+export const GetMyBlog = asyncHandler(async (req, res) => {
+  console.log("GetMyBlog:-",req.params.id);
+  const userName = req.params.id;
+  // console.log(user)
+  if (!userName)
+    throw new apiError(401, "Unauthorized Request")
 
-  const user=req.data
-  console.log(user)
-  if(!user)
-    throw new apiError(401,"Unauthorized Request")
-  
-    const posts= await Blog.aggregate(
-      [
-        {
-          '$match': {owner: new mongoose.Types.ObjectId(user._id)}
-        }
-      ]
-    )
-    
-    // const post= await Blog.find({owner:user._id})
-    
+  const user=await User.findOne({userName:userName})
+  const posts = await Blog.find({ owner: user._id }).sort({
+    createdAt: -1
+  }).populate("owner").exec();
+  console.log(posts)
+  var response = []
+  for (let i = 0; i < posts.length; i++) {
 
-    res.status(200).json(new apiResponse(200,{posts},"Done"))
+    const blog = posts[i]._id;
+
+
+    const exist = await Like.findOne({ user:user._id, blog });
+    const commentCount = await Comment.find({ blog }).count();
+    const likeCount = await Like.find({ blog, val: 1 }).count();
+    var obj;
+    if (exist) {
+      obj = { ...posts[i], reaction: exist };
+    }
+    else {
+      obj = { ...posts[i], reaction: { val: 0 } };
+    }
+    obj = { ...obj, comments: commentCount, likes: likeCount };
+    response.push(obj);
+  }
+  // const post= await Blog.find({owner:user._id})
+
+
+  res.status(200).json(new apiResponse(200, { response }, "Done"))
 
 })
 
-export const GetComment = asyncHandler(async(req,res)=>{
-  const{id,no} = req.body;
-  const skipAmount = no*5;
-  const result = await Comment.find({blog:id}).skip(skipAmount).limit(5).populate("user").exec();
-  res.status(200).json(new apiResponse(200,{result},"Comment fetched"));
+export const GetComment = asyncHandler(async (req, res) => {
+  const { id, no } = req.body;
+  const skipAmount = no * 5;
+  const result = await Comment.find({ blog: id }).skip(skipAmount).limit(5).populate("user").exec();
+  res.status(200).json(new apiResponse(200, { result }, "Comment fetched"));
 })
