@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/navbar";
 import StepComplition from "./StepComplition";
 import {useNavigate} from "react-router-dom";
-import Nav from "../components/nav";
+
 
 const getLocalData = () => {
   const retrivedData = localStorage.getItem("blogDescription");

@@ -6,7 +6,7 @@ import { LiaBlogSolid } from "react-icons/lia";
 import { FaEarthAsia } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Render from '../blogRenderComponents/Render';
+import Render from '../../blogRenderComponents/Render';
 
 export default function Middle({data}) {
   const navigate=useNavigate();

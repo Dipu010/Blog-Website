@@ -1,8 +1,7 @@
 import { useContext, useMemo, useState } from 'react'
-import Navbar from './components/navbar'
 import { BrowserRouter,Route,Routes } from 'react-router-dom'
-import Login from './components/Login'
-import Register from './components/Register'
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
 import BlogDescription from './blogComponents.jsx/BlogDescription'
 import BlogUploadImage from './blogComponents.jsx/BlogUploadImage'
 import BlogPost from './blogComponents.jsx/BlogPost'
@@ -10,7 +9,7 @@ import BlogPost from './blogComponents.jsx/BlogPost'
 
 
 import { AuthContext } from './context/Authcontex'
-import { ProfileSection } from './components/ProfileSection'
+import { ProfileSection } from './components/profile/ProfileSection'
 import BlogUpdate from './blogUpdateComponents/blogUpdateDescription'
 import {Layout} from "../src/Layout/Layout"
 import {HomeLayout} from "../src/Layout/HomeLayout"
