@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
-import Leftside from "../components/LeftSide";
-import Middle from "../components/Middle";
-import Rightside from "../components/RightSide";
+import Leftside from "../Components/LeftSide";
+import Middle from "../Components/Middle";
+import Rightside from "../Components/RightSide";
 
 import { Outlet } from 'react-router-dom';
 
