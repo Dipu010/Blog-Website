@@ -7,6 +7,10 @@ import { apiError } from "../utils/apiError.js";
 
 export const SearchName = asyncHandler(async (req, res) => {
   const { nameToSearch } = req.body;
+  if(nameToSearch.length==0)
+    return  res
+    .status(200)
+    .json(new apiResponse(200, {  }, "search empty"));
   var flag = 0;
   for (let i = 0; i < nameToSearch.length; i++) {
     if (nameToSearch[i] === " ") {
@@ -50,13 +54,6 @@ export const SearchName = asyncHandler(async (req, res) => {
       },
     ]);
   }
-
-
-  
-  
-
-  
- 
   return res
     .status(200)
     .json(new apiResponse(200, { data }, "users found"));
