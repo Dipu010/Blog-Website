@@ -1,6 +1,7 @@
 //SignUp,Login,Logout,ForgetPassword,ResetPassword
 import {User} from "../models/User.js";
-import {Blog} from "../models/Blog.js"
+import {Blog} from "../models/Blog.js";
+import { Follow } from "../models/Follow.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
@@ -175,14 +176,28 @@ const showProfile=asyncHandler(async(req,res)=>{
     console.log("Params:-",req.params.id)
     const{userName}=req.body
     const userData=await User.findOne({userName:userName})
-    // console.log(userData)
+    const follower = req.data._id;
+    const following = userData._id;
+    console.log("follower="+follower);
+    console.log("following="+following);
+
+    const isFollowing = await Follow.findOne({follower,following});
+    console.log(isFollowing);
+    var followData;
+    if(isFollowing){
+      followData={isFollowing:true};
+    }
+    else{
+      followData={isFollowing:false};
+    }
+    
     if(!userData)
       throw new apiError(404,"User not found")
 
     const userPosts=await Blog.find({owner:userData._id}).sort({createdAt:-1})
     // console.log(userPosts)
 
-    res.status(201).json(new apiResponse(200,{userData,userPosts},"Everything fetched"))
+    res.status(201).json(new apiResponse(200,{userData,userPosts,followData},"Everything fetched"))
 
 
 
