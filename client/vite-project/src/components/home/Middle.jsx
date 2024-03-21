@@ -17,6 +17,7 @@ export default function Middle({ data }) {
   const [userData, setUserData] = useState({});
   console.log(userData);
   const { click, setClick } = useContext(MyBlogContext);
+  const [show,setShow]=useState(null);
   // For Google Login
   const getUser = async () => {
     try {
@@ -48,15 +49,16 @@ export default function Middle({ data }) {
         </div>
         <div className="flex items-center justify-between gap-10">
           <div className="flex items-center">
-            <p onClick={() => navigate("blog")} className="cursor-pointer">
+            <p onClick={() => navigate(`/${data.userName}/blog`)} className="cursor-pointer">
               Create Blogs
             </p>
             <IoIosCreate className="h-6 w-6 text-gray-500 mx-2 cursor-pointer" />
           </div>
           <div className="flex items-center">
             <p
-              className="cursor-pointer text-black hover:bg-neutral-700 hover:text-white px-3 py-1 rounded-md"
-              onClick={() => setClick(0)}
+              className={` ${ show==1? 'px-3 font-bold py-1 bg-cyan-700  text-yellow-100': 'text-black'} cursor-pointer px-3 py-1 rounded-md`}
+              onClick={() => {setClick(0)
+                 setShow(1)}}
             >
               All Blogs
             </p>
@@ -64,8 +66,10 @@ export default function Middle({ data }) {
           </div>
           <div className="flex items-center">
             <p
-              className="cursor-pointer text-black hover:bg-neutral-700 hover:text-white px-3 py-1 rounded-md"
-              onClick={() => setClick(1)}
+              className={` ${ show==2? 'px-3 py-1 bg-cyan-700 font-bold text-yellow-100': 'text-black'} cursor-pointer hover:bg-neutral-700 px-3 py-1 rounded-md`}
+              onClick={() =>{ setClick(1)
+                 setShow(2)
+                }}
             >
               My Blogs
             </p>

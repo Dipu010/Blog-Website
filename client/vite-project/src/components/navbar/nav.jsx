@@ -74,6 +74,33 @@ const Nav = ({data}) => {
 useEffect(()=>
 {getUser()}
 ,[]);
+
+// Search Name 
+const handleClick=(event)=>{
+  setIsDropdownVisible(false)
+  setDataArray([])
+  event.preventDefault();
+  setName({...name,[event.target.name]:event.target.value})
+  searchName();
+}
+// for(let i=0;i<dataArray.length)
+   const[name,setName]=useState({nameToSearch:""});
+   const [dataArray,setDataArray]=useState([]);
+   console.log(dataArray);
+  const searchName=async()=>{
+    try {
+      const response=await axios.post('http://localhost:4000/api/v1/searchname',{...name},{withCredentials:true})
+       console.log(response);
+       setDataArray([...response.data.message.data]);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(()=>{
+     searchName()
+   
+  },[name]);
+  const [isDropdownVisible,setIsDropdownVisible]=useState(false);
   return (
    <div className="w-screen  z-30 fixed mb-8">
         <FlexBetween padding="1rem 6%"  className=" bg-fixed bg-slate-800">
@@ -97,8 +124,38 @@ useEffect(()=>
             borderRadius="9px"
             gap="3rem"
             padding="0.1rem 1.5rem"
+            className=" relative"
           >
-            <input type="text" placeholder="Search..." className="  border-white px-10 py-3 rounded-full ml-5"  />
+           <div className="flex flex-col">
+           <input type="text" placeholder="Search..." className="  border-white px-10 py-3 rounded-full ml-5"  name='nameToSearch' onChange={(event)=>{handleClick(event)
+             setIsDropdownVisible(event.target.value.length > 0)}}  value={name.nameToSearch}/>
+      {isDropdownVisible && (
+        <div className="absolute top-full left-0 right-0 z-10 border border-gray-200 bg-gray-800 max-h-60 overflow-auto mt-1 rounded-lg shadow">
+          {dataArray.length > 0 ? (
+           dataArray.map((item, index) => (
+              <div
+                key={index}
+                className="p-2 hover:bg-gray-600 cursor-pointer"
+                onClick={() => {
+                  setIsDropdownVisible(false);
+                }}
+              >
+               <div className="flex justify-between">
+                <div className=" text-yellow-100 ml-6 mt-2 text-[16px]" onClick={()=>{navigate(`/${item.userName}/profile`)}}>  {item.firstName} {item.lastName}</div>
+                <div className=" text-yellow-400 ml-6 mt-2 text-[16px]"> {item.userName} </div>
+                <img src={item.profilePicture}  className='w-[40px] rounded-full' alt="" />
+               </div>
+              </div>
+            ))
+          ) : (
+              setTimeout(() => {
+                return(<div className="p-2 text-gray-500">No results found.</div>)
+              }, 1000)
+             
+          )}
+        </div>
+      )}
+           </div>
             <IconButton>
               <Search className=" text-yellow-50"/>
             </IconButton>
