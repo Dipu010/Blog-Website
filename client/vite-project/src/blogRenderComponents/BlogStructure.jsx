@@ -9,7 +9,7 @@ export default function BlogStructure(props) {
   const [showComments, setShowComments] = useState(0);
 
   return (
-    <div className="">
+    <div className=" mb-[70px]">
       <div className=" box-border w-[690px] p-[20px] bg-slate-800 flex  rounded-t-md">
         <BlogOwner
           firstName={dataArray[props.i]._doc.owner.firstName}

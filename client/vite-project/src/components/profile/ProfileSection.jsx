@@ -75,7 +75,7 @@ export const ProfileSection = () => {
           </div>
           <BlogStructure />
           <button type="button" className=' w-full border-2 border-gray-300 rounded-2xl px-24 py-2 mt-8 mr-7 font-bold text-2xl ml-[-10px] hover:bg-slate-900' onClick={() => {
-            setClick(2)
+            setClick(1)
             navigate(`/${data.userName}/home`)
           }
           }> Show All Post</button>
