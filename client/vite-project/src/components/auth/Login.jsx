@@ -19,7 +19,7 @@ function Login() {
         const res= await axios.post(`http://localhost:4000/api/v1/login`,{...input},{ withCredentials: true })
         console.log(res);
         const response=res.data.message.data;
-         storeDataInLS(response);
+         localStorage.setItem("ResPonse",JSON.stringify(response))
          console.log(response)
          setData(response);
         navigate(`/${response.userName}/home`);

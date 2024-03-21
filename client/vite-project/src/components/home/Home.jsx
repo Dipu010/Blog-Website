@@ -7,10 +7,10 @@ import Nav from "./nav";
 const Home = (props) => {
  
   const data =JSON.parse(localStorage.getItem('ResPonse'))
+ 
   
   return (
     <div>
- <Nav data={data} ></Nav>
     <Container className=" bg-slate-500">
       <Layout>
         <Leftside data={data} />

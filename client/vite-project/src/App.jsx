@@ -30,6 +30,7 @@ function App() {
       
 
        <Route path='/' element={<Layout/>}>
+            <Route path='' element={<HomeLayout/>}/>
             <Route path='login' element={<Login/>}/>
             <Route path=':id/' element={<HomePage/>}>
                 <Route path='' element={<ProfileSection/>}/>

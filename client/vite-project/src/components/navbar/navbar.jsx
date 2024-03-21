@@ -25,7 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { setMode, setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
-import { AuthContext } from "../context/Authcontex";
+import { AuthContext } from "../../context/Authcontex";
 const Navbar = () => {
     const {data}=useContext(AuthContext);
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);

@@ -1,4 +1,5 @@
 import { useContext, useState,useEffect } from "react";
+
 import axios from "axios";
 import {
   Box,
@@ -24,10 +25,33 @@ import {
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 const Nav = ({data}) => {
+  const navigate = useNavigate();
+      
+  const logout =async ()=>{
+    console.log("Logout")
+    localStorage.removeItem("ResPonse")
+    const auth_dummy={
+      email:"name@gmail.com",
+      password:"159"
+    }
+    console.log(data.userName)
+    const logout=await axios.post(`http://localhost:4000/api/v1/logout`,{userName:data.userName},{withCredentials:true})
+    const UnkonwnUser=await axios.post(`http://localhost:4000/api/v1/login`,auth_dummy,{withCredentials:true})
+    console.log(UnkonwnUser)
+    localStorage.setItem("ResPonse",JSON.stringify(UnkonwnUser.data.message.data))
+
+    navigate(`/v1/home`)
+    window.location.reload();
+    
+
+}
     // console.log(data)
+    
+
+  // console.log(data)  
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
  
-  const navigate = useNavigate();
+  
 
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
@@ -35,21 +59,18 @@ const Nav = ({data}) => {
   // console.log(fullName)
 
   const [userData,setUserData]=useState({});
-  const [loginData,setLoginData]=useState({});
   // For google Login
   // console.log(userData);
    const getUser=async()=>{
     try {
       const response=await axios.get('http://localhost:4000/api/v1/login/success',{withCredentials:true});
-      console.log(response);
+      // console.log(response);
       setUserData(response.data.user);
     } catch (error) {
       console.log("error", error);
     }
    }
-   const logout = ()=>{
-    window.open("http://localhost:4000/api/v1/logout","_self")
-}
+   
 useEffect(()=>
 {getUser()}
 ,[]);
@@ -113,7 +134,7 @@ useEffect(()=>
               <MenuItem value={fullName || userData?.displayName} className="text-yellow-50 px-4 rounded-full">
                 <Typography className="text-yellow-50 [&>*:nth-child(2)]:bg-black">{fullName || userData?.displayName} </Typography>
               </MenuItem>
-              <MenuItem onClick={logout} >Log Out</MenuItem>
+              <MenuItem onClick={()=>{logout()}} >Log Out</MenuItem>
             </Select>
           </FormControl>
         </FlexBetween>

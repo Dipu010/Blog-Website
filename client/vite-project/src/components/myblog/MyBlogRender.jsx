@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-const data = JSON.parse(localStorage.getItem("ResPonse"));
-import axios from "axios";
-import BlogStructure from "../../blogRenderComponents/BlogStructure";
-import { BlogContext } from "../../context/BlogContext";
-import { useParams } from "react-router-dom";
+import React,{useState,useEffect,useContext} from 'react'
+import axios from 'axios';
+import BlogStructure from '../../blogRenderComponents/BlogStructure';
+import { BlogContext } from "../../context/BlogContext"
+import { useParams } from 'react-router-dom';
 export default function MyBlogRender() {
   const blogContext = useContext(BlogContext);
   const { id } = useParams();
