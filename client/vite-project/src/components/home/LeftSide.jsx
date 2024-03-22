@@ -44,7 +44,7 @@ function Leftside({data}) {
   return (
     <div className=" bg-slate-700 rounded-lg p-6 shadow-lg h-[470px] max-w-sm mt-[100px] ">
       <div className="flex items-center space-x-4" >
-        <img src={data.profilePicture} alt="Profile" className="rounded-full w-14 h-14" />
+        <img src={data.profilePicture} alt="Profile" className="rounded-full w-14 h-14 cursor-pointer" onClick={()=>{navigate(`/${data.userName}/profile`)}}/>
         <div>
           <h1 className="text-xl font-semibold text-yellow-100" onClick={()=>{navigate('..profile')}}>{fullName}</h1>
           <p className=" text-gray-300">{profileData.friends} friends</p>

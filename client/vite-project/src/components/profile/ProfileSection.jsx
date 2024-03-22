@@ -7,8 +7,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 export const ProfileSection = (props) => {
   const { click, setClick } = useContext(MyBlogContext);
-  
+
   const [show, setShow] = useState(null);
+  const response = JSON.parse(localStorage.getItem('ResPonse'));
   const { id } = useParams();
   console.log("Params:", id);
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export const ProfileSection = (props) => {
     const data = parsedData.data.message.userData;
     setData(data);
     setFollow(parsedData.data.message.followData.isFollowing);
-    
+
   };
 
   const owner_id = data._id;
@@ -75,17 +76,16 @@ export const ProfileSection = (props) => {
           <p className=" text-blue-500 text-[16px] font-bold mb-[10px]">
             1000 connections
           </p>
-          <button
-            className="text-white bg-blue-500 h-[50px] w-[150px] rounded-lg"
+
+          {follow ? <button
             onClick={() => {
               handleClick();
             }}
-          >
-            {follow ? "Following" : "Follow"}
-          </button>
+            className=" text-blue-700 bg-gray-300 h-[50px] w-[150px] text-center rounded-full align-middle">Following</button> : <button className="text-white bg-blue-500 h-[50px] w-[150px] rounded-full" onClick={() => { handleClick() }}>Follow</button>}
+
         </div>
 
-        <div className=" w-[1000px]  bg-gray-700 h-[130vh] text-gray-50 mx-auto mt-5 pt-[70px] pl-[50px]">
+        <div className=" w-[1000px]  bg-gray-700 text-gray-50 mx-auto mt-5 pt-[70px] pl-[50px]">
           <div className="flex justify-between items-center">
             <div className="flex flex-col">
               <p className="text-bold text-2xl rounded-md font-bold mt-2 text-gray-50">
@@ -94,30 +94,25 @@ export const ProfileSection = (props) => {
               <p className=" text-blue-500">500 followers</p>
             </div>
             <div className="flex gap-[-1]">
-              <button
+
+              {response.userName != id ? <div></div> : <button
                 className=" px-4 py-1 rounded-full text-xl border-2 mr-8 bg-blue-500 text-black"
-                onClick={() => navigate("/blog")}
-              >
-                {" "}
-                Create a Post{" "}
-              </button>
-              <IoIosCreate className=" text-4xl" />
+                onClick={() => navigate(`/${response.userName}/createblog`)}>  Create a Post</button>}
             </div>
           </div>
           <div className=" flex gap-3 mt-5">
             <button
-              className={`${
-                show == 1 ? " bg-green-500" : "bg-transparent"
-              } px-4 rounded-full border-2 border-white text-[18px]`}
-              onClick={() => setShow(1)}
+              className={`${show == 1 ? " bg-green-500" : "bg-transparent"
+                } px-4 rounded-full border-2 border-white text-[18px]`}
+              onClick={() => setShow(1)
+              }
             >
               {" "}
               Posts
             </button>
             <button
-              className={` ${
-                show == 2 ? "bg-green-500" : "bg-transparent"
-              } px-4 rounded-full border-2 border-white text-[18px]`}
+              className={` ${show == 2 ? "bg-green-500" : "bg-transparent"
+                } px-4 rounded-full border-2 border-white text-[18px]`}
               onClick={() => setShow(2)}
             >
               {" "}
@@ -130,7 +125,7 @@ export const ProfileSection = (props) => {
             className=" w-full border-2 border-gray-300 rounded-2xl px-24 py-2 mt-8 mr-7 font-bold text-2xl ml-[-10px] hover:bg-slate-900"
             onClick={() => {
               setClick(1);
-              navigate(`/${data.userName}/home`);
+              navigate(`/${response.userName}/home`);
             }}
           >
             {" "}

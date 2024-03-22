@@ -1,4 +1,5 @@
 import { User } from "../models/User.js";
+import { Blog } from "../models/Blog.js";
 import dotenv from "dotenv";
 dotenv.config();
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -58,3 +59,13 @@ export const SearchName = asyncHandler(async (req, res) => {
     .status(200)
     .json(new apiResponse(200, { data }, "users found"));
 })
+
+//Search the Blog using its tags.
+export const searchBlog=asyncHandler(async(req,res)=>{
+   const {tags}=req.body;
+   const response= await Blog.find({tags}).populate("owner").exec();
+   console.log(response);
+   if(!response) throw new apiError("Blog not found");
+   res.status(200).json(new apiResponse(200, {response }, "Blog found"))
+}
+)

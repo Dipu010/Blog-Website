@@ -46,7 +46,7 @@ export default function BlogDescription() {
     {
         alert("please complete all the input Field")
     }
-    else navigate("/image");
+    else navigate(`/${data.userName}/createblog/image`);
   }
   // fetch the data
   const data =JSON.parse(localStorage.getItem('ResPonse'))
@@ -82,7 +82,7 @@ export default function BlogDescription() {
             <textarea
               className="w-[100%] h-[80px] bg-slate-500 rounded-md text-white px-[10px] "
               type="text"
-              placeholder="Enter Blog Title"
+              placeholder="Enter Blog  Short Description"
               name="summery"
               value={description.summery}
               onChange={(event) => handleInput(event)}
@@ -96,7 +96,7 @@ export default function BlogDescription() {
             <textarea
               className="w-[100%] h-[300px] bg-slate-500 rounded-md text-white px-[10px] "
               type="text"
-              placeholder="Enter Blog Title"
+              placeholder="Enter Blog Description"
               name="description"
               value={description.description}
               onChange={(event) => handleInput(event)}
@@ -111,7 +111,7 @@ export default function BlogDescription() {
             <textarea
               className="w-[100%] h-[40px] bg-slate-500 rounded-md text-white px-[10px] "
               type="text"
-              placeholder="Enter Blog Title"
+              placeholder="Enter Blog Tags"
               name="tags"
               value={description.tags}
               onChange={(event) => handleInput(event)}

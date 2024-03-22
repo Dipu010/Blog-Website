@@ -109,7 +109,7 @@ const handleClick=(event)=>{
           fontWeight="bold"
           fontSize="clamp(1rem, 2rem, 2.25rem)"
           color="primary"
-          onClick={() => navigate("/home")}
+          onClick={() => navigate(`/${data.userName}/home`)}
           sx={{
             "&:hover": {
               // color: primaryLight,
@@ -136,21 +136,21 @@ const handleClick=(event)=>{
               <div
                 key={index}
                 className="p-2 hover:bg-gray-600 cursor-pointer"
-                onClick={() => {
-                  setIsDropdownVisible(false);
-                }}
+                onClick={()=>{navigate(`/${item.userName}/profile`)
+                 setIsDropdownVisible(false)}}
+                
               >
                <div className="flex justify-between">
-                <div className=" text-yellow-100 ml-6 mt-2 text-[16px]" onClick={()=>{navigate(`/${item.userName}/profile`)}}>  {item.firstName} {item.lastName}</div>
+                <div className=" text-yellow-100 ml-6 mt-2 text-[16px]">  {item.firstName} {item.lastName}</div>
                 <div className=" text-yellow-400 ml-6 mt-2 text-[16px]"> {item.userName} </div>
                 <img src={item.profilePicture}  className='w-[40px] rounded-full' alt="" />
                </div>
               </div>
             ))
           ) : (
-              setTimeout(() => {
-                return(<div className="p-2 text-gray-500">No results found.</div>)
-              }, 1000)
+            
+              (<div className="p-2 text-gray-500">No results found.</div>)
+             
              
           )}
         </div>
@@ -191,7 +191,7 @@ const handleClick=(event)=>{
               <MenuItem value={fullName || userData?.displayName} className="text-yellow-50 px-4 rounded-full">
                 <Typography className="text-yellow-50 [&>*:nth-child(2)]:bg-black">{fullName || userData?.displayName} </Typography>
               </MenuItem>
-              <MenuItem onClick={()=>{logout()}} >Log Out</MenuItem>
+              <MenuItem >{data.firstName=='Unknown'?<div onClick={()=>navigate('/login')}>Sign In</div>:<div onClick={()=>{logout()}}>Log Out</div>}</MenuItem>
             </Select>
           </FormControl>
         </FlexBetween>
