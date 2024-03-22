@@ -37,12 +37,12 @@ export default function BlogUploadImage() {
     }
     reader.readAsDataURL(image);
   };
-  
+  const data=JSON.parse(localStorage.getItem("ResPonse"));
   const handleClick = ()=>{
     if(selectedFile==undefined) alert("Upload an image");
-    else navigate("/post")
+    else navigate(`/${data.userName}/createblog/post`);
   }
-  const data=JSON.parse(localStorage.getItem("ResPonse"));
+  
   return (
     <div>
       

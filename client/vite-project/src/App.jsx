@@ -47,16 +47,6 @@ function App() {
             </Route>                            
            
        </Route>
-
-
-
-       {/* <Route path="/blog" element={<BlogDescription/>}/>
-       <Route path="/image" element={<BlogUploadImage/>}/>
-       <Route path='/post' element={<BlogPost/>}/>
-       <Route path='/home' element={<Home/>}/> */}
-       {/* <Route path='/blogrender' element={<Render/>}/> */}
-       {/* <Route path='/profile' element={<ProfileSection/>}/>
-       <Route path='/updateblog' element={<BlogUpdate/>}/> */}
     </Routes>
 
     </>

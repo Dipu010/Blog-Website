@@ -42,7 +42,7 @@ export default function BlogPost() {
     );
     console.log(data);
     removeLocalData();
-    navigate("/home");
+    navigate(`/${data.userName}/home`);
   };
   
 

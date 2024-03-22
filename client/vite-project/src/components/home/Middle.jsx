@@ -49,7 +49,7 @@ export default function Middle({ data }) {
         </div>
         <div className="flex items-center justify-between gap-10">
           <div className="flex items-center">
-            <p onClick={() => navigate(`/${data.userName}/blog`)} className="cursor-pointer">
+            <p onClick={() => navigate(`/${data.userName}/createblog`)} className="cursor-pointer">
               Create Blogs
             </p>
             <IoIosCreate className="h-6 w-6 text-gray-500 mx-2 cursor-pointer" />
