@@ -4,12 +4,14 @@ import Leftside from "../components/home/LeftSide";
 import Middle from "../components/home/Middle";
 import Rightside from "../components/home/RightSide";
 
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 
 export const HomeLayout = () => {
    
-    
+        const {id}=useParams()
       const data =JSON.parse(localStorage.getItem('ResPonse'))
+      if(id!==data.userName)
+      return(<></>)
 
    
   return (

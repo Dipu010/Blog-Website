@@ -4,13 +4,17 @@ import Nav from '../components/navbar/nav'
 
 export const HomePage = () => {
 
+  const dataLocal =JSON.parse(localStorage.getItem('ResPonse'))
   const {id}=useParams()
-  console.log(id)
+
+  
+  
   
 
 
-    const data =JSON.parse(localStorage.getItem('ResPonse'))
+    
 
+    
   return (
     <>
         

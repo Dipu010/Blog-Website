@@ -1,15 +1,15 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { apiError } from "../utils/apiError.js";
 
 dotenv.config();
 
 const auth =  async(req,res,next)=>{
     const token =  req.cookies.accessToken 
+    console.log(req.cookies)
     if(!token){
-        return  res.status(401).json({
-        success:false,
-        message:"user not logged in"
-       });
+       
+        return res.status(500)
       
     };
 

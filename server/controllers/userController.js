@@ -232,7 +232,35 @@ const logoutUser=asyncHandler(async(req,res)=>{
       }
   )
 
+  const authenticateUser=asyncHandler(async(req,res)=>{
+
+            const {accessToken,refreshToken}=req.cookies
+
+            if(!accessToken){
+                if(!refreshToken){
+                   throw new apiError(404,"No Access and Refresh Token.Plz Login")
+                }
+                
+                const decode=jwt.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET)
+                const newTokens=await generateAccessandRefreshTokens(decode._id)
+                await User.findByIdAndUpdate(decode._id,{refreshToken:newTokens.refreshToken},{new:true})
+
+                const options={
+                  httpOnly: true,
+                  secure: true
+              }
+
+                return res
+                .cookie("accessToken",newTokens.accessToken,options)
+                .cookie("refreshToken",newTokens.refreshToken,options).status(201)
+                .json(new apiResponse(201,{newTokens},"New access and refresh tokens created succesfully"))
+
+            }
+
+            return res.status(200).json(new apiResponse(200,{},"Access Token is present"))
+  })
 
 
 
-export {registerUser,loginUser,showProfile,logoutUser}
+
+export {registerUser,loginUser,showProfile,logoutUser,authenticateUser}
