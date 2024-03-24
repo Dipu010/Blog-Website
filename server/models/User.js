@@ -42,7 +42,14 @@ const UserSchema=mongoose.Schema({
       },
       profilePicture: {
         type: String
-    }
+      },
+      notifications:[
+         {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Notification",
+         }
+      ]
+
    
 },{timestamps:true})
 
@@ -62,9 +69,9 @@ UserSchema.methods.generateAccessToken=function(){
   return jwt.sign(
       {
           _id:this._id,
-          username:this.username,
+          userName:this.userName,
           email:this.email,
-          firstName:this.firstName
+          firstName:this.firstName,
       },
       process.env.ACCESS_TOKEN_SECRET,
       {
