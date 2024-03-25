@@ -238,7 +238,9 @@ const logoutUser=asyncHandler(async(req,res)=>{
 
             if(!accessToken){
                 if(!refreshToken){
-                   throw new apiError(404,"No Access and Refresh Token.Plz Login")
+                    
+                  return res.status(203).json(new apiResponse(203,{},"No Access and Refresh Token present.Plz login"))
+                   
                 }
                 
                 const decode=jwt.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET)

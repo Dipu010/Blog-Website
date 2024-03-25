@@ -12,11 +12,13 @@ import { MyBlogContext } from "../../context/myBlogContex";
 
 import MyBlogRender from "../myblog/MyBlogRender";
 import { BlogContext } from "../../context/BlogContext";
+import { AuthContext } from "../../context/Authcontex";
 // import { set } from "mongoose";
 
 export default function Middle({ data }) {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
+  const {LoggedIn}=useContext(AuthContext)
   console.log(userData);
   const { click, setClick } = useContext(MyBlogContext);
   const [show, setShow] = useState(null);
@@ -174,7 +176,7 @@ export default function Middle({ data }) {
         </div>
       </div>
       {
-        click==0?<Render/>:(click==1?<MyBlogRender/>:<RandomBlogRender/>)
+        LoggedIn ? (click==0? <Render/>:<MyBlogRender/> ) :(<RandomBlogRender/>)
       }
     </div>
   );

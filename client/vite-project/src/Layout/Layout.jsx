@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Nav from '../components/navbar/nav'
 import { Outlet } from 'react-router-dom'
 import Navbar from '../components/navbar/navbar'
 import axios from 'axios'
+import { AuthContext } from '../context/Authcontex'
 
 
 export const Layout = () => {
+
+      const {LoggedIn,setLoggedIn}=useContext(AuthContext)
 
       const authenticate=async()=>{
 
@@ -13,26 +16,31 @@ export const Layout = () => {
           
           console.log(user)
 
-          setLogin(true) 
+          if(user.statusCode===200 || user.statusCode===201){
+            setLoggedIn(true)
+          }
+          
 
           
 
       }
 
-      const [login,setLogin]=useState(false)
+      
    
       const data =JSON.parse(localStorage.getItem('ResPonse'))
       
       
       if(data){
         authenticate()
+        setLoggedIn(true)
       }
+      
         
 
     
   return (
     <>
-        {login ? (<Nav data={data}></Nav>):(<Navbar/>)}
+        {LoggedIn ? (<Nav data={data}></Nav>):(<Navbar/>)}
         <Outlet/>
     </>
   )

@@ -4,13 +4,22 @@ import Leftside from "../components/home/LeftSide";
 import Middle from "../components/home/Middle";
 import Rightside from "../components/home/RightSide";
 
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { DataDummy } from '../components/utils/DummyData';
 
 export const HomeLayout = () => {
-   
-        const {id}=useParams()
-      const data =JSON.parse(localStorage.getItem('ResPonse'))
-      if(id!==data.userName)
+      const navigate=useNavigate()
+      const {id}=useParams()
+      var data =JSON.parse(localStorage.getItem('ResPonse'))
+
+      if(data){
+          navigate(`/${data.userName}/home`)
+      }
+      if(!id){
+        data=DataDummy
+        console.log("Data:-",data)
+      }
+      else if(id!==data.userName)
       return(<></>)
 
    

@@ -24,23 +24,20 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
+import { AuthContext } from "../../context/Authcontex";
 const Nav = ({data}) => {
   const navigate = useNavigate();
+  const {setLoggedIn}=useContext(AuthContext)
       
   const logout =async ()=>{
     console.log("Logout")
-    localStorage.removeItem("ResPonse")
-    const auth_dummy={
-      email:"name@gmail.com",
-      password:"159"
-    }
-    console.log(data.userName)
-    const logout=await axios.post(`http://localhost:4000/api/v1/logout`,{userName:data.userName},{withCredentials:true})
-    const UnkonwnUser=await axios.post(`http://localhost:4000/api/v1/login`,auth_dummy,{withCredentials:true})
-    console.log(UnkonwnUser)
-    localStorage.setItem("ResPonse",JSON.stringify(UnkonwnUser.data.message.data))
+    
+    
+    await axios.post(`http://localhost:4000/api/v1/logout`,{userName:data.userName},{withCredentials:true})
+    localStorage.clear()
+    setLoggedIn(false)
 
-    navigate(`/v1/home`)
+    navigate(`home`)
     window.location.reload();
     
 

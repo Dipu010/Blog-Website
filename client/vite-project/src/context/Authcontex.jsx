@@ -3,7 +3,7 @@ import React ,{ createContext, useState } from "react";
 export const AuthContext=createContext(null);
 export const AuthProvider=(props)=>{
     const [LoggedIn,setLoggedIn]=useState(false)
-    const [data,setData]=useState([]);
+    const [data,setData]=useState({});
     
     const storeDataInLS=(serverResponse)=>{
       return localStorage.setItem("ResPonse",JSON.stringify(serverResponse));
