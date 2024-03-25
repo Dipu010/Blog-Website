@@ -31,7 +31,7 @@ export default function BlogPost() {
   };
   console.log(finalData);
   const [loading, setLoading] = useState(0);
-  const data=JSON.parse(localStorage.getItem("ResPonse"));
+  const response=JSON.parse(localStorage.getItem("ResPonse"));
   const handlePost = async () => {
     window.scrollTo(0,0);
     setLoading(1);
@@ -42,7 +42,7 @@ export default function BlogPost() {
     );
     console.log(data);
     removeLocalData();
-    navigate(`/${data.userName}/home`);
+    navigate(`/${response.userName}/home`);
   };
   
 
