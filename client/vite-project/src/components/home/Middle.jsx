@@ -7,9 +7,9 @@ import { FaEarthAsia, FaVolumeHigh } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Render from "../../blogRenderComponents/Render";
+import RandomBlogRender from "../randomblog/RandomBlogRender"
 import { MyBlogContext } from "../../context/myBlogContex";
 
-// import { MyBlogContext } from '../context/myBlogContex';
 import MyBlogRender from "../myblog/MyBlogRender";
 import { BlogContext } from "../../context/BlogContext";
 // import { set } from "mongoose";
@@ -173,11 +173,9 @@ export default function Middle({ data }) {
           </div>
         </div>
       </div>
-      {!click ? (
-        <Render />
-      ) : (
-        <MyBlogRender />
-      )}
+      {
+        click==0?<Render/>:(click==1?<MyBlogRender/>:<RandomBlogRender/>)
+      }
     </div>
   );
 }

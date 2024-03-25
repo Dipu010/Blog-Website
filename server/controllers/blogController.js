@@ -85,36 +85,42 @@ export const UpdateBlog = async (req, res) => {
 };
 
 export const LikeBlog = asyncHandler(async (req, res) => {
-
   const { val, id } = req.body; //Here Id id blogID
   const user = req.data._id;
-  const exist = await Like.findOne({ user: user, blog: id })
+  const exist = await Like.findOne({ user: user, blog: id });
   if (exist) {
     if (val == 1 && exist.val == 1) {
       const data = await Like.findOneAndDelete({ _id: exist._id });
-      return res.status(200).json(new apiResponse(200, { data }, "Your like is removed"));
-    }
-    else if (val == 1 && exist.val == -1) {
-      const data = await Like.findByIdAndUpdate({ _id: exist._id }, { val: 1 })
-      return res.status(200).json(new apiResponse(200, { data }, "Blog is Liked"));
-    }
-    else if (val == -1 && exist.val == 1) {
-      const data = await Like.findByIdAndUpdate({ _id: exist._id }, { val: -1 })
-      return res.status(200).json(new apiResponse(200, { data }, "Blog is disliked"));
-    }
-    else if (val == -1 && exist.val == -1) {
+      return res
+        .status(200)
+        .json(new apiResponse(200, { data }, "Your like is removed"));
+    } else if (val == 1 && exist.val == -1) {
+      const data = await Like.findByIdAndUpdate({ _id: exist._id }, { val: 1 });
+      return res
+        .status(200)
+        .json(new apiResponse(200, { data }, "Blog is Liked"));
+    } else if (val == -1 && exist.val == 1) {
+      const data = await Like.findByIdAndUpdate(
+        { _id: exist._id },
+        { val: -1 }
+      );
+      return res
+        .status(200)
+        .json(new apiResponse(200, { data }, "Blog is disliked"));
+    } else if (val == -1 && exist.val == -1) {
       const data = await Like.findOneAndDelete({ _id: exist._id });
-      return res.status(200).json(new apiResponse(200, { data }, "Your dislike is removed"));
+      return res
+        .status(200)
+        .json(new apiResponse(200, { data }, "Your dislike is removed"));
     }
   }
   const data = await Like.create({ val: val, user: user, blog: id });
-  return res.status(200).json(new apiResponse(200, { data }, "Blog is Liked/disliked"));
+  return res
+    .status(200)
+    .json(new apiResponse(200, { data }, "Blog is Liked/disliked"));
 });
 
-
-
 export const CommentBlog = asyncHandler(async (req, res) => {
-
   const { description, id } = req.body; //Here Id id blogId
   const user = req.data._id;
   const data = await Comment.create({
@@ -122,17 +128,21 @@ export const CommentBlog = asyncHandler(async (req, res) => {
     user: user,
     blog: id,
   });
-  if (data) return res.status(200).json(new apiResponse(200, { data }, "you have a comment in this post"));
-
-})
+  if (data)
+    return res
+      .status(200)
+      .json(new apiResponse(200, { data }, "you have a comment in this post"));
+});
 
 export const GetBlog = asyncHandler(async (req, res) => {
-  const data = await Blog.find().sort({
-    createdAt: -1
-  }).populate("owner").exec();
+  const data = await Blog.find()
+    .sort({
+      createdAt: -1,
+    })
+    .populate("owner")
+    .exec();
   var response = [];
   for (let i = 0; i < data.length; i++) {
-
     const blog = data[i]._id;
 
     const user = req.data._id;
@@ -142,42 +152,42 @@ export const GetBlog = asyncHandler(async (req, res) => {
     var obj;
     if (exist) {
       obj = { ...data[i], reaction: exist };
-    }
-    else {
+    } else {
       obj = { ...data[i], reaction: { val: 0 } };
     }
     obj = { ...obj, comments: commentCount, likes: likeCount };
     response.push(obj);
   }
-  return res.status(200).json(new apiResponse(200, { response }, "all the blogs fetched"));
-})
+  return res
+    .status(200)
+    .json(new apiResponse(200, { response }, "all the blogs fetched"));
+});
 
 export const GetMyBlog = asyncHandler(async (req, res) => {
-  console.log("GetMyBlog:-",req.params.id);
+  console.log("GetMyBlog:-", req.params.id);
   const userName = req.params.id;
   // console.log(user)
-  if (!userName)
-    throw new apiError(401, "Unauthorized Request")
+  if (!userName) throw new apiError(401, "Unauthorized Request");
 
-  const user=await User.findOne({userName:userName})
-  const posts = await Blog.find({ owner: user._id }).sort({
-    createdAt: -1
-  }).populate("owner").exec();
-  console.log(posts)
-  var response = []
+  const user = await User.findOne({ userName: userName });
+  const posts = await Blog.find({ owner: user._id })
+    .sort({
+      createdAt: -1,
+    })
+    .populate("owner")
+    .exec();
+  console.log(posts);
+  var response = [];
   for (let i = 0; i < posts.length; i++) {
-
     const blog = posts[i]._id;
 
-
-    const exist = await Like.findOne({ user:user._id, blog });
+    const exist = await Like.findOne({ user: user._id, blog });
     const commentCount = await Comment.find({ blog }).count();
     const likeCount = await Like.find({ blog, val: 1 }).count();
     var obj;
     if (exist) {
       obj = { ...posts[i], reaction: exist };
-    }
-    else {
+    } else {
       obj = { ...posts[i], reaction: { val: 0 } };
     }
     obj = { ...obj, comments: commentCount, likes: likeCount };
@@ -185,14 +195,34 @@ export const GetMyBlog = asyncHandler(async (req, res) => {
   }
   // const post= await Blog.find({owner:user._id})
 
-
-  res.status(200).json(new apiResponse(200, { response }, "Done"))
-
-})
+  res.status(200).json(new apiResponse(200, { response }, "Done"));
+});
 
 export const GetComment = asyncHandler(async (req, res) => {
   const { id, no } = req.body;
   const skipAmount = no * 5;
-  const result = await Comment.find({ blog: id }).skip(skipAmount).limit(5).populate("user").exec();
+  const result = await Comment.find({ blog: id })
+    .skip(skipAmount)
+    .limit(5)
+    .populate("user")
+    .exec();
   res.status(200).json(new apiResponse(200, { result }, "Comment fetched"));
-})
+});
+
+export const GetRandomBlog = asyncHandler(async (req, res) => {
+  var data = await Blog.find()
+    .sort({
+      createdAt: -1,
+    })
+    .populate("owner")
+    .exec();
+  for (let i = 0; i < data.length; i++) {
+    const blog = data[i]._id;
+    const commentCount = await Comment.find({ blog }).count();
+    const likeCount = await Like.find({ blog, val: 1 }).count();
+    data[i] = {...data[i],comments: commentCount, likes: likeCount };
+  }
+  return res
+    .status(200)
+    .json(new apiResponse(200, { data }, "all the blogs fetched"));
+});
