@@ -1,7 +1,7 @@
 import express from "express";
 const blogRoute = express.Router();
 import { CreateBlog ,UpdateBlog, LikeBlog,CommentBlog,GetBlog, GetMyBlog , GetComment} from "../controllers/blogController.js";
-import { SearchName, searchBlog } from "../controllers/searchController.js";
+import { SearchName, getallTags, searchBlog } from "../controllers/searchController.js";
 import { FollowPerson } from "../controllers/followController.js";
 import auth from "../middlewares/auth.js"
 
@@ -18,6 +18,7 @@ blogRoute.get("/myblog/:id",auth,GetMyBlog);
  
 //searching route
 blogRoute.post('/searchname',SearchName);
-blogRoute.post('/searchblog',searchBlog)
+blogRoute.post('/searchblog',auth,searchBlog)
+blogRoute.get('/tags',getallTags)
 
 export default blogRoute;

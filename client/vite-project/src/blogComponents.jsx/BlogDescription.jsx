@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import StepComplition from "./StepComplition";
 import {useNavigate} from "react-router-dom";
+import  Select from 'react-select'
 
 
 const getLocalData = () => {
@@ -19,7 +20,7 @@ export default function BlogDescription() {
         title: "",
         summery: "",
         description: "",
-        tags: "",
+        tags:[String],
       }
     ];
     console.log(retrivedData)
@@ -50,6 +51,48 @@ export default function BlogDescription() {
   }
   // fetch the data
   const data =JSON.parse(localStorage.getItem('ResPonse'))
+
+  const options=[
+    {value:'sports' ,label:'Sports' },
+    {value:'spiritual' ,label:'Spiritual' },
+    {value:'movies' ,label:'Movies' },
+    {value:'technology' ,label:'Technology' },
+    {value:'business' ,label:'Business' },
+    {value:'trading' ,label:'Trading' },
+    {value:'action' ,label:'Action' },
+    {value:'history' ,label:'History' },
+    {value:'adventure' ,label:'Adventure' },
+    {value:'anime' ,label:'Anime' },
+    {value:'travel' ,label:'Travel' },
+    {value:'sexual' ,label:'Sexual' },
+    {value:'edtech' ,label:'Edtech' },
+    {value:'learning' ,label:'Learning' },
+    {value:'friendship' ,label:'Friendship' },
+    {value:'geopolitics' ,label:'Geopolitics' },
+    {value:'politics' ,label:'Politics' },
+    {value:'coding' ,label:'Coding' },
+    {value:'cricket' ,label:'Cricket' },
+    {value:'football' ,label:'Football' },
+    {value:'kabadi' ,label:'Kabadi' },
+    {value:'chess' ,label:'Chess' },
+    {value:'entertainment' ,label:'Entertainment' },
+    {value:'nepotism' ,label:'Nepotism' },
+    {value:'racisim' ,label:'Racisim' },
+    {value:'antisocial' ,label:'Antisocial' },
+    {value:'faminism' ,label:'Faminism' },
+    {value:'ai & ml' ,label:'AI & ML' },
+    {value:'engineering' ,label:'Engineering' },
+    {value:'medical' ,label:'Medical' },
+    {value:'school' ,label:'School' },
+    {value:'college' ,label:'College' }
+  ]
+  const handleTagsChange = selectedOptions => {
+    setDescription({
+      ...description,
+      tags: selectedOptions || [],
+    });
+    console.log(`Option selected:`, selectedOptions);
+  };
   return (
     <div className="">
       <div className=" w-screen bg-slate-700 flex flex-col items-center">
@@ -108,14 +151,13 @@ export default function BlogDescription() {
                 Topic Tags (Helpfull for classification)
               </span>
             </div>
-            <textarea
-              className="w-[100%] h-[40px] bg-slate-500 rounded-md text-white px-[10px] "
-              type="text"
-              placeholder="Enter Blog Tags"
-              name="tags"
+              <Select className="w-full bg-slate-600 rounded-md text-black px-[10px] "
+              options={options}
+              name='tags'
               value={description.tags}
-              onChange={(event) => handleInput(event)}
-            />
+              onChange={handleTagsChange}
+              isMulti>
+              </Select>
           </div>
         </div>
         <div className="h-[40px] w-[800px] flex justify-end mt-[40px] mb-[60px]">
