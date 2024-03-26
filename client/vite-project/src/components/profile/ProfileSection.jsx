@@ -6,7 +6,7 @@ import { IoIosCreate } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 export const ProfileSection = (props) => {
-  const { click, setClick } = useContext(MyBlogContext);
+  // const { click, setClick } = useContext(MyBlogContext);
 
   const [show, setShow] = useState(null);
   const response = JSON.parse(localStorage.getItem('ResPonse'));
@@ -124,8 +124,8 @@ export const ProfileSection = (props) => {
             type="button"
             className=" w-full border-2 border-gray-300 rounded-2xl px-24 py-2 mt-8 mr-7 font-bold text-2xl ml-[-10px] hover:bg-slate-900"
             onClick={() => {
-              setClick(1);
-              navigate(`/${response.userName}/home`);
+              // setClick(1);
+              navigate(`/${data.userName}/userpost`);
             }}
           >
             {" "}

@@ -37,7 +37,8 @@ const Navbar = () => {
   const fullName = `${data.firstName} ${data.lastName}`;
 
   return (
-    <FlexBetween padding="1rem 6%" >
+  <div className="w-screen  z-30 fixed mb-8">
+      <FlexBetween padding="1rem 6%" className=" bg-fixed bg-slate-800" >
       <FlexBetween gap="1.75rem">
         <Typography
           fontWeight="bold"
@@ -46,7 +47,6 @@ const Navbar = () => {
           onClick={() => navigate("/home")}
           sx={{
             "&:hover": {
-              // color: primaryLight,
               cursor: "pointer",
             },
           }}
@@ -59,9 +59,9 @@ const Navbar = () => {
             gap="3rem"
             padding="0.1rem 1.5rem"
           >
-            <InputBase placeholder="Search..."  />
+           <input type="text" placeholder='Seach...' className="  border-white px-10 py-3 rounded-full ml-5"  />
             <IconButton>
-              <Search />
+              <Search className=" text-yellow-50"/>
             </IconButton>
           </FlexBetween>
         )}
@@ -76,9 +76,9 @@ const Navbar = () => {
           <Message sx={{ fontSize: "25px" }} />
           <Notifications sx={{ fontSize: "25px" }} />
           <Help sx={{ fontSize: "25px" }} />
-          <FormControl variant="standard" value={fullName}>
-           <Button onClick={()=>navigate("/register")} className=" bg-slate-400 rounded-sm"> Sign-Up</Button>
-          </FormControl>
+          {/* <FormControl variant="standard" value={fullName}> */}
+           <button  type='button' onClick={()=>navigate("/login")} className=" bg-blue-700 rounded-full text-yellow-200 px-5 py-2"> Sign-In</button>
+         
         </FlexBetween>
       ) : (
         <IconButton
@@ -89,6 +89,7 @@ const Navbar = () => {
       )}
 
           </FlexBetween>
+  </div>
   );
 };
 

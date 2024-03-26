@@ -83,64 +83,7 @@ export default function Middle({ data }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   return (
     <div>
-      <div className="flex  flex-col gap-3 p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm mt-[40px]">
-        <div className="flex  p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm">
-          <img
-            className="w-10 h-10 rounded-full mr-4"
-            src={data.profilePicture || userData?.profilePicture} // Replace with the path to your profile image
-            alt="Your Name"
-          />
-          <input
-            type="text"
-            className="flex-1 p-2 text-sm  focus:ring-0 border-white px-10 py-3 rounded-full"
-            placeholder="What Kind of Genre You Want to Watch"
-            onChange={(event) => {
-              event.preventDefault();
-              handleChange(event);
-              setIsDropdownVisible(event.target.value.length > 0)
-            }}
-            name="tags"
-            value={input.tags}
-          />
-          
-          {isDropdownVisible && (
-            <div className=" absolute top-[200px] left-[370px] right-[460px] z-10 border border-gray-200 bg-gray-800 overflow-auto mt-1 rounded-lg shadow">
-              {result.length > 0 ?
-                (
-                  
-                  result.map((item, index) => {
-                  
-                    return <div
-                      key={index}
-                      className="p-2 hover:bg-gray-600 cursor-pointer"
-                    // onClick={
-                    //  setIsDropdownVisible(false)}  
-                    >
-                      
-                      <div className="flex">
-                        {
-                          item._doc.tags?.map((index,tag)=>{
-                            const value=input.tags.slice(0,1)==index.value.slice(0,1)
-                           var result=''
-                            if(value){
-                              result=index.value
-                            }
-                          console.log(index);
-                            return <div  key={tag}  className=" text-yellow-100 ml-6 mt-2 text-[16px]">
-                         {result}
-                            </div>
-                          })
-                        }
-                      </div>
-                    </div>
-                  })
-                ) : (
-
-                  (<div className="p-2 text-gray-500">No results found.</div>)
-                )}
-            </div>
-          )}
-        </div>
+      <div className="flex  flex-col gap-3 p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm mt-[80px]">
 
         <div className="flex items-center justify-between gap-10">
           <div className="flex items-center">

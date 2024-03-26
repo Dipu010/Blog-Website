@@ -29,8 +29,6 @@ export const Reroute = () => {
       console.log('Status code 203')
       localStorage.clear()
       navigate(`home`)
-
-
     }
   };
 

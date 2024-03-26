@@ -19,10 +19,6 @@ export const Layout = () => {
           if(user.statusCode===200 || user.statusCode===201){
             setLoggedIn(true)
           }
-          
-
-          
-
       }
 
       
