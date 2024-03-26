@@ -2,7 +2,8 @@ import { Follow } from "../models/Follow.js";
 import { Notification } from "../models/Notification.js";
 import { User } from "../models/User.js";
 import { apiResponse } from "../utils/apiResponse.js";
-
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { apiError } from "../utils/apiError.js";
 //this controller is imported in the Blog routes for now
 
 export const FollowPerson = async (req, res) => {
@@ -28,14 +29,13 @@ export const FollowPerson = async (req, res) => {
     const FollowedUser = await User.findOne({ _id: followingID }).populate(
       "notifications"
     );
-    
+
     const prevNotifications = FollowedUser.notifications;
     var notification;
     if (prevNotifications.length != 0) {
       let x = prevNotifications.length - 1;
-      if ((prevNotifications[x].message).includes("following you")) {
-        if((prevNotifications[x].message).includes( req.data.userName)){
-         
+      if (prevNotifications[x].message.includes("following you") && prevNotifications[x].view===0) {
+        if (prevNotifications[x].message.includes(req.data.userName)) {
           data = { ...data, val: 1 };
           return res
             .status(200)
@@ -46,7 +46,7 @@ export const FollowPerson = async (req, res) => {
         notification = await Notification.findOneAndUpdate(
           { _id: prevNotifications[x]._id },
           { message: newMessage },
-          {new:true}
+          { new: true }
         );
         data = { ...data, val: 1 };
         return res
@@ -60,16 +60,30 @@ export const FollowPerson = async (req, res) => {
       message: `${req.data.userName} is following you`,
     });
 
-    var notify = await User.findOneAndUpdate(
+    if (prevNotifications.length < 10) {
+      const notify = await User.findOneAndUpdate(
+        { _id: followingID },
+        { $push: { notifications: notification._id } },
+        { new: true }
+      ).populate("notifications");
+      data = { ...data, val: 1 };
+      return res
+        .status(200)
+        .json(new apiResponse(200, { data }, "Following the user"));
+    }
+
+    const notify = await User.findOneAndUpdate(
       { _id: followingID },
-      { $push: { notifications: notification._id } },
+      [
+        { $pop: { notifications: -1 } }, // Pop the first element
+        { $push: { notifications: notification._id } }, 
+      ],
       { new: true }
     ).populate("notifications");
     data = { ...data, val: 1 };
-
     return res
       .status(200)
-      .json(new apiResponse(200, { data}, "Following the user"));
+      .json(new apiResponse(200, { data }, "Following the user"));
   } catch (error) {
     return res.status(200).json({
       success: false,
@@ -78,3 +92,38 @@ export const FollowPerson = async (req, res) => {
     });
   }
 };
+
+export const GetNotifictionCount = asyncHandler(async (req, res) => {
+  const userName = req.body.userName;
+  const userData =await  User.findOne({ userName }).populate("notifications");
+  var notificationCount = 0;
+  for (let i = 0; i < userData.notifications.length; i++) {
+    if (userData.notifications[i].view === 0) {
+      notificationCount++;
+    }
+  }
+  return res
+    .status(200)
+    .json(
+      new apiResponse(
+        200,
+        { notificationCount },
+        "unseen notification count fetched"
+      )
+    );
+});
+
+export const GetNotification = asyncHandler(async(req,res)=>{
+  const userName = req.body.userName;
+  const userData =await  User.findOne({ userName }).populate("notifications");
+  const notifications = userData.notifications;
+  return res
+    .status(200)
+    .json(
+      new apiResponse(
+        200,
+        { notifications },
+        "all notifications fetched"
+      )
+    );
+})

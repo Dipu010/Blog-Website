@@ -7,6 +7,10 @@ const notificationSchema = mongoose.Schema({
     message:{
         type:String,
         required: true,
+    },
+    view:{
+        type:Number,
+        default:0
     }
 });
 export const Notification = mongoose.model("Notification",notificationSchema);
