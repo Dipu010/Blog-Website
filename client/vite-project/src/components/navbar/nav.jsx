@@ -37,7 +37,7 @@ const Nav = ({data}) => {
     localStorage.clear()
     setLoggedIn(false)
 
-    navigate(`home`)
+    navigate(`/`)
     window.location.reload();
     
 
