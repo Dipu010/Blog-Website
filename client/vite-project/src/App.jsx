@@ -16,6 +16,7 @@ import {HomeLayout} from "../src/Layout/HomeLayout"
 import { HomePage } from './Layout/HomePage'
 import { CreateBlogLayout } from './Layout/CreateBlogLayout'
 import { Reroute } from './components/utils/Reroute'
+import UserPost from './components/profile/UserPost'
 function App() {
   const [count, setCount] = useState(0)
   const {data}=useContext(AuthContext);
@@ -36,6 +37,7 @@ function App() {
             <Route path='home' element={<HomeLayout/>}/>
             <Route path=':id/' element={<HomePage/>}>
                 <Route path='' element={<ProfileSection/>}/>
+                <Route path='userpost'element={<UserPost/>}/>
                 <Route path='home' element={<HomeLayout/>} />
                 <Route path='profile' element={<ProfileSection/>}/>
 

@@ -118,21 +118,5 @@ export const getallTags=asyncHandler(async(req,res)=>{
   ]);
   res.status(200).json(new apiResponse(201,{tags},"Tags Found"));
 })
-//  export const searchTags=asyncHandler(async(req,res)=>{
-//   const {tags}=req.body;
-//   const tag=await Blog.aggregate(
-//     [
-//       {
-//         '$unwind': {
-//           'path': '$tags'
-//         }
-//       },
-//       {
-//         $group: {
-//           _id: "$tags.label",
-          
-//         }
-//       }
-//     ]
-//   )
-//  })
+
+

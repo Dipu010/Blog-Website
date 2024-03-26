@@ -242,8 +242,9 @@ const logoutUser=asyncHandler(async(req,res)=>{
                   return res.status(203).json(new apiResponse(203,{},"No Access and Refresh Token present.Plz login"))
                    
                 }
-                
+                // reauthinticate
                 const decode=jwt.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET)
+                console.log(decode.email);
                 const newTokens=await generateAccessandRefreshTokens(decode._id)
                 await User.findByIdAndUpdate(decode._id,{refreshToken:newTokens.refreshToken},{new:true})
 
@@ -251,7 +252,7 @@ const logoutUser=asyncHandler(async(req,res)=>{
                   httpOnly: true,
                   secure: true
               }
-
+        
                 return res
                 .cookie("accessToken",newTokens.accessToken,options)
                 .cookie("refreshToken",newTokens.refreshToken,options).status(201)
@@ -262,7 +263,15 @@ const logoutUser=asyncHandler(async(req,res)=>{
             return res.status(200).json(new apiResponse(200,{},"Access Token is present"))
   })
 
+ const findbyUsername=asyncHandler(
+    async(req,res)=>{
+       const {userName}=req.body;
+       const data=await User.findOne({userName});
+       if(!data)  return res.status(404).json(new apiResponse(404,{},"No data found"))
+       console.log(data);
+        return res.status(200).json(new apiResponse(201,{data},"Data found"));
+    }
+  )
 
 
-
-export {registerUser,loginUser,showProfile,logoutUser,authenticateUser}
+export {registerUser,loginUser,showProfile,logoutUser,authenticateUser,findbyUsername}
