@@ -226,3 +226,16 @@ export const GetRandomBlog = asyncHandler(async (req, res) => {
     .status(200)
     .json(new apiResponse(200, { data }, "all the blogs fetched"));
 });
+
+// Delete UserBlog Controllers by User.
+export const deleteMyBlog=asyncHandler(async(req,res)=>{
+    const {blogId}=req.body;
+    const userId=req.data._id;
+    const data=await Blog.findOneAndDelete({_id:blogId,owner:userId});
+    if(!data) return res.status(404).json(new apiResponse(404, {}, "You are not allowed to delete this blog"))
+    console.log(data);
+    return res
+    .status(200)
+    .json(new apiResponse(200, { data }, "Blog Deleted Successfully"));
+}
+)

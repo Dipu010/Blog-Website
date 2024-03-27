@@ -35,7 +35,9 @@ const UserSchema=mongoose.Schema({
       accountType:{
         type:String,
         enum:["user","admin"],
-        lowercase:true
+        default:'user',
+        lowercase:true,
+        required:true
       },
       refreshToken:{
         type:String
@@ -72,6 +74,7 @@ UserSchema.methods.generateAccessToken=function(){
           userName:this.userName,
           email:this.email,
           firstName:this.firstName,
+          accountType:this.accountType
       },
       process.env.ACCESS_TOKEN_SECRET,
       {
@@ -84,7 +87,8 @@ UserSchema.methods.generateAccessToken=function(){
 UserSchema.methods.generateRefreshToken=function(){
   return jwt.sign(
       {
-          _id:this._id
+          _id:this._id,
+          accountType:this.accountType
       },
       process.env.REFRESH_TOKEN_SECRET,
       {
