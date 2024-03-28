@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import NotificationRender from "../notifications/NotificationRender";
 
 import axios from "axios";
 import {
@@ -28,16 +29,12 @@ import { AuthContext } from "../../context/Authcontex";
 const Nav = ({ data }) => {
   //function and states for notification
   const [showNotification, setShowNotification] = useState(0);
-  const [notificationArray, setNotificationArray] = useState([]);
-  const fetchNotification = async () => {
-    showNotification ? setShowNotification(0) : setShowNotification(1)
-    const userNotifications = await axios.post(
-      `http://localhost:4000/api/v1/getnotification`,
-      { userName: data.userName },
-      { withCredentials: true }
-    );
-    console.log(userNotifications);
+  const handleShowNotification = () => {
+    
+    showNotification ? setShowNotification(0) : setShowNotification(1);
+    console.log(showNotification);
   };
+  
   const [unreadNotifications, setUnreadNotifications] = useState(-1);
 
   const getUnreadNotificationCount = async () => {
@@ -221,10 +218,16 @@ const Nav = ({ data }) => {
             <Message sx={{ fontSize: "25px" }} className=" text-yellow-50" />
 
             {/* Notification is here */}
-            <div className=" relative" onClick={()=>{fetchNotification()}}>
+            <div
+              className=" relative"
+              
+            >
               <Notifications
                 sx={{ fontSize: "25px" }}
                 className=" text-yellow-50"
+                onClick={() => {
+                handleShowNotification();
+              }}
               />
               {unreadNotifications === -1 ? (
                 <div className="absolute right-[0px] bottom-[20px] box-border rounded-full bg-red-600 h-[10px] w-[10px] animate-ping"></div>
@@ -235,11 +238,13 @@ const Nav = ({ data }) => {
               ) : (
                 ""
               )}
-              {
-                showNotification ? <div className="absolute box-border h-[400px] w-[200px] bg-slate-800 border-white border-2 z-40 rounded-md ">
-                    
-                </div>:""
-              }
+              {showNotification ? (
+                <div className="absolute box-border -left-[100px]  w-[400px] bg-slate-800 border-white border-2 z-40 rounded-md flex justify-center items-center py-[15px]">
+                  <NotificationRender userName={data.userName} />
+                </div>
+              ) : (
+                ""
+              )}
             </div>
             {/* Notification ends here */}
 
