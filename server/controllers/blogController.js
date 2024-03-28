@@ -1,5 +1,6 @@
 import { Blog } from "../models/Blog.js";
 import { Like } from "../models/Like.js";
+import {Notification} from "../models/Notification.js"
 import { Comment } from "../models/Comment.js";
 import { cloudinary } from "../utils/cloudinary.js";
 import { apiError } from "../utils/apiError.js";
@@ -49,6 +50,14 @@ export const CreateBlog = asyncHandler(async (req, res) => {
     tags,
   });
   if (!data) throw new apiError(500, "something went wrong!! please try again");
+
+  const notification = await Notification.create({user:user,message:`${title} blog is posted successfully`});
+  const notify = await User.findOneAndUpdate(
+    { _id: user },
+    { $push: { notifications: notification._id } },
+    { new: true }
+  ).populate("notifications");
+
   return res
     .status(200)
     .json(new apiResponse(200, { data }, "Blog posted Successfully"));
