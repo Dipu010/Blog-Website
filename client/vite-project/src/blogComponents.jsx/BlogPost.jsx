@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import StepComplition from "./StepComplition";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Nav from "../components/navbar/nav";
+import { AuthContext, AuthProvider } from "../context/Authcontex";
 
 const getLocalData = () => {
   const retriveDescription = JSON.parse(
@@ -20,6 +21,7 @@ const removeLocalData = () => {
   localStorage.removeItem("blogImage");
 };
 export default function BlogPost() {
+  const {reloadNotifications, setReloadNotifications} = useContext(AuthContext);
   const navigate = useNavigate();
   const retrivedData = getLocalData();
   const finalData = {
@@ -42,6 +44,7 @@ export default function BlogPost() {
     );
     console.log(data);
     removeLocalData();
+    reloadNotifications ? setReloadNotifications(0) : setReloadNotifications(1);
     navigate(`/${response.userName}/home`);
   };
   
