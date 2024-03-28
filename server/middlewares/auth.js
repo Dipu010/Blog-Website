@@ -1,10 +1,12 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { apiError } from "../utils/apiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { apiResponse } from "../utils/apiResponse.js";
 
 dotenv.config();
 
-const auth =  async(req,res,next)=>{
+ const auth =  async(req,res,next)=>{
     const token =  req.cookies.accessToken 
     console.log(req.cookies)
     if(!token){
@@ -29,5 +31,27 @@ const auth =  async(req,res,next)=>{
     }
 
 }
+ const isAdmin=async(req,res,next)=>{
+  try {
+    if(req.data.accountType!=='admin'){
+        return res.status(401).json(new apiResponse(401,{},'This is a protected route for admin'))
+    }
+  } catch (error) {
+   return res.status(500).json(new apiResponse(500,{},'Admin not defined'))
+  }
+    next();
+}
+ const isUser=async(req,res,next)=>{
+    try {
+        if(req.data.accountType!=='user'){
+            return res.status(401).json(new apiResponse(401,{},'This is a protected route for user'))
+        }
+      } catch (error) {
+       return res.status(500).json(new apiResponse(500,{},'User not defined'))
+      }
+        next();
+}
+ 
 
-export default auth;
+export {auth,isAdmin,isUser};
+

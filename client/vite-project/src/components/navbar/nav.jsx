@@ -250,25 +250,27 @@ const Nav = ({ data }) => {
             >
               <Select
                 value={fullName || userData?.displayName}
+                className="text-black bg-gray-800"
                 sx={{
-                  width: "150px",
-                  borderRadius: "0.25rem",
-                  p: "0.25rem 1rem",
+                  backgroundColor:'whitesmoke',
+                  textAlign:'center',
+                  marginRight:'20px',
+                  borderRadius: "1rem",
+                  p: "0.25rem 0.5rem",
+                  border:'2px solid',
+                  boxShadow:'-moz-initial',
                   "& .MuiSvgIcon-root": {
                     pr: "0.25rem",
                     width: "3rem",
                   },
                   "& .MuiSelect-select:focus": {},
                 }}
-                input={<InputBase className=" text-yellow-50" />}
+                input={<InputBase className="bg-gray-800" />}
               >
                 <MenuItem
                   value={fullName || userData?.displayName}
-                  className="text-yellow-50 px-4 rounded-full"
                 >
-                  <Typography className="text-yellow-50 [&>*:nth-child(2)]:bg-black">
-                    {fullName || userData?.displayName}{" "}
-                  </Typography>
+                 <option  onClick={()=>navigate(`/${data.userName}/profile`)} value={fullName} className=''>{fullName}</option>
                 </MenuItem>
                 <MenuItem>
                   {data.firstName == "Unknown" ? (

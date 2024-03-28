@@ -49,7 +49,7 @@ const generateAccessandRefreshTokens=async(userId)=>{
         userName,
         password,
         accountType,
-         profilePicture:`https://api.dicebear.com/5.x/initials/svg?seed=${firstName}${lastName}`
+         profilePicture:`https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`
       });
       return res.status(200).json(new apiResponse(200,{data},"User Registered Successfully"));
   });

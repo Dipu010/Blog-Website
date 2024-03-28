@@ -71,11 +71,11 @@ const Navbar = () => {
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
           <IconButton >
-              <LightMode sx={{ fontSize: "25px" }} />
+              <LightMode sx={{ fontSize: "25px" }} className=" text-yellow-50" />
           </IconButton>
-          <Message sx={{ fontSize: "25px" }} />
-          <Notifications sx={{ fontSize: "25px" }} />
-          <Help sx={{ fontSize: "25px" }} />
+          <Message sx={{ fontSize: "25px" }}  className=" text-yellow-50"/>
+          <Notifications sx={{ fontSize: "25px" } }  className=" text-yellow-50" />
+          <Help sx={{ fontSize: "25px" }}  className=" text-yellow-50" />
           {/* <FormControl variant="standard" value={fullName}> */}
            <button  type='button' onClick={()=>navigate("/login")} className=" bg-blue-700 rounded-full text-yellow-200 px-5 py-2"> Sign-In</button>
          
