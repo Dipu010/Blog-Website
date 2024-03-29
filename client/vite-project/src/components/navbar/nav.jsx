@@ -25,7 +25,7 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
-import { AuthContext } from "../../context/Authcontex";
+import { AuthContext, AuthProvider } from "../../context/Authcontex";
 import { NotificationRender } from "../notifications/NotificationRender";
 const Nav = ({ data }) => {
 
@@ -38,6 +38,7 @@ const Nav = ({ data }) => {
   };
   
   const [unreadNotifications, setUnreadNotifications] = useState(-1);
+  const {reloadNotifications, setReloadNotifications} = useContext(AuthContext);
 
   const getUnreadNotificationCount = async () => {
     const notificationCount = await axios.post(
@@ -50,7 +51,7 @@ const Nav = ({ data }) => {
   };
   useEffect(() => {
     getUnreadNotificationCount();
-  }, []);
+  }, [reloadNotifications]);
 
   //Function for logout
   const navigate = useNavigate();
@@ -241,7 +242,7 @@ const Nav = ({ data }) => {
                 ""
               )}
               {showNotification ? (
-                <div className="absolute box-border -left-[100px]  w-[400px] bg-slate-800 border-white border-2 z-40 rounded-md flex justify-center items-center py-[15px]">
+                <div className="absolute box-border -left-[100px] m-2  w-[375px] bg-slate-800 border-white border-2 z-40 rounded-md flex justify-center items-center py-[15px]">
                   <NotificationRender userName={data.userName} />
                 </div>
               ) : (

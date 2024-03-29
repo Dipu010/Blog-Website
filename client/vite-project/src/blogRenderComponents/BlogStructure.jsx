@@ -52,9 +52,12 @@ export default function BlogStructure(props) {
         ) : (
           ""
         )}
-        <div className=" mt-[20px]">
-          <img className=" object-fill h-[350px] w-full" src={dataArray[props.i]._doc.picture} />
-        </div>
+        <div className="mt-[20px] flex justify-center items-center">
+              <img
+                src={dataArray[props.i]._doc.picture}
+                className=" object-contain h-[400px]"
+              />
+            </div>
         <div className=" mt-[20px]">
           {dataArray[props.i].comments != 0 ? (
             <div

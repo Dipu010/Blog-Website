@@ -2,7 +2,7 @@ import express from "express";
 const blogRoute = express.Router();
 import { CreateBlog ,UpdateBlog, LikeBlog,CommentBlog,GetBlog, GetMyBlog , GetComment,GetRandomBlog, deleteMyBlog} from "../controllers/blogController.js";
 import { SearchName, getallTags, searchBlog } from "../controllers/searchController.js";
-import { FollowPerson , GetNotifictionCount ,GetNotification} from "../controllers/followController.js";
+import { FollowPerson , GetNotifictionCount ,GetNotification, ViewNotification} from "../controllers/followController.js";
 import {auth, isAdmin} from "../middlewares/auth.js";
  import { deleteBlog } from "../controllers/adminControllers.js";
 
@@ -21,6 +21,7 @@ blogRoute.get("/myblog/:id",auth,GetMyBlog);
 //notification route
 blogRoute.post("/notificationcount",auth,GetNotifictionCount);
 blogRoute.post("/getnotification",auth,GetNotification);
+blogRoute.post("/viewnotification",auth,ViewNotification);
  
 //searching route
 blogRoute.post('/searchname',SearchName);
