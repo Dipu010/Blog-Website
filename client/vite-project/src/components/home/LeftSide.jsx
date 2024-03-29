@@ -9,7 +9,7 @@ import axios from 'axios';
 import { useNavigate ,Link} from 'react-router-dom';
 function Leftside({data}) {
   // Dummy data for the user profile
-  console.log("LeftSide")
+  // console.log("LeftSide")
   const [userData,setUserData]=useState({});
   const navigate=useNavigate()
 

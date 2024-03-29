@@ -19,7 +19,7 @@ export default function Middle({ data }) {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
   const {LoggedIn,setLoggedIn}=useContext(AuthContext)
-  console.log(userData);
+  // console.log(userData);
   const { click, setClick } = useContext(MyBlogContext);
   const [show, setShow] = useState(null);
   const {id}=useParams();

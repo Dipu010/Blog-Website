@@ -14,7 +14,7 @@ export const HomeLayout = () => {
       const {id}=useParams()
       var data =JSON.parse(localStorage.getItem('ResPonse'))
 
-      console.log("HomeLayout")
+      // console.log("HomeLayout")
       if(!id){
         data=DataDummy
         console.log("Data:-",data)

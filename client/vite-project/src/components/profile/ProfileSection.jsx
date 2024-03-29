@@ -38,7 +38,7 @@ export const ProfileSection = (props) => {
       "http://localhost:4000/api/v1/follow",
       { followingID: owner_id },
       { withCredentials: true }
-    );
+    )
     console.log(response);
     if (response.data.message.data.val) setFollow(true);
     else setFollow(false);

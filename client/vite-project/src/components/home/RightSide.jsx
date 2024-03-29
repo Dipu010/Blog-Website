@@ -5,7 +5,7 @@ import { BlogContext } from "../../context/BlogContext";
 
 const Rightside = (props) => {
 
-  console.log("Right Side")
+  
   const { dataArray, setDataArray } = useContext(BlogContext);
   const [loading, setLoading] = useState(true);
   const [click, setClick] = useState(null);
@@ -21,7 +21,6 @@ const Rightside = (props) => {
     setLoading(false);
   };
   useEffect(() => {
-    console.log("Get all tags")
    getAllTags()
   }, []);
   // console.log(tags);
@@ -38,7 +37,7 @@ const Rightside = (props) => {
       setResult([...response.data.message.response]);
       setDataArray([...response.data.message.response]);
     }
-    console.log(dataArray);
+    // console.log(dataArray);
   };
   //  const handleClick=(e,searchString)=>{
   //      e.preventDefault();

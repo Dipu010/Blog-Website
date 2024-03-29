@@ -7,7 +7,7 @@ import { AuthContext } from '../context/Authcontex'
 
 
 export const Layout = () => {
-      console.log("Layout")
+      
       const navigate=useNavigate()
 
       const {LoggedIn,setLoggedIn}=useContext(AuthContext)
@@ -16,24 +16,24 @@ export const Layout = () => {
 
       const authenticate=async()=>{
 
-          console.log("Calling authenticate function")
+          
           const user=await axios.get(`http://localhost:4000/api/v1/reauthenticate`,{withCredentials:true})
          
           
-          console.log(user)
+          // console.log(user)
 
           if(user.status===200 || user.statusCode===201){
             setLoggedIn(true)
             
             navigate(`/${data.userName}/home`)
-            console.log(LoggedIn)
+            // console.log(LoggedIn)
           }
           else{
             setTimeout(()=>{
               navigate(`home`)
             },0)
           }
-          console.log(LoggedIn)
+          // console.log(LoggedIn)
         
       }
 
