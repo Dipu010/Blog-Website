@@ -6,10 +6,14 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { apiError } from "../utils/apiError.js";
 //this controller is imported in the Blog routes for now
 
-export const FollowPerson = async (req, res) => {
-  try {
+export const FollowPerson = asyncHandler(async (req, res) => {
+
     const { followingID } = req.body;
     const follower = req.data._id;
+    
+    if(followingID===follower){
+      throw new apiError(404,"Follower and follwing id cannot be same")
+    }
 
     const followedUser = await Follow.findOne({
       $and: [{ follower }, { following: followingID }],
@@ -86,15 +90,9 @@ export const FollowPerson = async (req, res) => {
     data = { ...data, val: 1 };
     return res
       .status(200)
-      .json(new apiResponse(200, { data }, "Following the user"));
-  } catch (error) {
-    return res.status(200).json({
-      success: false,
-      data: "",
-      message: error.message,
-    });
-  }
-};
+      .json(new apiResponse(200, { data }, "Following the user"))
+})
+  
 
 export const GetNotifictionCount = asyncHandler(async (req, res) => {
   const userName = req.body.userName;
