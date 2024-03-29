@@ -12,6 +12,6 @@ const followSchema = mongoose.Schema({
         ref: "User",
         required:true
     }
-})
+},{timestamps:true})
 
 export const Follow= mongoose.model("Follow",followSchema);

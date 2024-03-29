@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import NotificationRender from "../notifications/NotificationRender";
+
 
 import axios from "axios";
 import {
@@ -26,7 +26,9 @@ import {
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 import { AuthContext } from "../../context/Authcontex";
+import { NotificationRender } from "../notifications/NotificationRender";
 const Nav = ({ data }) => {
+
   //function and states for notification
   const [showNotification, setShowNotification] = useState(0);
   const handleShowNotification = () => {

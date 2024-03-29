@@ -28,6 +28,6 @@ blogRoute.post('/searchblog',auth,searchBlog)
 blogRoute.get('/tags',getallTags)
 
 // Delete blog Route
-blogRoute.post('/deleteblogadmin',auth,isAdmin,deleteBlog);
+// blogRoute.post('/deleteblogadmin',auth,isAdmin,deleteBlog);
 blogRoute.post('/deleteblogbyme',auth,deleteMyBlog);
 export default blogRoute;

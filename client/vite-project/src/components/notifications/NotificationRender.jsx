@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NotificationStructure from "./NotificationStructure";
-export default function NotificationRender(props) {
+export  function NotificationRender(props) {
   const [notificationArray, setNotificationArray] = useState([]);
   console.log(notificationArray);
   const [loading, setLoading] = useState(1);

@@ -28,14 +28,26 @@ function App() {
     <>
 
       <Routes>
-        <Route path='/login' element={<Login></Login>} />
+        {/* <Route path='/login' element={<Login></Login>} />
         <Route path='/register' element={<Register></Register>} />
-
+       <Route path='/' element={<Layout/>}>
+            <Route path='' element={<Reroute/>}/>
+            <Route path='reroute' element={<Reroute/>}/>
+            <Route path='login' element={<Login/>}/>
+            <Route path='home' element={<HomeLayout/>}/>
+            <Route path=':id/' element={<HomePage/>}>
+                <Route path='' element={<ProfileSection/>}/>
+                <Route path='userpost'element={<UserPost/>}/>
+                <Route path='home' element={<HomeLayout/>} />
+                <Route path='profile' element={<ProfileSection/>}/> */}
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register></Register>} />
 
 
         <Route path='/' element={<Layout />}>
           <Route path='' element={<Reroute />} />
           <Route path='login' element={<Login />} />
+          
           <Route path='home' element={<HomeLayout />} />
           <Route path='forbidden' element={<Forbidden />} />
           <Route path='notfound' element={<NotFound />} />
