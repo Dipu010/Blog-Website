@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
 import Leftside from "../components/home/LeftSide";
 import Middle from "../components/home/Middle";
@@ -6,21 +6,23 @@ import Rightside from "../components/home/RightSide";
 
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { DataDummy } from '../components/utils/DummyData';
+import { AuthContext } from '../context/Authcontex';
 
 export const HomeLayout = () => {
       const navigate=useNavigate()
+      const {LoggedIn,setLoggedIn}=useContext(AuthContext)
       const {id}=useParams()
       var data =JSON.parse(localStorage.getItem('ResPonse'))
 
-      if(data){
-          navigate(`/${data.userName}/home`)
-      }
+      console.log("HomeLayout")
       if(!id){
         data=DataDummy
         console.log("Data:-",data)
       }
-      else if(id!==data.userName)
-      return(<></>)
+      else if(id!==data.userName && !LoggedIn){
+        console.log("Stuck in Home Layout Login")
+        return(<></>)
+      }
 
    
   return (

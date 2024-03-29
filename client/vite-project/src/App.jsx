@@ -36,7 +36,7 @@ function App() {
 
 
         <Route path='/' element={<Layout />}>
-          <Route path='' element={<Reroute />} />
+          {/* <Route path='' element={<Reroute />} /> */}
           <Route path='login' element={<Login />} />
           
           <Route path='home' element={<HomeLayout />} />

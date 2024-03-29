@@ -24,20 +24,20 @@ export default function Middle({ data }) {
   const [show, setShow] = useState(null);
   const {id}=useParams();
   // For Google Login
-  const getUser = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:4000/api/v1/login/success",
-        { withCredentials: true }
-      );
-      setUserData(response.data.user);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
-  useEffect(() => {
-    getUser();
-  }, []);
+  // const getUser = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       "http://localhost:4000/api/v1/login/success",
+  //       { withCredentials: true }
+  //     );
+  //     setUserData(response.data.user);
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   getUser();
+  // }, []);
   return (
     <div>
       <div className="flex  flex-col gap-3 p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm mt-[80px]">

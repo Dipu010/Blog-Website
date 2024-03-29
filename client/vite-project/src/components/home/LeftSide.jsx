@@ -9,24 +9,24 @@ import axios from 'axios';
 import { useNavigate ,Link} from 'react-router-dom';
 function Leftside({data}) {
   // Dummy data for the user profile
-  
+  console.log("LeftSide")
   const [userData,setUserData]=useState({});
   const navigate=useNavigate()
 
-  console.log(userData);
+  // console.log(userData);
 
 
-   const getUser=async()=>{
-    try {
-      const response=await axios.get('http://localhost:4000/api/v1/login/success',{withCredentials:true});
-      setUserData(response.data.user);
-    } catch (error) {
-      console.log("error", error);
-    }
-   }
-   useEffect(()=>{
-    getUser()
-   },[]);
+  //  const getUser=async()=>{
+  //   try {
+  //     const response=await axios.get('http://localhost:4000/api/v1/login/success',{withCredentials:true});
+  //     setUserData(response.data.user);
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  //  }
+  //  useEffect(()=>{
+  //   getUser()
+  //  },[]);
   const profileData = {
     name: 'Apple Icecream',
     friends: 0,

@@ -46,7 +46,7 @@ const Nav = ({ data }) => {
       { userName: data.userName },
       { withCredentials: true }
     );
-    console.log(notificationCount);
+    // console.log(notificationCount);
     setUnreadNotifications(notificationCount.data.message.notificationCount);
   };
   useEffect(() => {
@@ -112,7 +112,7 @@ const Nav = ({ data }) => {
   // for(let i=0;i<dataArray.length)
   const [name, setName] = useState({ nameToSearch: "" });
   const [dataArray, setDataArray] = useState([]);
-  console.log(dataArray);
+  // console.log(dataArray);
   const searchName = async () => {
     try {
       const response = await axios.post(
@@ -120,7 +120,7 @@ const Nav = ({ data }) => {
         { ...name },
         { withCredentials: true }
       );
-      console.log(response);
+      // console.log(response);
       setDataArray([...response.data.message.data]);
     } catch (error) {
       console.log(error);
@@ -146,7 +146,7 @@ const Nav = ({ data }) => {
               },
             }}
           >
-            BlogoPedia
+            BlogPedia
           </Typography>
           {isNonMobileScreens && (
             <FlexBetween

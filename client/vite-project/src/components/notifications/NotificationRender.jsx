@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import NotificationStructure from "./NotificationStructure";
 import { AuthContext } from "../../context/Authcontex";
-export default function NotificationRender(props) {
+export  function NotificationRender(props) {
   const{reloadNotifications, setReloadNotifications} = useContext(AuthContext);
   const [seenNotificationArray, setSeenNotificationArray] = useState([]);
   const [unseenNotificationArray, setUnseenNotificationArray] = useState([]);
