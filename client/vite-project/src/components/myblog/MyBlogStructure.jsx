@@ -42,7 +42,7 @@ export default function MyBlogStructure({ val }) {
                         <div> {val._doc.title}</div>
                         <div className='flex flex-col gap-4'>
                            {console.log(val._doc.owner.userName)}
-                            {data == val._doc.owner.userName ? <RiDeleteBin6Line onClick={() => {
+                            {data.userName == val._doc.owner.userName ? <RiDeleteBin6Line onClick={() => {
                                 setClick(true);
                             }
                             } className='text-xl mr-6 cursor-pointer hover:shadow-xl'/>:''}

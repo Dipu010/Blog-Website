@@ -23,8 +23,10 @@ app.use(cors({
 
 import routes from "./routes/UserRoutes.js";
 import blogRoute from "./routes/BlogRoutes.js";
+import adminRoute from "./routes/AdminRoutes.js";
 app.use('/api/v1',routes);
-app.use('/api/v1',blogRoute)
+app.use('/api/v1',blogRoute);
+app.use('/api/v1/admin',adminRoute);
 
 
 dbConnector();
@@ -35,6 +37,7 @@ import passport from "passport";
 // const OAuth2Strategy = require("passport-google-oauth2").Strategy;
 import OAuth2Strategy from "passport-google-oauth2"
 import { User } from "./models/User.js";
+
 
 const clientid = process.env.CLIENT_ID
 const clientsecret =process.env.CLIENT_SECRET
