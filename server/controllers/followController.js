@@ -12,7 +12,7 @@ export const FollowPerson = asyncHandler(async (req, res) => {
     const follower = req.data._id;
     
     if(followingID===follower){
-      throw new apiError(404,"Follower and follwing id cannot be same")
+      throw new apiError(400,"Follower and follwing id cannot be same")
     }
 
     const followedUser = await Follow.findOne({

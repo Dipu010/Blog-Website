@@ -86,11 +86,13 @@ const showProfileAdmin=asyncHandler(async(req,res)=>{
     ]
   )
 
+  const blogList= await Blog.find({owner:userData._id})
+
 
 
   
 
-  return res.status(200).json(new apiResponse(200,"Fetched",{numberOfFollowers}))
+  return res.status(200).json(new apiResponse(200,"Fetched",{Blogs:blogList,Followers:numberOfFollowers}))
 
 
 })
@@ -157,6 +159,8 @@ const dataBlog=asyncHandler(async(req,res)=>{
       return res.status(200).json(new apiResponse(200,"Fetched all blogs",{arr}))
 
 })
+
+
 
 export {deleteBlog,showProfileAdmin,dataUser,dataBlog,showBlogID}
 

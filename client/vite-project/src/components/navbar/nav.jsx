@@ -114,17 +114,15 @@ const Nav = ({ data }) => {
   const [dataArray, setDataArray] = useState([]);
   // console.log(dataArray);
   const searchName = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:4000/api/v1/searchname",
-        { ...name },
-        { withCredentials: true }
-      );
-      // console.log(response);
-      setDataArray([...response.data.message.data]);
-    } catch (error) {
-      console.log(error);
-    }
+      if(name.nameToSearch!==""){
+        const response = await axios.post(
+          "http://localhost:4000/api/v1/searchname",
+          { ...name },
+          { withCredentials: true }
+        );
+        // console.log(response);
+        setDataArray([...response.data.message.data]);
+      }
   };
   useEffect(() => {
     searchName();
