@@ -7,7 +7,7 @@ import { Users } from "../admin-tabs/Users/Users";
 
 export const AdminHome = () => {
   return (
-    <div className="  bg-[#1e293b]   flex ">
+    <div className="  bg-[#0b1423]   flex ">
       <Sidebar />
 
       <div className=" flex flex-col  ml-10 gap-10">
