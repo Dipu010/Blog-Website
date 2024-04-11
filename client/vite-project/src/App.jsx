@@ -5,9 +5,6 @@ import Register from './components/auth/Register'
 import BlogDescription from './blogComponents.jsx/BlogDescription'
 import BlogUploadImage from './blogComponents.jsx/BlogUploadImage'
 import BlogPost from './blogComponents.jsx/BlogPost'
-
-
-
 import { AuthContext } from './context/Authcontex'
 import { ProfileSection } from './components/profile/ProfileSection'
 import BlogUpdate from './blogUpdateComponents/blogUpdateDescription'
@@ -20,6 +17,7 @@ import UserPost from './components/profile/UserPost'
 import NotFound from './components/Error/NotFound'
 import Forbidden from './components/Error/Forbidden'
 import { AdminHome } from './Layout/AdminHome'
+import { Users } from './admin-tabs/Users/Users'
 function App() {
   const [count, setCount] = useState(0)
   const { data } = useContext(AuthContext);
@@ -27,12 +25,18 @@ function App() {
   // const theme=useMemo(()=>createTheme(themeSettings(mode)),[mode]);
   return (
     <>
+   
 
       <Routes>
        
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register></Register>} />
-        <Route path='/admin' element={<AdminHome/>}/>
+
+
+        <Route path='/admin' element={<AdminHome/>}>
+
+            <Route path='' element={<Users/>}/>
+        </Route>
 
 
         <Route path='/' element={<Layout />}>

@@ -27,7 +27,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Authcontex";
 const NavbarAdmin = () => {
   return (
-    <div className=" top-0 w-screen bg-[#1e293b] h-[100px] flex justify-center items-center shadow-gray-700 shadow-lg">
+    <div className=" top-0 w-screen bg-[#1e293b] h-[100px] flex justify-center items-center shadow-gray-700 shadow-sm">
       <Typography
         fontWeight="bold"
         fontSize="clamp(1rem, 2rem, 2.25rem)"

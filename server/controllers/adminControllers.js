@@ -121,8 +121,8 @@ const dataUser=asyncHandler(async(req,res)=>{
       data.forEach(element => {
           countUser+=element.count
           arr.push({
-            "name":element._id,
-            "pv":countUser
+            "x":element._id,
+            "y":countUser
           })
       });
 
