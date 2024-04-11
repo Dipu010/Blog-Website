@@ -18,6 +18,8 @@
     "@mui/material": "^5.15.15",
     "@mui/system": "^5.15.12",
     "@nivo/line": "^0.85.1",
+    "@tanstack/react-table": "^8.15.3",
+    "add": "^2.0.6",
     "axios": "^1.6.7",
     "chart.js": "^4.4.2",
     "react": "^18.2.0",
@@ -28,8 +30,10 @@
     "react-router-dom": "^6.22.2",
     "react-select": "^5.8.0",
     "recharts": "^2.12.3",
+    "shadcn-ui": "^0.8.0",
     "state": "^0.2.0",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "table": "^6.8.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",

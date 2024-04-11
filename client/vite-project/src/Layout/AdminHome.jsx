@@ -10,7 +10,7 @@ export const AdminHome = () => {
     <div className="  bg-[#0b1423]   flex ">
       <Sidebar />
 
-      <div className=" flex flex-col  ml-10 gap-10">
+      <div className=" flex flex-col  ml-10 gap-5">
         <p className="text-gray-300 text-5xl mt-5">Dashboard</p>
 
         <div className="  w-[1250px] h-[630px] mx-auto  rounded-xl">

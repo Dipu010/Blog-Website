@@ -12,7 +12,7 @@ import adminLogo from "../../assets/admin.jpeg"
 
 const Sidebar = () => {
   return (
-    <div className=' w-[150px] bg-gray-700 h-screen  p-[20px]'>
+    <div className=' w-[150px] bg-gray-800 h-screen  p-[20px] border-r-2 border-gray-500'>
 
         <p className=' text-gray-300 text-2xl text-center font-semibold mb-7'>Admin</p>
 
@@ -20,27 +20,27 @@ const Sidebar = () => {
 
             <div className=' flex gap-2 cursor-pointer'>
                 
-                <BsFillPeopleFill className=' text-[#1976d2] text-xl '/>
-                <p className=' text-[#1976d2] text-md font-bold mt-[-2px]'>Users</p>
+                <BsFillPeopleFill className=' text-[#92b9ff] text-xl '/>
+                <p className=' text-[#92b9ff] text-md font-bold mt-[-2px]'>Users</p>
                 
             </div>
             <div className=' flex gap-2'>
-              <IoNewspaperSharp className=' text-[#1976d2] text-xl'/>
-              <p className=' text-[#1976d2] text-md font-bold mt-[-2px]'>Alerts</p>
+              <IoNewspaperSharp className=' text-[#92b9ff] text-xl'/>
+              <p className=' text-[#92b9ff] text-md font-bold mt-[-2px]'>Alerts</p>
             </div>
 
             <div className=' flex gap-2'>
-            <FaSearch className=' text-[#1976d2] text-lg'/>
-            <p className=' text-[#1976d2] text-md font-bold mt-[-2px]'>Search</p>
+            <FaSearch className=' text-[#92b9ff] text-lg'/>
+            <p className=' text-[#92b9ff] text-md font-bold mt-[-2px]'>Search</p>
             </div>
             
             
         </div>
 
         <div className=' flex flex-col justify-center ml-[20px] mt-[-40px]'>
-          <div className=' bg-slate-300 rounded-full w-[70px] h-[70px] '>
+          <div className=' w-[80px] h-[80px] rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 '>
                 <img 
-                  className=' object-cover rounded-full h-[70px] w-[70px]'
+                  className=' object-cover rounded-full h-[80px] w-[80px]'
                   src={adminLogo}
                   alt='photo'
                 />

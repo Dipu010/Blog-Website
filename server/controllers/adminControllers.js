@@ -7,6 +7,7 @@ import { apiResponse } from "../utils/apiResponse.js";
 import { apiError } from "../utils/apiError.js";
 import { Follow } from "../models/Follow.js";
 import mongoose from "mongoose";
+import { Like } from "../models/Like.js";
 
     // Ability to delete any blog
      
@@ -131,6 +132,27 @@ const dataUser=asyncHandler(async(req,res)=>{
 
 })
 
+const famousBlogs=asyncHandler(async(req,res)=>{
+  const data= await Like.aggregate(
+    [
+      {
+        '$group': {
+          '_id': '$blog', 
+          'likeCount': {
+            '$sum': 1
+          }
+        }
+      }, {
+        '$sort': {
+          'likeCount': -1
+        }
+      }
+    ]
+  )
+
+  return res.status(200).json(new apiResponse(200,"Fetched famous blogs",{data}))
+})
+
 const dataBlog=asyncHandler(async(req,res)=>{
 
       const data=await Blog.aggregate(
@@ -162,5 +184,5 @@ const dataBlog=asyncHandler(async(req,res)=>{
 
 
 
-export {deleteBlog,showProfileAdmin,dataUser,dataBlog,showBlogID}
+export {deleteBlog,showProfileAdmin,dataUser,dataBlog,showBlogID,famousBlogs}
 

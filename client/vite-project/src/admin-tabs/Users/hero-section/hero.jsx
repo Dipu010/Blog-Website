@@ -12,11 +12,13 @@ export const Hero = ({ data /* see data tab */ }) => {
 
     const theme=useTheme();
     const colors=tokens(theme.palette.mode)
-    const blueColor = '	hsl(210, 79%, 46%)';
+    const blueColor = '#92b9ff';
 
-    return(<ResponsiveLine
-        data={data}
+    return(
         
+        <ResponsiveLine
+        data={data}
+        colors={[blueColor]}
         theme={{
         axis: {
           domain: {
@@ -46,7 +48,7 @@ export const Hero = ({ data /* see data tab */ }) => {
         },
         tooltip: {
           container: {
-            color: colors.primary[500],
+            color: colors.primary[100],
           },
         },
         layers:[],
@@ -73,7 +75,7 @@ export const Hero = ({ data /* see data tab */ }) => {
             truncateTickAt: 0
         }}
         axisLeft={{
-            tickSize: 5,
+            tickSize: 10,
             tickPadding: 5,
             tickRotation: 0,
             legend: 'Total Users',
@@ -82,7 +84,7 @@ export const Hero = ({ data /* see data tab */ }) => {
             truncateTickAt: 0
         }}
         enableGridX={false}
-        enableGridY={true}
+        enableGridY={false}
         pointSize={10}
         
         pointBorderWidth={2}
