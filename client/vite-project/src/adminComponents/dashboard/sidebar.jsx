@@ -12,7 +12,7 @@ import adminLogo from "../../assets/admin.jpeg"
 
 const Sidebar = () => {
   return (
-    <div className=' w-[150px] bg-gray-800 h-screen  p-[20px] border-r-2 border-gray-500'>
+    <div className=' w-[150px] bg-gray-800 h-screen  p-[20px] border-r-2 border-[#263240]'>
 
         <p className=' text-gray-300 text-2xl text-center font-semibold mb-7'>Admin</p>
 
@@ -20,18 +20,18 @@ const Sidebar = () => {
 
             <div className=' flex gap-2 cursor-pointer'>
                 
-                <BsFillPeopleFill className=' text-[#92b9ff] text-xl '/>
-                <p className=' text-[#92b9ff] text-md font-bold mt-[-2px]'>Users</p>
+                <BsFillPeopleFill className=' text-[#0d6efd]  text-xl '/>
+                <p className=' text-[#0d6efd] text-md font-bold mt-[-2px]'>Users</p>
                 
             </div>
-            <div className=' flex gap-2'>
-              <IoNewspaperSharp className=' text-[#92b9ff] text-xl'/>
-              <p className=' text-[#92b9ff] text-md font-bold mt-[-2px]'>Alerts</p>
+            <div className=' flex gap-2 text-[#0d6efd]'>
+              <IoNewspaperSharp className=' text-xl'/>
+              <p className='  text-md font-bold mt-[-2px]'>Alerts</p>
             </div>
 
-            <div className=' flex gap-2'>
-            <FaSearch className=' text-[#92b9ff] text-lg'/>
-            <p className=' text-[#92b9ff] text-md font-bold mt-[-2px]'>Search</p>
+            <div className=' flex gap-2 text-[#0d6efd]'>
+            <FaSearch className='  text-lg'/>
+            <p className=' text-md font-bold mt-[-2px]'>Search</p>
             </div>
             
             

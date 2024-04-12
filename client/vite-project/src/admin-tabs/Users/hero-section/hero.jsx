@@ -12,13 +12,13 @@ export const Hero = ({ data /* see data tab */ }) => {
 
     const theme=useTheme();
     const colors=tokens(theme.palette.mode)
-    const blueColor = '#92b9ff';
+    const graphColor = '#289371';
 
     return(
         
         <ResponsiveLine
         data={data}
-        colors={[blueColor]}
+        colors={[graphColor]}
         theme={{
         axis: {
           domain: {

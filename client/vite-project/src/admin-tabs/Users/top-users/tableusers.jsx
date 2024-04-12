@@ -1,42 +1,46 @@
-import React from 'react';
+import React from "react";
 import adminLogo from "../../../assets/admin.jpeg";
 
 const FamousUsers = () => {
+  const arr = [1, 2, 3, 4, , 5, 6, 7, 8];
   return (
-    <div className="overflow-x-auto h-full w-full text-white bg-gray-800 rounded-lg">
-
-      <div className=' text-3xl text-bold text-center mb-5'> Famous Users</div>
-      <table className="table w-full">
+    <div className="overflow-x-auto h-full w-full text-gray-300 bg-[#1b232d] rounded-lg p-2">
+      <div className=" text-3xl font-bold text-center mb-5 text-gray-300">
+        {" "}
+        Famous Users
+      </div>
+      <table className="table w-full mx-auto">
         {/* head */}
         <thead>
           <tr>
-            
-            <th className="py-2">Name</th>
-            <th className="py-2">Job</th>
-            <th className="py-2">Favorite Color</th>
-            <th className="py-2"></th>
+            <th className="py-2 text-left">Name</th>
+            <th className="py-2 text-left">Username</th>
+            <th className="py-2 text-left">Followers</th>
+            <th className="py-2">Email</th>
           </tr>
         </thead>
         <tbody>
           {/* row 1 */}
-          <tr className="my-4"> {/* Increased margin between rows */}
-            
+          <tr className="my-4  rounded-lg">
+            {" "}
+            {/* Increased margin between rows */}
             <td className="py-2">
-              <div className="flex items-center">
+              <div className="flex items-center gap-4">
                 <div className="w-12 h-12 overflow-hidden rounded-full">
-                  <img src={adminLogo} alt="Avatar" className="w-full h-full object-cover" />
+                  <img
+                    src={adminLogo}
+                    alt="Avatar"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <div className="ml-3">
+                <div className="ml-0">
                   <div className="font-bold">Hart Hagerty</div>
-                  <div className="text-sm opacity-50">United States</div>
                 </div>
               </div>
             </td>
             <td className="py-2">
               <div>
-                Zemlak, Daniel and Leannon
-                <br />
-                <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
+                <span className="badge badge-ghost badge-sm">Username</span>
               </div>
             </td>
             <td className="py-2">Purple</td>
@@ -46,11 +50,14 @@ const FamousUsers = () => {
           </tr>
           {/* row 2 */}
           <tr className="my-4">
-            
             <td className="py-2">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 overflow-hidden rounded-full">
-                  <img src={adminLogo} alt="Avatar" className="w-full h-full object-cover" />
+                  <img
+                    src={adminLogo}
+                    alt="Avatar"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div>
                   <div className="font-bold">Brice Swyre</div>
@@ -60,9 +67,7 @@ const FamousUsers = () => {
             </td>
             <td className="py-2">
               <div>
-                Carroll Group
-                <br />
-                <span className="badge badge-ghost badge-sm">Tax Accountant</span>
+                <span className="badge badge-ghost badge-sm">Username</span>
               </div>
             </td>
             <td className="py-2">Red</td>
@@ -72,11 +77,14 @@ const FamousUsers = () => {
           </tr>
           {/* row 3 */}
           <tr className="my-4">
-           
             <td className="py-2">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 overflow-hidden rounded-full">
-                  <img src={adminLogo} alt="Avatar" className="w-full h-full object-cover" />
+                  <img
+                    src={adminLogo}
+                    alt="Avatar"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div>
                   <div className="font-bold">Marjy Ferencz</div>
@@ -86,9 +94,7 @@ const FamousUsers = () => {
             </td>
             <td className="py-2">
               <div>
-                Rowe-Schoen
-                <br />
-                <span className="badge badge-ghost badge-sm">Office Assistant I</span>
+                <span className="badge badge-ghost badge-sm">Username</span>
               </div>
             </td>
             <td className="py-2">Crimson</td>
@@ -98,11 +104,14 @@ const FamousUsers = () => {
           </tr>
           {/* row 4 */}
           <tr className="my-4">
-            
             <td className="py-2">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 overflow-hidden rounded-full">
-                  <img src={adminLogo} alt="Avatar" className="w-full h-full object-cover" />
+                  <img
+                    src={adminLogo}
+                    alt="Avatar"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div>
                   <div className="font-bold">Yancy Tear</div>
@@ -112,9 +121,7 @@ const FamousUsers = () => {
             </td>
             <td className="py-2">
               <div>
-                Wyman-Ledner
-                <br />
-                <span className="badge badge-ghost badge-sm">Community Outreach Specialist</span>
+                <span className="badge badge-ghost badge-sm">Username</span>
               </div>
             </td>
             <td className="py-2">Indigo</td>
@@ -124,7 +131,6 @@ const FamousUsers = () => {
           </tr>
         </tbody>
         {/* foot */}
-       
       </table>
     </div>
   );
