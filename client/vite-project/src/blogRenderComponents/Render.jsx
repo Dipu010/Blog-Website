@@ -5,7 +5,7 @@ import { BlogContext } from "../context/BlogContext";
 export default function Render() {
   const blogContext = useContext(BlogContext);
   const [loading, setLoading] = useState(1);
-  console.log(blogContext.dataArray)
+  console.log("Inside Render")
   const getData = async () => {
     const parsedData = await axios.get(`http://localhost:4000/api/v1/getblog`, {
       withCredentials: true,
